@@ -1,6 +1,1 @@
 # ViKard
-
-
-
-
-EOEOEOEOEOO
