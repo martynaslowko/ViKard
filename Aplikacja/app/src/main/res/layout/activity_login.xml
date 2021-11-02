@@ -20,6 +20,7 @@
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
+        android:minHeight="48dp"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +46,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
+        android:autofillHints=""
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
@@ -84,11 +86,11 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="374dp"
-        android:layout_height="110dp"
+        android:layout_width="343dp"
+        android:layout_height="132dp"
         android:text="@string/registration_welcome"
         android:textSize="34sp"
-        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="32dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
