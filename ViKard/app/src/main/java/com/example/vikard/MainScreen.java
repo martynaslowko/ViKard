@@ -1,13 +1,9 @@
 package com.example.vikard;
 
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-//import com.example.vikard.databinding.ActivityMainScreenBinding;
-//import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainScreen extends AppCompatActivity {
