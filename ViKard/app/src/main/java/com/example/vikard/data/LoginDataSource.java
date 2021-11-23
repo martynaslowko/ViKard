@@ -21,12 +21,12 @@ public class LoginDataSource {
         LoggedInUser logUser = new LoggedInUser(username, password);
         try {
             Statement statement = sql.conn.createStatement();
-            String sqlQuery = "SELECT Id FROM dbo.Users WHERE E-mail='"+username+"'";
+            String sqlQuery = "SELECT Id FROM dbo.Users WHERE E-mail='"+resultSet.getString(0)+"'";
             resultSet = statement.executeQuery(sqlQuery);
-            if (resultSet != null) {
-                sqlQuery = "SELECT password FROM dbo.Credentials WHERE Id='"+resultSet+"'";
+            if (resultSet!= null) {
+                sqlQuery = "SELECT password FROM dbo.Credentials WHERE Id='"+resultSet.getString(0)+"'";
                 resultSet = statement.executeQuery(sqlQuery);
-                if (resultSet.toString() == password){
+                if (resultSet.getString(0) == password){
                     return new Result.Success<>(logUser);
                 } else {
                     return new Result.Error(new IOException("The password is incorrect."));
