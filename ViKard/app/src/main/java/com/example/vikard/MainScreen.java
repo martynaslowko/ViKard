@@ -22,4 +22,8 @@ public class MainScreen extends AppCompatActivity {
         tabcontroller.addFragment(new Mapa(),"Mapa");
         viewPager.setAdapter(tabcontroller);
     }
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }
