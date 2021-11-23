@@ -23,7 +23,7 @@ public class LoginDataSource {
         LoggedInUser logUser = new LoggedInUser(username, password);
         try {
             Statement statement = conn.createStatement();
-            String sqlQuery = "SELECT Id FROM dbo.Users WHERE E-mail='"+resultSet.getString(0)+"'";
+            String sqlQuery = "SELECT Id FROM dbo.Users WHERE Email='"+username+"'";
             resultSet = statement.executeQuery(sqlQuery);
             if (resultSet!= null) {
                 sqlQuery = "SELECT password FROM dbo.Credentials WHERE Id='"+resultSet.getString(0)+"'";
