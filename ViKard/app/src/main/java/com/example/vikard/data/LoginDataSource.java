@@ -23,12 +23,16 @@ public class LoginDataSource {
         LoggedInUser logUser = new LoggedInUser(username, password);
         try {
             Statement statement = conn.createStatement();
-            String sqlQuery = "SELECT Id FROM dbo.Users WHERE Email='"+username+"'";
+            String sqlQuery = "SELECT Id FROM Users WHERE Email='"+username+"'";
             resultSet = statement.executeQuery(sqlQuery);
             if (resultSet!= null) {
-                sqlQuery = "SELECT password FROM dbo.Credentials WHERE Id='"+resultSet.getString(0)+"'";
+                resultSet.next();
+                int id = resultSet.getInt("Id");
+                sqlQuery = "SELECT Password FROM Credentials WHERE UsersId=" + id;
                 resultSet = statement.executeQuery(sqlQuery);
-                if (resultSet.getString(0) == password){
+                resultSet.next();
+                String pwd = resultSet.getString("Password");
+                if (pwd.equals(password)){
                     return new Result.Success<>(logUser);
                 } else {
                     return new Result.Error(new IOException("The password is incorrect."));
@@ -39,17 +43,6 @@ public class LoginDataSource {
         } catch (Exception e) {
             return new Result.Error(new IOException("The user doesn't exist."));
         }
-
-/*        try {
-            // TODO: handle loggedInUser authentication
-            LoggedInUser fakeUser =
-                    new LoggedInUser(
-                            java.util.UUID.randomUUID().toString(),
-                            "Jane Doe");
-            return new Result.Success<>(fakeUser);
-        } catch (Exception e) {
-            return new Result.Error(new IOException("Error logging in", e));
-        }*/
     }
 
     public void logout() {
