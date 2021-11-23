@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.vikard.data.model.LoggedInUser;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,12 +16,13 @@ import java.sql.Statement;
 public class LoginDataSource {
 
     SQLConnection sql = new SQLConnection();
+    Connection conn = sql.getConnection();
 
     public Result<LoggedInUser> login(String username, String password) {
         ResultSet resultSet = null;
         LoggedInUser logUser = new LoggedInUser(username, password);
         try {
-            Statement statement = sql.conn.createStatement();
+            Statement statement = conn.createStatement();
             String sqlQuery = "SELECT Id FROM dbo.Users WHERE E-mail='"+resultSet.getString(0)+"'";
             resultSet = statement.executeQuery(sqlQuery);
             if (resultSet!= null) {
