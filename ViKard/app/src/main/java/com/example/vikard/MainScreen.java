@@ -2,24 +2,52 @@ package com.example.vikard;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.google.android.material.tabs.TabLayout;
 
 public class MainScreen extends AppCompatActivity {
+    TabLayout tablayout;
+    ViewPager2 viewpager2;
+    FragmentAdapter fragmentadapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+        tablayout = findViewById(R.id.tablayout);
+        viewpager2 = findViewById(R.id.view_pager);
+        FragmentManager fm = getSupportFragmentManager();
+        fragmentadapter = new FragmentAdapter(fm, getLifecycle());
+        viewpager2.setAdapter(fragmentadapter);
 
-        TabLayout tabLayout = findViewById(R.id.tablayout);
-        ViewPager viewPager = findViewById(R.id.view_pager);
+        tablayout.addTab(tablayout.newTab().setText("Karty"));
+        tablayout.addTab(tablayout.newTab().setText("Mapa"));
 
-        tabLayout.setupWithViewPager(viewPager);
+        tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewpager2.setCurrentItem(tab.getPosition());
+            }
 
-        TabController tabcontroller = new TabController(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        tabcontroller.addFragment(new Karty(),"Karty");
-        tabcontroller.addFragment(new Mapa(),"Mapa");
-        viewPager.setAdapter(tabcontroller);
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        viewpager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                tablayout.selectTab(tablayout.getTabAt(position));
+            }
+        });
     }
 }
