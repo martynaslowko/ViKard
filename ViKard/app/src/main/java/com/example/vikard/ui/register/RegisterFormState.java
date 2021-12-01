@@ -2,7 +2,7 @@ package com.example.vikard.ui.register;
 
 import androidx.annotation.Nullable;
 
-public class registerFormState {
+public class RegisterFormState {
 
     @Nullable
     private Integer emailError;
@@ -21,7 +21,7 @@ public class registerFormState {
     private Integer passwordError;
     private boolean isDataValid;
 
-    registerFormState(@Nullable Integer usernameError, @Nullable Integer passwordError, @Nullable Integer firstNameError,@Nullable Integer lastNameError,@Nullable Integer birthdateError, @Nullable Integer repasswordError) {
+    RegisterFormState(@Nullable Integer usernameError, @Nullable Integer passwordError, @Nullable Integer firstNameError, @Nullable Integer lastNameError, @Nullable Integer birthdateError, @Nullable Integer repasswordError) {
         this.emailError = usernameError;
         this.passwordError = passwordError;
         this.firstNameError = firstNameError;
@@ -31,7 +31,7 @@ public class registerFormState {
         this.isDataValid = false;
     }
 
-    registerFormState(boolean isDataValid) {
+    RegisterFormState(boolean isDataValid) {
         this.emailError = null;
         this.passwordError = null;
         this.firstNameError = null;

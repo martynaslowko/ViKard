@@ -18,7 +18,7 @@ import android.widget.EditText;
 import com.example.vikard.databinding.ActivityRegisterBinding;
 
 
-public class activity_register extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
 
     private RegisterViewModel RegisterViewModel;
@@ -30,8 +30,10 @@ public class activity_register extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Populowanie bindingu, żeby móć się odwoływać do wszystkich kontrolek w danym widoku
+        //Zastępuje findViewById()
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
-        //registerPatternCheck = new ViewModelProvider(this, new LoginViewModelFactory()).get(registerPatternCheck.class);
         setContentView(binding.getRoot());
         RegisterViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
 
@@ -48,6 +50,8 @@ public class activity_register extends AppCompatActivity {
         final Button registerButton = binding.regButton;
         registerButton.setEnabled(false);
 
+
+        //Logika przycisku register, co dzieje się po kliknięciu
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -72,9 +76,9 @@ public class activity_register extends AppCompatActivity {
         //Jeśli tak to włączy przycisk register i można przejść do rejestracji
 
 
-        RegisterViewModel.getRegisterFormState().observe(this, new Observer<registerFormState>() {
+        RegisterViewModel.getRegisterFormState().observe(this, new Observer<RegisterFormState>() {
             @Override
-            public void onChanged(@Nullable registerFormState registerFormState) {
+            public void onChanged(@Nullable RegisterFormState registerFormState) {
                 if(registerFormState == null)
                 {
                     return;
@@ -114,7 +118,8 @@ public class activity_register extends AppCompatActivity {
             }
         });
 
-
+        //Text listener mega nieoptymalne mam wrażenie ale nie wiem jak inaczej to zrobic
+        //Przy każdym wpisanym znaku w rejestracji wywołuje się afterTextChanged
         TextWatcher afterTextChangedListener1 = new TextWatcher()
         {
             @Override

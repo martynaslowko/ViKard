@@ -1,7 +1,5 @@
 package com.example.vikard.ui.register;
 
-import com.example.vikard.ui.register.RegisterDataSource;
-
 import android.util.Patterns;
 
 import androidx.lifecycle.LiveData;
@@ -9,23 +7,20 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.vikard.R;
-import com.example.vikard.ui.register.registerFormState;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RegisterViewModel extends ViewModel {
 
 
     private RegisterDataSource rds;
 
-    private MutableLiveData<registerFormState> registerFormState = new MutableLiveData<>();
+    private MutableLiveData<RegisterFormState> registerFormState = new MutableLiveData<>();
 
-    public LiveData<registerFormState> getRegisterFormState() {
+    public LiveData<RegisterFormState> getRegisterFormState() {
         return registerFormState;
     }
 
 
+    //Metoda rejestracji wykonująca się po wciśnięciu przycisku registerButton
     public void register(String username, String password, String firstName,
                          String lastName, String birthDate )
     {
@@ -42,35 +37,35 @@ public class RegisterViewModel extends ViewModel {
     {
         if (!isEmailAdressValid(username))
         {
-            registerFormState.setValue(new registerFormState(R.string.invalid_email, null,null,null,null,null));
+            registerFormState.setValue(new RegisterFormState(R.string.invalid_email, null,null,null,null,null));
         }
         if (!isPasswordValid(password))
         {
-            registerFormState.setValue(new registerFormState(null, R.string.invalid_password,null,null,null,null));
+            registerFormState.setValue(new RegisterFormState(null, R.string.invalid_password,null,null,null,null));
         }
         if(!isFirstNameValid(firstName))
         {
-            registerFormState.setValue(new registerFormState(null,null,R.string.invalidFirstName, null,null,null));
+            registerFormState.setValue(new RegisterFormState(null,null,R.string.invalidFirstName, null,null,null));
         }
         if(!isValidLastName(lastName))
         {
-            registerFormState.setValue(new registerFormState(null,null,null, R.string.invalidLastName,null,null));
+            registerFormState.setValue(new RegisterFormState(null,null,null, R.string.invalidLastName,null,null));
         }
         if(!isValidBirthDay(birthDate))
         {
-            registerFormState.setValue(new registerFormState(null,null,null, null,R.string.invalidBirthday,null));
+            registerFormState.setValue(new RegisterFormState(null,null,null, null,R.string.invalidBirthday,null));
         }
         if(!arePasswordsEqual(password, repassword))
         {
-            registerFormState.setValue(new registerFormState(null,null,null,null,null,R.string.invalid_repassword));
+            registerFormState.setValue(new RegisterFormState(null,null,null,null,null,R.string.invalid_repassword));
         }
         else {
-            registerFormState.setValue(new registerFormState(true));
+            registerFormState.setValue(new RegisterFormState(true));
         }
     }
 
+    //Metody sprawdzające poprawność pól.
 
-    // A placeholder username validation check
     private boolean isEmailAdressValid(String email)
     {
         if (email == null) {
@@ -89,7 +84,6 @@ public class RegisterViewModel extends ViewModel {
         }
     }
 
-    //Metody sprawdzające poprawność pól.
 
     private boolean isFirstNameValid(String firstName)
     {
@@ -118,9 +112,10 @@ public class RegisterViewModel extends ViewModel {
     private boolean arePasswordsEqual(String password, String repassword)
     {
         if(password.equals(repassword))
-        {
             return true;
-        }
+        else if(repassword.equals(password))
+            return true;
+
         return false;
     }
 
