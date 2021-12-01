@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.vikard.ui.login.LoginActivity;
+import com.example.vikard.ui.register.activity_register;
 
 public class HomeActivity extends AppCompatActivity {
 

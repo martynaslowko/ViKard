@@ -10,7 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ViKard">
         <activity
-            android:name=".activity_register"
+            android:name=".ui.login.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".ui.register.activity_register"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
@@ -26,10 +30,6 @@
             android:exported="false"
             android:label="@string/title_activity_main_screen"
             android:theme="@style/Theme.ViKard.NoActionBar" />
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="false"
-            android:label="@string/app_name"></activity>
     </application>
 
 </manifest>
