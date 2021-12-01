@@ -9,21 +9,36 @@ import android.widget.Button;
 
 import com.example.vikard.ui.login.LoginActivity;
 
+import com.example.vikard.ui.register.RegisterActivity;
+
 public class HomeActivity extends AppCompatActivity {
 
-    private Button loginButton;
+    private Button signinButton;
+    private Button signupButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        loginButton = (Button) findViewById(R.id.loginButton);
+        signinButton = (Button) findViewById(R.id.loginButton);
+        signupButton = (Button) findViewById(R.id.homeRegButton);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        signinButton.setOnClickListener(new View.OnClickListener() {
+       
             @Override
             public void onClick(View v) {
                 openLoginScreen();
             }
         });
+
+
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openRegisterScreen();
+            }
+        });
+
     }
 
     public void openLoginScreen()
@@ -32,6 +47,15 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
+    public void openRegisterScreen()
+    {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
 
 }

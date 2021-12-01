@@ -10,18 +10,21 @@
     <Button
         android:id="@+id/loginButton"
         android:layout_width="186dp"
-        android:layout_height="48dp"
+        android:layout_height="52dp"
+
         android:layout_marginStart="114dp"
         android:layout_marginEnd="115dp"
         android:layout_marginBottom="28dp"
         android:text="Existing User"
-        app:layout_constraintBottom_toTopOf="@+id/registerButton"
+
+        app:layout_constraintBottom_toTopOf="@+id/homeRegButton"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/registerButton"
+        android:id="@+id/homeRegButton"
         android:layout_width="182dp"
         android:layout_height="52dp"
         android:layout_marginStart="114dp"
