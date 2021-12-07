@@ -39,26 +39,28 @@ public class RegisterViewModel extends ViewModel {
         {
             registerFormState.setValue(new RegisterFormState(R.string.invalid_email, null,null,null,null,null));
         }
-        if (!isPasswordValid(password))
+        else if (!isPasswordValid(password))
         {
             registerFormState.setValue(new RegisterFormState(null, R.string.invalid_password,null,null,null,null));
         }
-        if(!isFirstNameValid(firstName))
-        {
-            registerFormState.setValue(new RegisterFormState(null,null,R.string.invalidFirstName, null,null,null));
-        }
-        if(!isValidLastName(lastName))
-        {
-            registerFormState.setValue(new RegisterFormState(null,null,null, R.string.invalidLastName,null,null));
-        }
-        if(!isValidBirthDay(birthDate))
-        {
-            registerFormState.setValue(new RegisterFormState(null,null,null, null,R.string.invalidBirthday,null));
-        }
-        if(!arePasswordsEqual(password, repassword))
+        else if(!arePasswordsEqual(password, repassword))
         {
             registerFormState.setValue(new RegisterFormState(null,null,null,null,null,R.string.invalid_repassword));
         }
+
+        else if(!isFirstNameValid(firstName))
+        {
+            registerFormState.setValue(new RegisterFormState(null,null,R.string.invalidFirstName, null,null,null));
+        }
+        else if(!isValidLastName(lastName))
+        {
+            registerFormState.setValue(new RegisterFormState(null,null,null, R.string.invalidLastName,null,null));
+        }
+        else if(!isValidBirthDay(birthDate))
+        {
+            registerFormState.setValue(new RegisterFormState(null,null,null, null,R.string.invalidBirthday,null));
+        }
+
         else {
             registerFormState.setValue(new RegisterFormState(true));
         }
@@ -87,20 +89,27 @@ public class RegisterViewModel extends ViewModel {
 
     private boolean isFirstNameValid(String firstName)
     {
-        return firstName.matches( "[A-Z][a-z]*" );
-
+        if((firstName != null) && firstName.matches( "[A-Z][a-z]*" ))
+            return true;
+        else
+            return false;
     }
 
     private boolean isValidLastName(String lastName)
     {
-        return lastName.matches( "[A-Z][a-z]*" );
+        if((lastName != null) && lastName.matches( "[A-Z][a-z]*" ))
+            return true;
+        else
+            return false;
     }
 
     private boolean isValidBirthDay(String birthDate)
     {
         //Zwraca true gdy = dd/mm/yyyy, dd-mm-yyyy or dd.mm.yyyy
-
-        return birthDate.matches("^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$");
+        if ((birthDate != null) && birthDate.matches("^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$"))
+            return true;
+        else
+            return false;
     }
 
     // A placeholder password validation check

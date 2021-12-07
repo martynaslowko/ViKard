@@ -38,7 +38,7 @@ public class RegisterFormState {
         this.lastNameError = null;
         this.birthdateError = null;
         this.repasswordError = null;
-        this.isDataValid = true;
+        this.isDataValid = isDataValid;
     }
 
 

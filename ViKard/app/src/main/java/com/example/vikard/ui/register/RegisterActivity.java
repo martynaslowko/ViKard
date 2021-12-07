@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private RegisterViewModel RegisterViewModel;
     private ActivityRegisterBinding binding;
-    private String formattedDate = null;
+    private String formattedDate = "";
 
 
 
@@ -67,36 +67,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         //
 
-        birthdayEditText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
-
-                //picker dialog
-                if(picker[0] == null)
-                {
-                    picker[0] = new DatePickerDialog(RegisterActivity.this,
-                            new DatePickerDialog.OnDateSetListener() {
-                                @Override
-                                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                    birthdayEditText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                                    formattedDate = "" + year+(monthOfYear+1)+dayOfMonth;
-                                }
-                            }, year, month, day);
-                    picker[0].show();
-                }
-                else
-                {
-                    picker[0].show();
-                }
-
-
-            }
-
-        });
 
 
         //Logika przycisku register, co dzieje się po kliknięciu przycisku register
@@ -131,31 +101,31 @@ public class RegisterActivity extends AppCompatActivity {
                 registerButton.setEnabled(registerFormState.isDataValid());
                 if (registerFormState.getEmailError() != null) {
                     emailEditText.setError(getString(registerFormState.getEmailError()));
-                    registerButton.setEnabled(false);
+
                 }
-                else if (registerFormState.getPasswordError() != null) {
+                if (registerFormState.getPasswordError() != null) {
                     r_passwordEditText.setError(getString(registerFormState.getPasswordError()));
-                    registerButton.setEnabled(false);
+
                 }
-                else if(registerFormState.getFirstNameError() != null)
+                if(registerFormState.getFirstNameError() != null)
                 {
                     firstNameEditText.setError(getString(registerFormState.getFirstNameError()));
-                    registerButton.setEnabled(false);
+
                 }
-                else if(registerFormState.getLastNameError() != null)
+                if(registerFormState.getLastNameError() != null)
                 {
                     lastNameEditText.setError(getString(registerFormState.getLastNameError()));
-                    registerButton.setEnabled(false);
+
                 }
-                else if(registerFormState.getBirthdateError() != null)
+                if(registerFormState.getBirthdateError() != null)
                 {
-                    lastNameEditText.setError(getString(registerFormState.getBirthdateError()));
-                    registerButton.setEnabled(false);
+                    //birthdayEditText.setError(getString(registerFormState.getBirthdateError()));
+
                 }
-                else if(registerFormState.getRepasswordError() != null)
+                if(registerFormState.getRepasswordError() != null)
                 {
                     r_repasswordEditText.setError(getString(registerFormState.getRepasswordError()));
-                    registerButton.setEnabled(false);
+
                 }
 
 
@@ -185,6 +155,39 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         };
+
+        birthdayEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+
+                //picker dialog
+                if(picker[0] == null)
+                {
+                    picker[0] = new DatePickerDialog(RegisterActivity.this,
+                            new DatePickerDialog.OnDateSetListener() {
+                                @Override
+                                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                    birthdayEditText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                    formattedDate = "" + year+(monthOfYear+1)+dayOfMonth;
+                                }
+                            }, year, month, day);
+                    picker[0].show();
+                }
+                else
+                {
+                    picker[0].show();
+                }
+
+
+            }
+
+        });
+
+
         emailEditText.addTextChangedListener(afterTextChangedListener1);
         r_passwordEditText.addTextChangedListener(afterTextChangedListener1);
         firstNameEditText.addTextChangedListener(afterTextChangedListener1);

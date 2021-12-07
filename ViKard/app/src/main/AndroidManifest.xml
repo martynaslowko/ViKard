@@ -27,14 +27,6 @@
             android:name=".ui.register.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-
-        </activity>
-        <activity
             android:name=".MainScreen"
             android:exported="false"
             android:label="@string/title_activity_main_screen"
