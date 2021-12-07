@@ -20,7 +20,6 @@ public class LoginDataSource {
 
     public Result<LoggedInUser> login(String username, String password) {
         ResultSet resultSet = null;
-        LoggedInUser logUser = new LoggedInUser(username, password);
         try {
             Statement statement = conn.createStatement();
             String sqlQuery = "SELECT Id FROM Users WHERE Email='"+username+"'";
@@ -33,6 +32,7 @@ public class LoginDataSource {
                 resultSet.next();
                 String pwd = resultSet.getString("Password");
                 if (pwd.equals(password)){
+                    LoggedInUser logUser = new LoggedInUser(String.valueOf(id), username);
                     return new Result.Success<>(logUser);
                 } else {
                     return new Result.Error(new IOException("The password is incorrect."));

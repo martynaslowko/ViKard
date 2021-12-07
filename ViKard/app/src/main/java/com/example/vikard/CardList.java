@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.SQLConnection;
 import com.example.vikard.data.model.CardModel;
 import com.example.vikard.data.model.LoggedInUser;
@@ -23,8 +24,8 @@ public class CardList extends Fragment {
     ArrayList<CardModel> cardCollection = new ArrayList<CardModel>();
 
     public CardList() {
-        //populateCardCollection(1); //populates cardCollection object with Jane Doe's cards (Id = 1)
-        // Required empty public constructor
+        //populateCardCollection(Integer.valueOf(LoginRepository.user.getUserId()));
+        //populates cardCollection object with current logged-in user
     }
 
     @Override
