@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 
 import com.example.vikard.data.SQLConnection;
 import com.example.vikard.data.model.CardModel;
+import com.example.vikard.data.model.LoggedInUser;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+
 
 public class CardList extends Fragment {
 
@@ -28,6 +30,7 @@ public class CardList extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_card_list, container, false);
     }
