@@ -10,40 +10,74 @@ import java.util.Date;
 
 public class CardModel {
 
-    private int Id;
-    private int UsersId;
-    private int ShopsId;
+    private SQLConnection sql = new SQLConnection();
+    private Integer Id;
+    private Integer UsersId;
+    private Integer ShopsId;
     private String Barcode;
     private Date ExpiryDate;
     private String UsersCategory;
 
-    public CardModel(int id) {
-        Id = id;
-        setAll();
-    }
+    private String ShopsName;
 
-    public void setAll() {
-        SQLConnection sql = new SQLConnection();
-        Connection conn = sql.getConnection();
-        try {
-            UsersId = Integer.valueOf(getCardDataSQL("UsersId", conn));
-            ShopsId = Integer.valueOf(getCardDataSQL("ShopsId", conn));
-            Barcode = getCardDataSQL("Barcode", conn);
-            ExpiryDate = new SimpleDateFormat("yyyy-MM-dd").parse(getCardDataSQL("ExpiryDate", conn));
-            UsersCategory = getCardDataSQL("UsersCategory", conn);
-        } catch (Exception ex) {
-            return;
+    public CardModel(int id, boolean isFull) {
+        Id = id;
+        if (isFull) {
+            setAll();
+        } else {
+            setPreview();
         }
     }
 
-    public String getCardDataSQL(String type, Connection connection) {
+    //Used for full initialization or supplementing existing CardModels
+    public void setAll() {
+        Connection conn = sql.getConnection();
+        try {
+            UsersId = Integer.valueOf(getCardDataSQL("UsersId", "Id", "Cards", Id, conn));
+            if (ShopsId == null) {
+                ShopsId = Integer.valueOf(getCardDataSQL("ShopsId", "Id", "Cards", Id, conn));
+            }
+            Barcode = getCardDataSQL("Barcode", "Id", "Cards", Id, conn);
+            ExpiryDate = new SimpleDateFormat("yyyy-MM-dd").parse(getCardDataSQL("ExpiryDate", "Id", "Cards", Id, conn));
+            if (UsersCategory == null) {
+                UsersCategory = getCardDataSQL("UsersCategory", "Id", "Cards", Id, conn);
+            }
+            if (ShopsName == null) {
+                ShopsName = getCardDataSQL("Name", "Id", "Shops", ShopsId, conn);
+            }
+        } catch (Exception ex) {
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    //Used for primary initialization in CardModel List
+    public void setPreview() {
+        Connection conn = sql.getConnection();
+        try {
+            ShopsId = Integer.valueOf(getCardDataSQL("ShopsId", "Id", "Cards", Id, conn));
+            UsersCategory = getCardDataSQL("UsersCategory", "Id", "Cards", Id, conn);
+            ShopsName = getCardDataSQL("Name", "Id", "Shops", ShopsId, conn);
+        } catch (Exception ex) {
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public String getCardDataSQL(String typeTo, String typeFrom, String tableFrom, int idFrom, Connection connection) {
         ResultSet resultSet = null;
         try {
             Statement statement = connection.createStatement();
-            String sqlQuery = "SELECT " + type + " FROM Cards WHERE Id=" + Id;
+            String sqlQuery = "SELECT " + typeTo + " FROM " + tableFrom + " WHERE " + typeFrom + "='" + idFrom + "'";
             resultSet = statement.executeQuery(sqlQuery);
             resultSet.next();
-            return resultSet.getString(type);
+            return resultSet.getString(typeTo);
         } catch (Exception ex) {
             return null;
         }
@@ -51,15 +85,15 @@ public class CardModel {
 
     //region Getters
 
-    public int getId() {
+    public Integer getId() {
         return Id;
     }
 
-    public int getUsersId() {
+    public Integer getUsersId() {
         return UsersId;
     }
 
-    public int getShopsId() {
+    public Integer getShopsId() {
         return ShopsId;
     }
 
@@ -75,19 +109,23 @@ public class CardModel {
         return UsersCategory;
     }
 
-    public void setId(int id) {
-        Id = id;
+    public String getShopsName() {
+        return ShopsName;
     }
 
     //endregion
 
     //region Setters
 
-    public void setUsersId(int usersId) {
+    public void setId(Integer id) {
+        Id = id;
+    }
+
+    public void setUsersId(Integer usersId) {
         UsersId = usersId;
     }
 
-    public void setShopsId(int shopsId) {
+    public void setShopsId(Integer shopsId) {
         ShopsId = shopsId;
     }
 
@@ -101,6 +139,10 @@ public class CardModel {
 
     public void setUsersCategory(String usersCategory) {
         UsersCategory = usersCategory;
+    }
+
+    public void setShopsName(String shopsName) {
+        ShopsName = shopsName;
     }
 
     //endregion
