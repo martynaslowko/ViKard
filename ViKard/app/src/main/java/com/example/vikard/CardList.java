@@ -3,10 +3,14 @@ package com.example.vikard;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.vikard.data.LoginRepository;
@@ -24,6 +28,7 @@ public class CardList extends Fragment {
 
     ArrayList<CardModel> cardCollection = new ArrayList<CardModel>();
     TextView tv1;
+    LinearLayout list;
     View rootView;
     int user_id;
 
@@ -38,12 +43,21 @@ public class CardList extends Fragment {
         //populateCardCollection(Integer.valueOf(LoginRepository.user.getUserId()));
         //populates cardCollection object with current logged-in user
         populateCardCollection(user_id);
+        tv1 = rootView.findViewById(R.id.output);
+        list = rootView.findViewById(R.id.card_list);
+        tv1.setText("");
+        int size = cardCollection.size();
+        for(int i = 0; i < size; i++) {
+            tv1.append(cardCollection.get(i).getShopsId()+", "+cardCollection.get(i).getShopsName()+", "+cardCollection.get(i).getUsersCategory()+"\n");
+        }
 
-        tv1 = (TextView) rootView.findViewById(R.id.output);
-        tv1.setText(String.valueOf(user_id));
+        FragmentManager fm = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        CardListElement fm2 = new CardListElement();
+        fragmentTransaction.add(R.id.card_list, fm2, "HELLO");
+        fragmentTransaction.commit();
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_card_list, container, false);
+        return rootView;
     }
 
     public void populateCardCollection (int UsersId){
