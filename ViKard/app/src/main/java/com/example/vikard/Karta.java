@@ -1,6 +1,8 @@
 package com.example.vikard;
 import com.example.vikard.data.model.CardModel;
 import com.example.vikard.data.SQLConnection;
+
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -22,9 +24,13 @@ import com.google.zxing.oned.Code128Writer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import java.util.Hashtable;
-public class Karta {
+public class Karta extends View{
     String code;
     private ImageView imageViewResult;
+
+    public Karta() {
+
+    }
 
     protected void onCreate() {
         imageViewResult = (ImageView) imageViewResult.findViewById(R.id.barcode);

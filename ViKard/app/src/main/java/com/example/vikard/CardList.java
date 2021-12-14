@@ -17,6 +17,7 @@ import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.SQLConnection;
 import com.example.vikard.data.model.CardModel;
 import com.example.vikard.data.model.LoggedInUser;
+import com.example.vikard.data.model.ShopModel;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,8 +28,7 @@ import java.util.ArrayList;
 public class CardList extends Fragment {
 
     ArrayList<CardModel> cardCollection = new ArrayList<CardModel>();
-    TextView tv1;
-    LinearLayout list;
+    ArrayList<ShopModel> shopsCollection = new ArrayList<ShopModel>();
     View rootView;
     int user_id;
 
@@ -43,20 +43,16 @@ public class CardList extends Fragment {
         //populateCardCollection(Integer.valueOf(LoginRepository.user.getUserId()));
         //populates cardCollection object with current logged-in user
         populateCardCollection(user_id);
-        tv1 = rootView.findViewById(R.id.output);
-        list = rootView.findViewById(R.id.card_list);
-        tv1.setText("");
+
         int size = cardCollection.size();
         for(int i = 0; i < size; i++) {
-            tv1.append(cardCollection.get(i).getShopsId()+", "+cardCollection.get(i).getShopsName()+", "+cardCollection.get(i).getUsersCategory()+"\n");
+            ShopModel shopModel = new ShopModel(cardCollection.get(i).getShopsId(), false);
+            FragmentManager fm = getParentFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            CardListElement fm2 = new CardListElement(shopModel.getName(), cardCollection.get(i).getUsersCategory(),shopModel.getHexColor());
+            fm.beginTransaction().add(R.id.card_list, fm2).commit();
+            fragmentTransaction.commit();
         }
-
-        FragmentManager fm = getParentFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        CardListElement fm2 = new CardListElement();
-        fragmentTransaction.add(R.id.card_list, fm2, "HELLO");
-        fragmentTransaction.commit();
-
         return rootView;
     }
 
