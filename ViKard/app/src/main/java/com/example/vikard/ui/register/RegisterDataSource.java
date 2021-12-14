@@ -8,7 +8,10 @@ import java.sql.Statement;
 
 public class RegisterDataSource {
 
-    public void executeRegisterQuery(String name, String lastName, String email, String birthDate, String password){
+    public void executeRegisterQuery(String name, String lastName,
+                                     String email, String birthDate,
+                                     String password)
+    {
         SQLConnection sql = new SQLConnection();
         Connection conn = sql.getConnection();
         ResultSet resultSet = null;
