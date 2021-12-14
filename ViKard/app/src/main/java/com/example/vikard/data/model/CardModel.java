@@ -1,16 +1,11 @@
 package com.example.vikard.data.model;
 
-import com.example.vikard.data.SQLConnection;
-
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class CardModel {
+public class CardModel extends SQLDataModel{
 
-    private SQLConnection sql = new SQLConnection();
     private Integer Id;
     private Integer UsersId;
     private Integer ShopsId;
@@ -18,7 +13,8 @@ public class CardModel {
     private Date ExpiryDate;
     private String UsersCategory;
 
-    private String ShopsName;
+    //Used to get ShopModel.Name and ShopModel.HexColor
+    private ShopModel Shop;
 
     public CardModel(int id, boolean isFull) {
         Id = id;
@@ -30,20 +26,19 @@ public class CardModel {
     }
 
     //Used for full initialization or supplementing existing CardModels
+    @Override
     public void setAll() {
         Connection conn = sql.getConnection();
         try {
-            UsersId = Integer.valueOf(getCardDataSQL("UsersId", "Id", "Cards", Id, conn));
+            UsersId = Integer.valueOf(getModelDataSQL("UsersId", "Id", "Cards", Id, conn));
             if (ShopsId == null) {
-                ShopsId = Integer.valueOf(getCardDataSQL("ShopsId", "Id", "Cards", Id, conn));
+                ShopsId = Integer.valueOf(getModelDataSQL("ShopsId", "Id", "Cards", Id, conn));
+                Shop = new ShopModel(ShopsId, true);
             }
-            Barcode = getCardDataSQL("Barcode", "Id", "Cards", Id, conn);
-            ExpiryDate = new SimpleDateFormat("yyyy-MM-dd").parse(getCardDataSQL("ExpiryDate", "Id", "Cards", Id, conn));
+            Barcode = getModelDataSQL("Barcode", "Id", "Cards", Id, conn);
+            ExpiryDate = new SimpleDateFormat("yyyy-MM-dd").parse(getModelDataSQL("ExpiryDate", "Id", "Cards", Id, conn));
             if (UsersCategory == null) {
-                UsersCategory = getCardDataSQL("UsersCategory", "Id", "Cards", Id, conn);
-            }
-            if (ShopsName == null) {
-                ShopsName = getCardDataSQL("Name", "Id", "Shops", ShopsId, conn);
+                UsersCategory = getModelDataSQL("UsersCategory", "Id", "Cards", Id, conn);
             }
         } catch (Exception ex) {
         } finally {
@@ -52,28 +47,16 @@ public class CardModel {
     }
 
     //Used for primary initialization in CardModel List
+    @Override
     public void setPreview() {
         Connection conn = sql.getConnection();
         try {
-            ShopsId = Integer.valueOf(getCardDataSQL("ShopsId", "Id", "Cards", Id, conn));
-            UsersCategory = getCardDataSQL("UsersCategory", "Id", "Cards", Id, conn);
-            ShopsName = getCardDataSQL("Name", "Id", "Shops", ShopsId, conn);
+            ShopsId = Integer.valueOf(getModelDataSQL("ShopsId", "Id", "Cards", Id, conn));
+            Shop = new ShopModel(ShopsId, false);
+            UsersCategory = getModelDataSQL("UsersCategory", "Id", "Cards", Id, conn);
         } catch (Exception ex) {
         } finally {
             try { conn.close(); } catch (Exception e) { }
-        }
-    }
-
-    public String getCardDataSQL(String typeTo, String typeFrom, String tableFrom, int idFrom, Connection connection) {
-        ResultSet resultSet = null;
-        try {
-            Statement statement = connection.createStatement();
-            String sqlQuery = "SELECT " + typeTo + " FROM " + tableFrom + " WHERE " + typeFrom + "='" + idFrom + "'";
-            resultSet = statement.executeQuery(sqlQuery);
-            resultSet.next();
-            return resultSet.getString(typeTo);
-        } catch (Exception ex) {
-            return null;
         }
     }
 
@@ -103,10 +86,6 @@ public class CardModel {
         return UsersCategory;
     }
 
-    public String getShopsName() {
-        return ShopsName;
-    }
-
     //endregion
 
     //region Setters
@@ -133,10 +112,6 @@ public class CardModel {
 
     public void setUsersCategory(String usersCategory) {
         UsersCategory = usersCategory;
-    }
-
-    public void setShopsName(String shopsName) {
-        ShopsName = shopsName;
     }
 
     //endregion
