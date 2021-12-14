@@ -44,17 +44,16 @@
 
     <TextView
         android:id="@+id/barcode"
-        android:layout_width="214dp"
-        android:layout_height="276dp"
-        android:layout_marginBottom="56dp"
+        android:layout_width="363dp"
+        android:layout_height="826dp"
+        android:fontFamily="@font/barcode"
+        android:padding="0dp"
         android:rotation="90"
         android:text="12-2022"
-        android:fontFamily="@font/barcodeRegular"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="85sp"
+        tools:layout_editor_absoluteX="-249dp"
+        tools:layout_editor_absoluteY="-5dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

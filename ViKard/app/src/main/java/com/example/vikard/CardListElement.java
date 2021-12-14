@@ -1,20 +1,18 @@
 package com.example.vikard;
 
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.ListFragment;
 
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.vikard.data.LoginRepository;
+import com.example.vikard.data.model.CardModel;
 
 import java.util.List;
 
@@ -26,11 +24,13 @@ public class CardListElement extends Fragment {
     String shopName;
     String shopCategory;
     String hexColor;
+    int cardId_;
 
-    public CardListElement(String shopname, String shopcategory, String hexcolor) {
+    public CardListElement(String shopname, String shopcategory, String hexcolor, int id) {
         shopName = shopname;
         shopCategory = shopcategory;
         hexColor = hexcolor;
+        cardId_ = id;
     }
 
     @Override
@@ -45,10 +45,12 @@ public class CardListElement extends Fragment {
         shopName_.setText(shopName);
         shopCategory_.setText(shopCategory);
 
+        //listener, że jak naciśnie się na kartę, to otwiera się okienko z podglądem karty... nie działa
         cardMiniature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View karta = new Karta();
+                Karta karta;
+                karta = new Karta(shopName, new CardModel(cardId_,true).getExpiryDate(), new CardModel(cardId_,true).getBarcode());
             }
         });
         return rootView;

@@ -49,7 +49,7 @@ public class CardList extends Fragment {
             ShopModel shopModel = new ShopModel(cardCollection.get(i).getShopsId(), false);
             FragmentManager fm = getParentFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            CardListElement fm2 = new CardListElement(shopModel.getName(), cardCollection.get(i).getUsersCategory(),shopModel.getHexColor());
+            CardListElement fm2 = new CardListElement(shopModel.getName(), cardCollection.get(i).getUsersCategory(),shopModel.getHexColor(), i);
             fm.beginTransaction().add(R.id.card_list, fm2).commit();
             fragmentTransaction.commit();
         }
