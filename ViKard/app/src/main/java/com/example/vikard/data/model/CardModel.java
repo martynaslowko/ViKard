@@ -47,10 +47,7 @@ public class CardModel {
             }
         } catch (Exception ex) {
         } finally {
-            try {
-                conn.close();
-            } catch (Exception e) {
-            }
+            try { conn.close(); } catch (Exception e) { }
         }
     }
 
@@ -63,10 +60,7 @@ public class CardModel {
             ShopsName = getCardDataSQL("Name", "Id", "Shops", ShopsId, conn);
         } catch (Exception ex) {
         } finally {
-            try {
-                conn.close();
-            } catch (Exception e) {
-            }
+            try { conn.close(); } catch (Exception e) { }
         }
     }
 

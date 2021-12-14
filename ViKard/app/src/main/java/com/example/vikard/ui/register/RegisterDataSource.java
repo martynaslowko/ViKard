@@ -3,8 +3,8 @@ package com.example.vikard.ui.register;
 import com.example.vikard.data.SQLConnection;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class RegisterDataSource {
 
@@ -16,18 +16,26 @@ public class RegisterDataSource {
         Connection conn = sql.getConnection();
         ResultSet resultSet = null;
         try {
-            Statement statement = ((Connection) conn).createStatement();
             String sqlQuery = "INSERT INTO Users (Name, LastName, Email, BirthDate) VALUES " +
-                    "('"+name+"', '"+lastName+"', '"+email+"', '"+birthDate+"')";
-            statement.executeUpdate(sqlQuery);
-            sqlQuery = "SELECT Id FROM Users WHERE Email='"+email+"'";
-            resultSet = statement.executeQuery(sqlQuery);
+                    "(?, ?, ?, ?)";
+            PreparedStatement statement = conn.prepareStatement(sqlQuery);
+            statement.setString(1, name);
+            statement.setString(2, lastName);
+            statement.setString(3, email);
+            statement.setDate(4, java.sql.Date.valueOf(birthDate));
+            statement.executeUpdate();
+            sqlQuery = "SELECT Id FROM Users WHERE Email = ?";
+            statement = conn.prepareStatement(sqlQuery);
+            statement.setString(1, email);
+            resultSet = statement.executeQuery();
             resultSet.next();
-            sqlQuery = "INSERT INTO Credentials (UsersId, Password) VALUES " +
-                    "("+resultSet.getInt("Id")+", '"+password+"')";
-            statement.executeUpdate(sqlQuery);
-        } catch (Exception ex) {
-            return;
+            sqlQuery = "INSERT INTO Credentials (UsersId, Password) VALUES (?, ?)";
+            statement = conn.prepareStatement(sqlQuery);
+            statement.setInt(1, resultSet.getInt("Id"));
+            statement.setString(2, password);
+            statement.executeUpdate();
+        } catch (Exception ex) { } finally {
+            try { conn.close(); } catch (Exception e) { }
         }
     }
 

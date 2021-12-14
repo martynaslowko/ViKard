@@ -172,7 +172,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                     birthdayEditText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                                    formattedDate = "" + year+(monthOfYear+1)+dayOfMonth;
+                                    formattedDate = "" + year + "-" + (monthOfYear+1) + "-" + dayOfMonth;
                                 }
                             }, year, month, day);
                     picker[0].show();
