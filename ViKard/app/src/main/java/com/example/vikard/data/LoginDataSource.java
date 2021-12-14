@@ -1,14 +1,11 @@
 package com.example.vikard.data;
 
-import android.util.Log;
-
 import com.example.vikard.data.model.LoggedInUser;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
@@ -21,14 +18,17 @@ public class LoginDataSource {
     public Result<LoggedInUser> login(String username, String password) {
         ResultSet resultSet = null;
         try {
-            Statement statement = conn.createStatement();
-            String sqlQuery = "SELECT Id FROM Users WHERE Email='"+username+"'";
-            resultSet = statement.executeQuery(sqlQuery);
+            String sqlQuery = "SELECT Id FROM Users WHERE Email = ?";
+            PreparedStatement statement = conn.prepareStatement(sqlQuery);
+            statement.setString(1, username);
+            resultSet = statement.executeQuery();
             if (resultSet!= null) {
                 resultSet.next();
                 int id = resultSet.getInt("Id");
-                sqlQuery = "SELECT Password FROM Credentials WHERE UsersId=" + id;
-                resultSet = statement.executeQuery(sqlQuery);
+                sqlQuery = "SELECT Password FROM Credentials WHERE UsersId = ?";
+                statement = conn.prepareStatement(sqlQuery);
+                statement.setInt(1, id);
+                resultSet = statement.executeQuery();
                 resultSet.next();
                 String pwd = resultSet.getString("Password");
                 if (pwd.equals(password)){
@@ -40,9 +40,12 @@ public class LoginDataSource {
             } else {
                 return new Result.Error(new IOException("The user doesn't exist."));
             }
-        } catch (Exception e) {
+        } catch (Exception ex) {
             return new Result.Error(new IOException("The user doesn't exist."));
+        } finally {
+            try { conn.close(); } catch (Exception e) {}
         }
+
     }
 
     public void logout() {

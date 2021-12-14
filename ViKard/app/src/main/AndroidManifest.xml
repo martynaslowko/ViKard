@@ -26,7 +26,6 @@
 
             android:name=".ui.register.RegisterActivity"
             android:exported="false" />
-
         <activity
             android:name=".MainScreen"
             android:exported="false"

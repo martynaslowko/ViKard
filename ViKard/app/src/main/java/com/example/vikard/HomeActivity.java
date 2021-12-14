@@ -45,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-        finish();
+
     }
 
 
@@ -53,7 +53,7 @@ public class HomeActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
-        finish();
+
     }
 
 
