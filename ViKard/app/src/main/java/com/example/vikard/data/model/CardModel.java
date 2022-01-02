@@ -1,6 +1,10 @@
 package com.example.vikard.data.model;
 
+import com.example.vikard.data.SQLConnection;
+
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,6 +26,15 @@ public class CardModel extends SQLDataModel{
             setAll();
         } else {
             setPreview();
+        }
+    }
+
+    public CardModel(int usersid, int shopsid, String barcode, Date expirydate){
+        if (createNewCard(usersid,shopsid,barcode,expirydate)){
+            UsersId = usersid;
+            ShopsId = shopsid;
+            Barcode = barcode;
+            ExpiryDate = expirydate;
         }
     }
 
@@ -56,6 +69,31 @@ public class CardModel extends SQLDataModel{
             UsersCategory = getModelDataSQL("UsersCategory", "Id", "Cards", Id, conn);
         } catch (Exception ex) {
         } finally {
+            try { conn.close(); } catch (Exception e) { }
+        }
+    }
+
+    public boolean createNewCard(int usersid, int shopsid, String barcode, Date expirydate){
+        SQLConnection sql = new SQLConnection();
+        Connection conn = sql.getConnection();
+        ResultSet resultSet = null;
+        try {
+            String sqlQuery = "INSERT INTO Cards (UsersId, ShopsId, Barcode, ExpiryDate) VALUES " +
+                    "(?, ?, ?, ?)";
+            PreparedStatement statement = conn.prepareStatement(sqlQuery);
+            statement.setInt(1, usersid);
+            statement.setInt(2, shopsid);
+            statement.setString(3, barcode);
+            statement.setDate(4, (java.sql.Date) expirydate);
+            statement.executeUpdate();
+            sqlQuery = "SELECT Id FROM Cards WHERE Barcode = ?";
+            statement = conn.prepareStatement(sqlQuery);
+            statement.setString(1, barcode);
+            resultSet = statement.executeQuery();
+            resultSet.next();
+            Id = resultSet.getInt("Id");
+            return true;
+        } catch (Exception ex) { return false; } finally {
             try { conn.close(); } catch (Exception e) { }
         }
     }
