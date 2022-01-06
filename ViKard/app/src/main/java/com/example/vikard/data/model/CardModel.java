@@ -1,5 +1,6 @@
 package com.example.vikard.data.model;
 
+import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.SQLConnection;
 
 import java.sql.Connection;
@@ -11,7 +12,7 @@ import java.util.Date;
 public class CardModel extends SQLDataModel{
 
     private Integer Id;
-    private Integer UsersId;
+    private Integer UsersId = Integer.valueOf(LoginRepository.user.getUserId());
     private Integer ShopsId;
     private String Barcode;
     private Date ExpiryDate;
@@ -29,12 +30,16 @@ public class CardModel extends SQLDataModel{
         }
     }
 
-    public CardModel(int usersid, int shopsid, String barcode, Date expirydate){
-        if (createNewCard(usersid,shopsid,barcode,expirydate)){
-            UsersId = usersid;
-            ShopsId = shopsid;
+    //New Card constructor, can be added to CardCollection later and populated on selection.
+    public CardModel(String shopsname, String barcode, Date expirydate){
+        if (createNewCard(shopsname,barcode,expirydate)){
+            Shop = new ShopModel(ShopsId, false);
             Barcode = barcode;
             ExpiryDate = expirydate;
+        } else {
+            ShopsId = null;
+            UsersId = null;
+            Id = null;
         }
     }
 
@@ -43,10 +48,11 @@ public class CardModel extends SQLDataModel{
     public void setAll() {
         Connection conn = sql.getConnection();
         try {
-            UsersId = Integer.valueOf(getModelDataSQL("UsersId", "Id", "Cards", Id, conn));
             if (ShopsId == null) {
-                ShopsId = Integer.valueOf(getModelDataSQL("ShopsId", "Id", "Cards", Id, conn));
-                Shop = new ShopModel(ShopsId, true);
+                Shop = new ShopModel(Integer.valueOf(getModelDataSQL("ShopsId", "Id", "Cards", Id, conn)), true);
+                ShopsId = Shop.getId();
+            } else {
+                Shop.setAll();
             }
             Barcode = getModelDataSQL("Barcode", "Id", "Cards", Id, conn);
             ExpiryDate = new SimpleDateFormat("yyyy-MM-dd").parse(getModelDataSQL("ExpiryDate", "Id", "Cards", Id, conn));
@@ -64,8 +70,8 @@ public class CardModel extends SQLDataModel{
     public void setPreview() {
         Connection conn = sql.getConnection();
         try {
-            ShopsId = Integer.valueOf(getModelDataSQL("ShopsId", "Id", "Cards", Id, conn));
-            Shop = new ShopModel(ShopsId, false);
+            Shop = new ShopModel(Integer.valueOf(getModelDataSQL("ShopsId", "Id", "Cards", Id, conn)), false);
+            ShopsId = Shop.getId();
             UsersCategory = getModelDataSQL("UsersCategory", "Id", "Cards", Id, conn);
         } catch (Exception ex) {
         } finally {
@@ -73,19 +79,29 @@ public class CardModel extends SQLDataModel{
         }
     }
 
-    public boolean createNewCard(int usersid, int shopsid, String barcode, Date expirydate){
+    //Used for creating a new card
+    public boolean createNewCard(String shopsname, String barcode, Date expirydate){
         SQLConnection sql = new SQLConnection();
         Connection conn = sql.getConnection();
         ResultSet resultSet = null;
         try {
-            String sqlQuery = "INSERT INTO Cards (UsersId, ShopsId, Barcode, ExpiryDate) VALUES " +
-                    "(?, ?, ?, ?)";
+            //get ShopsId
+            String sqlQuery = "SELECT Id FROM Shops WHERE Name = ?";
             PreparedStatement statement = conn.prepareStatement(sqlQuery);
-            statement.setInt(1, usersid);
-            statement.setInt(2, shopsid);
+            statement.setString(1, shopsname);
+            resultSet = statement.executeQuery();
+            resultSet.next();
+            ShopsId = resultSet.getInt("Id");
+            //Insert new Card
+            sqlQuery = "INSERT INTO Cards (UsersId, ShopsId, Barcode, ExpiryDate) VALUES " +
+                    "(?, ?, ?, ?)";
+            statement = conn.prepareStatement(sqlQuery);
+            statement.setInt(1, UsersId);
+            statement.setInt(2, ShopsId);
             statement.setString(3, barcode);
             statement.setDate(4, (java.sql.Date) expirydate);
             statement.executeUpdate();
+            //get new Card's Id
             sqlQuery = "SELECT Id FROM Cards WHERE Barcode = ?";
             statement = conn.prepareStatement(sqlQuery);
             statement.setString(1, barcode);
