@@ -114,6 +114,21 @@ public class CardModel extends SQLDataModel{
         }
     }
 
+    public void changeUsersCategory(String usersCategory) {
+        SQLConnection sql = new SQLConnection();
+        Connection conn = sql.getConnection();
+        try {
+            String sqlQuery = "UPDATE Cards SET UsersCategory = ? WHERE Id = ?";
+            PreparedStatement statement = conn.prepareStatement(sqlQuery);
+            statement.setString(1, usersCategory);
+            statement.setInt(2, Id);
+            statement.executeUpdate();
+            UsersCategory = usersCategory;
+        } catch (Exception ex) { } finally {
+            try { conn.close(); } catch (Exception e) { }
+        }
+    }
+
     //region Getters
 
     public Integer getId() {
