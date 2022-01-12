@@ -1,9 +1,4 @@
 package com.example.vikard.ui.card;
-import com.example.vikard.MainScreen;
-import com.example.vikard.data.LoginRepository;
-import com.example.vikard.data.SQLConnection;
-import com.example.vikard.data.model.CardModel;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -13,7 +8,6 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -22,28 +16,25 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.vikard.ui.register.RegisterActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.vikard.MainScreen;
+import com.example.vikard.R;
+import com.example.vikard.data.SQLConnection;
+import com.example.vikard.data.model.CardModel;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.example.vikard.R;
-import com.example.vikard.ui.card.AddCardSql;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import com.example.vikard.data.model.ShopModel;
-
 
 public class AddCardActivity extends AppCompatActivity {
-
-    ShopModel shops = new ShopModel(1,true);
-    ArrayList<ShopModel> shopsCollection = new ArrayList<ShopModel>();
-    int user_id = Integer.valueOf(LoginRepository.user.getUserId());
-    AddCardSql addCardClass = new AddCardSql();
 
     public ArrayAdapter<String> dataAdapter;
 
@@ -63,7 +54,6 @@ public class AddCardActivity extends AppCompatActivity {
 
 
         //ShoplistSpinner
-        populateShopCollection();
         shplistSpinner = findViewById(R.id.shopListSpinner);
         loadSpinnerData();
 
@@ -87,15 +77,7 @@ public class AddCardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                int shop_id = (int) shplistSpinner.getSelectedItemId() + 1;
-                addCardClass.executeAddQuery(user_id, shop_id,
-                        scannedText.getText().toString(),formattedDate,
-                        "Spożywcze");
-
-                //Konczy widok po dodaniu do karty
-                //Nie wiem co wykminić odnośnie odświeżania kart w mainscreenie
-//                finish();
-
+                new CardModel(shplistSpinner.getSelectedItem().toString(), scannedText.getText().toString(), Date.valueOf(formattedDate));
             }
         });
 
@@ -176,9 +158,6 @@ public class AddCardActivity extends AppCompatActivity {
 
     }
 
-
-
-
     //Metody odpowiedzialne za pobieranie syfu z bazy odnośnie sklepów.
 
     //Przenieść go na start aplikacji aby pobierać wszystko za jednym zamachem!!
@@ -187,12 +166,20 @@ public class AddCardActivity extends AppCompatActivity {
     public List<String> getAllLabels()
     {
         List<String> labels = new ArrayList<String>();
-        int size = shopsCollection.size();
-        for(int i = 0; i < size; i++)
-        {
-            labels.add(shopsCollection.get(i).getName());
+        SQLConnection sql = new SQLConnection();
+        Connection conn = sql.getConnection();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT Name FROM Shops");
+            while (resultSet.next()){
+                labels.add(resultSet.getString("Name"));
+            }
+
+        } catch (Exception ex) {
+        } finally {
+            try { conn.close(); } catch (Exception e) { }
+            return labels;
         }
-        return labels;
     }
     private void loadSpinnerData() {
 
@@ -209,22 +196,6 @@ public class AddCardActivity extends AppCompatActivity {
         // attaching data adapter to spinner
         shplistSpinner.setAdapter(dataAdapter);
     }
-
-    public void populateShopCollection (){
-        SQLConnection sql = new SQLConnection();
-        Connection conn = sql.getConnection();
-        try {
-            Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Shops");
-            while (resultSet.next()){
-                shopsCollection.add(new ShopModel(resultSet.getInt("Id"), true));
-            }
-        } catch (Exception ex) {
-        } finally {
-            try { conn.close(); } catch (Exception e) { }
-        }
-    }
-
 
     @Override
     public void onBackPressed() {
