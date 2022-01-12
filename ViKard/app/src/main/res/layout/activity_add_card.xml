@@ -7,7 +7,7 @@
     android:padding="4dp"
     tools:context=".ui.card.AddCardActivity">
     <TextView
-        android:layout_below="@id/button"
+        android:layout_below="@id/initiateScan"
         android:layout_centerInParent="true"
         android:layout_marginBottom="10dp"
         android:text=" code reader"
@@ -15,12 +15,46 @@
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtContent"/>
+        android:id="@+id/scannedContent"/>
+
     <Button
+        android:id="@+id/initiateScan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Process"
-        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
-        android:id="@+id/button" />
+        android:layout_marginTop="50dp"
+        android:text="Process" />
+
+    <Button
+        android:id="@+id/addCardToDB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scannedContent"
+        android:layout_marginTop="287dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:text="Dodaj kartę"
+        android:translationX="150dp" />
+
+    <EditText
+        android:id="@+id/expiryDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scannedContent"
+        android:layout_alignStart="@+id/initiateScan"
+        android:layout_marginStart="-55dp"
+        android:layout_marginTop="37dp"
+        android:ems="10"
+        android:inputType="date" />
+
+    <Spinner
+        android:id="@+id/shopListSpinner"
+        android:layout_width="206dp"
+        android:layout_height="53dp"
+        android:layout_below="@+id/expiryDateText"
+        android:layout_alignStart="@+id/expiryDateText"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="66dp"
+        android:spinnerMode="dropdown" />
+
 </RelativeLayout>

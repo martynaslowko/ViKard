@@ -41,7 +41,10 @@
             android:exported="false"
             android:label="@string/title_activity_main_screen"
             android:theme="@style/Theme.ViKard.NoActionBar" />
+
+
     </application>
     <uses-feature android:name="android.hardware.camera.autoFocus" />
     <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.any" />
 </manifest>
