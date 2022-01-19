@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+<<<<<<< Updated upstream
 
 import com.example.vikard.ui.register.RegisterActivity;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -28,6 +29,15 @@ import com.google.zxing.integration.android.IntentResult;
 import com.example.vikard.R;
 import com.example.vikard.ui.card.AddCardSql;
 
+=======
+import androidx.appcompat.app.AppCompatActivity;
+import com.example.vikard.MainScreen;
+import com.example.vikard.R;
+import com.example.vikard.data.SQLConnection;
+import com.example.vikard.data.model.CardModel;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+>>>>>>> Stashed changes
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;

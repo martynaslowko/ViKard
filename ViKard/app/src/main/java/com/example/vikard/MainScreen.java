@@ -12,6 +12,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.vikard.ui.card.AddCardActivity;
 import com.example.vikard.ui.login.LoginActivity;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -25,6 +26,8 @@ public class MainScreen extends AppCompatActivity {
     FloatingActionButton dropFloatButton;
     FloatingActionButton addFloatButton;
     FloatingActionButton delFloatButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
