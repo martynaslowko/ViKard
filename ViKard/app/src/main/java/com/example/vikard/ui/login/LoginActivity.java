@@ -23,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.vikard.HomeActivity;
 import com.example.vikard.MainScreen;
 import com.example.vikard.R;
 import com.example.vikard.ui.login.LoginViewModel;
@@ -134,10 +135,18 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+
     }
 
+    //Po udanym logowaniu przechodzi do MainScreen.class
     private void switchActivities() {
         Intent switchActivityIntent = new Intent(this, MainScreen.class);
         startActivity(switchActivityIntent);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

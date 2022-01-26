@@ -1,35 +1,51 @@
 package com.example.vikard;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.SQLConnection;
 import com.example.vikard.data.model.CardModel;
+import com.example.vikard.data.model.ShopModel;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+
 public class CardList extends Fragment {
 
     ArrayList<CardModel> cardCollection = new ArrayList<CardModel>();
+    View rootView;
+    int user_id;
 
     public CardList() {
-        //populateCardCollection(1); //populates cardCollection object with Jane Doe's cards (Id = 1)
-        // Required empty public constructor
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_card_list, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.fragment_card_list, container, false);
+        user_id = Integer.valueOf(LoginRepository.user.getUserId());
+        populateCardCollection(user_id);
+
+        int size = cardCollection.size();
+        for(int i = 0; i < size; i++) {
+            ShopModel shopModel = new ShopModel(cardCollection.get(i).getShopsId(), false);
+            FragmentManager fm = getParentFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            CardListElement fm2 = new CardListElement(shopModel.getName(), cardCollection.get(i).getUsersCategory(),shopModel.getHexColor(), cardCollection.get(i).getId());
+            fm.beginTransaction().add(R.id.card_list, fm2).commit();
+            fragmentTransaction.commit();
+        }
+        return rootView;
     }
 
     public void populateCardCollection (int UsersId){
@@ -46,5 +62,4 @@ public class CardList extends Fragment {
             try { conn.close(); } catch (Exception e) { }
         }
     }
-
 }

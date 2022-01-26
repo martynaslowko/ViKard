@@ -1,24 +1,25 @@
 package com.example.vikard.data.model;
 
+import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.SQLConnection;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class CardModel {
+public class CardModel extends SQLDataModel{
 
-    private SQLConnection sql = new SQLConnection();
     private Integer Id;
-    private Integer UsersId;
+    private Integer UsersId = Integer.valueOf(LoginRepository.user.getUserId());
     private Integer ShopsId;
     private String Barcode;
     private Date ExpiryDate;
     private String UsersCategory;
 
-    private String ShopsName;
+    //Used to get ShopModel.Name and ShopModel.HexColor
+    private ShopModel Shop;
 
     public CardModel(int id, boolean isFull) {
         Id = id;
@@ -29,57 +30,102 @@ public class CardModel {
         }
     }
 
+    //New Card constructor, can be added to CardCollection later and populated on selection.
+    public CardModel(String shopsname, String barcode, Date expirydate){
+        if (createNewCard(shopsname,barcode,expirydate)){
+            Shop = new ShopModel(ShopsId, false);
+            Barcode = barcode;
+            ExpiryDate = expirydate;
+        } else {
+            ShopsId = null;
+            UsersId = null;
+            Id = null;
+        }
+    }
+
     //Used for full initialization or supplementing existing CardModels
+    @Override
     public void setAll() {
         Connection conn = sql.getConnection();
         try {
-            UsersId = Integer.valueOf(getCardDataSQL("UsersId", "Id", "Cards", Id, conn));
             if (ShopsId == null) {
-                ShopsId = Integer.valueOf(getCardDataSQL("ShopsId", "Id", "Cards", Id, conn));
+                Shop = new ShopModel(Integer.valueOf(getModelDataSQL("ShopsId", "Id", "Cards", Id, conn)), true);
+                ShopsId = Shop.getId();
+            } else {
+                Shop.setAll();
             }
-            Barcode = getCardDataSQL("Barcode", "Id", "Cards", Id, conn);
-            ExpiryDate = new SimpleDateFormat("yyyy-MM-dd").parse(getCardDataSQL("ExpiryDate", "Id", "Cards", Id, conn));
+            Barcode = getModelDataSQL("Barcode", "Id", "Cards", Id, conn);
+            ExpiryDate = new SimpleDateFormat("yyyy-MM-dd").parse(getModelDataSQL("ExpiryDate", "Id", "Cards", Id, conn));
             if (UsersCategory == null) {
-                UsersCategory = getCardDataSQL("UsersCategory", "Id", "Cards", Id, conn);
-            }
-            if (ShopsName == null) {
-                ShopsName = getCardDataSQL("Name", "Id", "Shops", ShopsId, conn);
+                UsersCategory = getModelDataSQL("UsersCategory", "Id", "Cards", Id, conn);
             }
         } catch (Exception ex) {
         } finally {
-            try {
-                conn.close();
-            } catch (Exception e) {
-            }
+            try { conn.close(); } catch (Exception e) { }
         }
     }
 
     //Used for primary initialization in CardModel List
+    @Override
     public void setPreview() {
         Connection conn = sql.getConnection();
         try {
-            ShopsId = Integer.valueOf(getCardDataSQL("ShopsId", "Id", "Cards", Id, conn));
-            UsersCategory = getCardDataSQL("UsersCategory", "Id", "Cards", Id, conn);
-            ShopsName = getCardDataSQL("Name", "Id", "Shops", ShopsId, conn);
+            Shop = new ShopModel(Integer.valueOf(getModelDataSQL("ShopsId", "Id", "Cards", Id, conn)), false);
+            ShopsId = Shop.getId();
+            UsersCategory = getModelDataSQL("UsersCategory", "Id", "Cards", Id, conn);
         } catch (Exception ex) {
         } finally {
-            try {
-                conn.close();
-            } catch (Exception e) {
-            }
+            try { conn.close(); } catch (Exception e) { }
         }
     }
 
-    public String getCardDataSQL(String typeTo, String typeFrom, String tableFrom, int idFrom, Connection connection) {
+    //Used for creating a new card
+    public boolean createNewCard(String shopsname, String barcode, Date expirydate){
+        SQLConnection sql = new SQLConnection();
+        Connection conn = sql.getConnection();
         ResultSet resultSet = null;
         try {
-            Statement statement = connection.createStatement();
-            String sqlQuery = "SELECT " + typeTo + " FROM " + tableFrom + " WHERE " + typeFrom + "='" + idFrom + "'";
-            resultSet = statement.executeQuery(sqlQuery);
+            //get ShopsId
+            String sqlQuery = "SELECT Id FROM Shops WHERE Name = ?";
+            PreparedStatement statement = conn.prepareStatement(sqlQuery);
+            statement.setString(1, shopsname);
+            resultSet = statement.executeQuery();
             resultSet.next();
-            return resultSet.getString(typeTo);
-        } catch (Exception ex) {
-            return null;
+            ShopsId = resultSet.getInt("Id");
+            //Insert new Card
+            sqlQuery = "INSERT INTO Cards (UsersId, ShopsId, Barcode, ExpiryDate) VALUES " +
+                    "(?, ?, ?, ?)";
+            statement = conn.prepareStatement(sqlQuery);
+            statement.setInt(1, UsersId);
+            statement.setInt(2, ShopsId);
+            statement.setString(3, barcode);
+            statement.setDate(4, (java.sql.Date) expirydate);
+            statement.executeUpdate();
+            //get new Card's Id
+            sqlQuery = "SELECT Id FROM Cards WHERE Barcode = ?";
+            statement = conn.prepareStatement(sqlQuery);
+            statement.setString(1, barcode);
+            resultSet = statement.executeQuery();
+            resultSet.next();
+            Id = resultSet.getInt("Id");
+            return true;
+        } catch (Exception ex) { return false; } finally {
+            try { conn.close(); } catch (Exception e) { }
+        }
+    }
+
+    public void changeUsersCategory(String usersCategory) {
+        SQLConnection sql = new SQLConnection();
+        Connection conn = sql.getConnection();
+        try {
+            String sqlQuery = "UPDATE Cards SET UsersCategory = ? WHERE Id = ?";
+            PreparedStatement statement = conn.prepareStatement(sqlQuery);
+            statement.setString(1, usersCategory);
+            statement.setInt(2, Id);
+            statement.executeUpdate();
+            UsersCategory = usersCategory;
+        } catch (Exception ex) { } finally {
+            try { conn.close(); } catch (Exception e) { }
         }
     }
 
@@ -109,10 +155,6 @@ public class CardModel {
         return UsersCategory;
     }
 
-    public String getShopsName() {
-        return ShopsName;
-    }
-
     //endregion
 
     //region Setters
@@ -139,10 +181,6 @@ public class CardModel {
 
     public void setUsersCategory(String usersCategory) {
         UsersCategory = usersCategory;
-    }
-
-    public void setShopsName(String shopsName) {
-        ShopsName = shopsName;
     }
 
     //endregion
