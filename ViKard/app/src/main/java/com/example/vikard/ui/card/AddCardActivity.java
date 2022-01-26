@@ -1,6 +1,7 @@
 package com.example.vikard.ui.card;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,9 +16,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import com.example.vikard.MainScreen;
+import com.example.vikard.R;
+import com.example.vikard.data.SQLConnection;
+import com.example.vikard.data.model.CardModel;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.vikard.MainScreen;
 import com.example.vikard.R;
 import com.example.vikard.data.SQLConnection;
@@ -32,7 +39,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
+import com.example.vikard.CardList;
 
 public class AddCardActivity extends AppCompatActivity {
 
@@ -78,6 +85,7 @@ public class AddCardActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 new CardModel(shplistSpinner.getSelectedItem().toString(), scannedText.getText().toString(), Date.valueOf(formattedDate));
+                finish();
             }
         });
 
@@ -198,9 +206,12 @@ public class AddCardActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
+
         Intent intent = new Intent(this, MainScreen.class);
         startActivity(intent);
+        //finish();
     }
 
     @Override

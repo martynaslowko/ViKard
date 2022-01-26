@@ -6,14 +6,17 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.vikard.data.model.CardModel;
 import com.example.vikard.ui.card.AddCardActivity;
-import com.example.vikard.ui.login.LoginActivity;
+import com.example.vikard.ui.card.EditCategoryActivity;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
 
 public class MainScreen extends AppCompatActivity {
     TabLayout tablayout;
@@ -25,6 +28,9 @@ public class MainScreen extends AppCompatActivity {
     FloatingActionButton dropFloatButton;
     FloatingActionButton addFloatButton;
     FloatingActionButton delFloatButton;
+    FloatingActionButton editFloatButton;
+    ArrayList<CardModel> ckd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,12 @@ public class MainScreen extends AppCompatActivity {
         fragmentadapter = new FragmentAdapter(fm, getLifecycle());
         viewpager2.setAdapter(fragmentadapter);
 
+//        CardList frag = (CardList)fm.findFragmentById(R.id.FirstFragment);
+//        if(frag != null && frag.isAdded())
+//        {
+//            ckd = frag.cardCollection;
+//        }
+
         tablayout.addTab(tablayout.newTab().setText("Karty"));
         tablayout.addTab(tablayout.newTab().setText("Mapa"));
 
@@ -43,6 +55,7 @@ public class MainScreen extends AppCompatActivity {
         dropFloatButton = (FloatingActionButton)findViewById(R.id.dropDown);
         addFloatButton = (FloatingActionButton)findViewById(R.id.addCardButton);
         delFloatButton = (FloatingActionButton)findViewById(R.id.deleteCardButton);
+        editFloatButton = (FloatingActionButton)findViewById(R.id.editCardButton);
 
 
         dropFloatButton.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +74,13 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openAddCardActivity();
+            }
+        });
+
+        editFloatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openEditCategoryActivity();
             }
         });
 
@@ -96,19 +116,35 @@ public class MainScreen extends AppCompatActivity {
         {
            addFloatButton.setVisibility(View.VISIBLE);
            delFloatButton.setVisibility(View.VISIBLE);
+           editFloatButton.setVisibility(View.VISIBLE);
         }
         else
         {
             addFloatButton.setVisibility(View.INVISIBLE);
             delFloatButton.setVisibility(View.INVISIBLE);
+            editFloatButton.setVisibility(View.INVISIBLE);
         }
     }
     public void openAddCardActivity()
     {
         Intent intent = new Intent(this, AddCardActivity.class);
-        startActivity(intent);
 
+        startActivity(intent);
     }
+
+    public void openEditCategoryActivity()
+    {
+
+        Intent intent = new Intent(this, EditCategoryActivity.class);
+        startActivity(intent);
+    }
+
+
+
+
+
+
+    //Zrzuca apke do pulpitu.
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);

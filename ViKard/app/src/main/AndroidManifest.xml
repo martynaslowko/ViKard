@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.vikard" >
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,9 +17,17 @@
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCYI0AFAj3bWe4cSVGYyJt1DtA3i17P_pw" />
 
         <activity
             android:name=".ui.card.AddCardActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.card.EditCategoryActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
@@ -41,8 +54,12 @@
             android:exported="false"
             android:label="@string/title_activity_main_screen"
             android:theme="@style/Theme.ViKard.NoActionBar" />
-
-
+        <activity
+            android:name=".Karta"
+            android:exported="false"
+            android:label="@string/karta"
+            android:theme="@style/Theme.ViKard.NoActionBar"
+            tools:ignore="Instantiatable" />
     </application>
     <uses-feature android:name="android.hardware.camera.autoFocus" />
     <uses-feature android:name="android.hardware.camera" />

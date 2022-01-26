@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -30,30 +33,35 @@ import com.google.zxing.oned.Code128Writer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import java.util.Hashtable;
-public class Karta extends Fragment {
-    String shopName_;
-    java.util.Date expireDate_;
-    String barcode_;
-    View rootView;
-    TextView shopName__;
-    TextView expireDate__;
-    TextView barcode__;
+public class Karta extends AppCompatActivity {
+    String shopName;
+    String expireDate;
+    String barcode;
+    TextView shopName_;
+    TextView expireDate_;
+    TextView barcode_;
 
-    Karta(String shopName, java.util.Date expireDate, String barcode){
-        shopName_ = shopName;
-        expireDate_ = expireDate;
-        barcode_ = barcode;
-    }
-    protected View onCreate(LayoutInflater inflater, ViewGroup container,
-                            Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.karta, container, false);
-        shopName__ = (TextView) rootView.findViewById(R.id.shopName);
-        expireDate__ = (TextView) rootView.findViewById(R.id.cardExpires);
-        barcode__ = (TextView) rootView.findViewById(R.id.barcode);
 
-        shopName__.setText(shopName_);
-        //expireDate__.setText(expireDate_);
-        barcode__.setText(barcode_);
-        return rootView;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.karta);
+
+        Log.e("Karta", "It worked");
+        shopName_ = (TextView) findViewById(R.id.shopName);
+        expireDate_ = (TextView) findViewById(R.id.cardExpires);
+        barcode_ = (TextView) findViewById(R.id.barcode);
+
+        Bundle b = getIntent().getExtras();
+        if(b != null){
+            shopName = b.getString("shopName");
+            expireDate = b.getString("expireDate");
+            barcode = b.getString("barcode");
+
+            shopName_.setText(shopName);
+            expireDate_.setText(expireDate);
+            barcode_.setText(barcode);
+        }
+
     }
 }
