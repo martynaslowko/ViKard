@@ -24,7 +24,6 @@ import com.example.vikard.data.model.CardModel;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.vikard.MainScreen;
 import com.example.vikard.R;
@@ -45,7 +44,6 @@ import com.example.vikard.CardList;
 public class AddCardActivity extends AppCompatActivity {
 
     public ArrayAdapter<String> dataAdapter;
-
 
     Button btnBarcode;
     Button btnaddCardToDB;

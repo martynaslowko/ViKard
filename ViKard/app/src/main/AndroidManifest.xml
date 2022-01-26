@@ -63,4 +63,5 @@
     </application>
     <uses-feature android:name="android.hardware.camera.autoFocus" />
     <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.any" />
 </manifest>
