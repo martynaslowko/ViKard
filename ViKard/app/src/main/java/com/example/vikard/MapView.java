@@ -44,6 +44,7 @@ public class MapView extends Fragment implements OnMapReadyCallback{
     public void onMapReady(@NonNull GoogleMap googleMap)
     {
         mMap =  googleMap;
+        initMap();
     }
 
     //Tymczasowo zakomentowany, próbuje dojść do tego jak prosić użytkownika o zezwolenie na pobieranie lokalizacji

@@ -17,6 +17,9 @@
     <string name="title_activity_main_screen">MainScreen</string>
     <string name="tab_text_1">Karty</string>
     <string name="tab_text_2">Mapa</string>
+    <string name="EditCatText">Edit card category</string>
+    <string name="SpinnerCatText">Pick a card</string>
+    <string name="SpinnerCat">Enter your category</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
