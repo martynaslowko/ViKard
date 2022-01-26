@@ -33,4 +33,28 @@
         app:layout_constraintStart_toStartOf="@+id/editCatText"
         app:layout_constraintTop_toBottomOf="@+id/editCatText" />
 
+    <Button
+        android:id="@+id/EditCategoryButton"
+        android:layout_width="174dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="160dp"
+        android:text="Edit Category"
+        app:layout_constraintEnd_toEndOf="@+id/cardListSpinner"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="@+id/cardListSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/cardListSpinner" />
+
+    <EditText
+        android:id="@+id/editTextCategory"
+        android:layout_width="237dp"
+        android:layout_height="62dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/EditCategoryButton"
+        app:layout_constraintEnd_toEndOf="@+id/cardListSpinner"
+        app:layout_constraintStart_toStartOf="@+id/cardListSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/cardListSpinner"
+        tools:text="@string/SpinnerCat" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

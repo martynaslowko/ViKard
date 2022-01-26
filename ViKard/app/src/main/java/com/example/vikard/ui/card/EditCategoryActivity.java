@@ -1,25 +1,34 @@
 package com.example.vikard.ui.card;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
-
-import com.example.vikard.CardList;
+import com.example.vikard.MainScreen;
 import com.example.vikard.R;
 import com.example.vikard.data.LoginRepository;
+import com.example.vikard.data.SQLConnection;
 import com.example.vikard.data.model.CardModel;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class EditCategoryActivity extends AppCompatActivity {
 
-
-    Spinner cardListSpinner;
     ArrayAdapter<String> dataAdapter;
+    Spinner cardListSpinner;
+    Button changeCategoryButton;
+    EditText categoryEditTextBox;
+    List<Integer> ids = new ArrayList<Integer>();
     int userId;
 
 
@@ -30,36 +39,79 @@ public class EditCategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_category);
 
 
+        categoryEditTextBox = findViewById(R.id.editTextCategory);
+
         //CardListSpinner
         userId = Integer.valueOf(LoginRepository.user.getUserId());
 
-        cardListSpinner = findViewById(R.id.shopListSpinner);
-        //loadCardSpinnerData();
+        cardListSpinner = findViewById(R.id.cardListSpinner);
+        loadCardSpinnerData();
 
+
+        changeCategoryButton = findViewById(R.id.EditCategoryButton);
+        changeCategoryButton.setEnabled(false);
+        changeCategoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                int id = ids.get((int)cardListSpinner.getSelectedItemId());
+                String userCategory = categoryEditTextBox.getText().toString();
+                new CardModel(id,false).changeUsersCategory(userCategory);
+                getBackToMain();
+            }
+        });
+
+        TextWatcher scannedTextChange = new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //ignore
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //ignore
+                if(s.toString().trim().length()==0){
+                    changeCategoryButton.setEnabled(false);
+                } else {
+                    changeCategoryButton.setEnabled(true);
+                }
+            }
+
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        };
+        categoryEditTextBox.addTextChangedListener(scannedTextChange);
 
     }
+
     private List<String> getAllLabels()
     {
-//        List<String> labels = new ArrayList<String>();
-//        SQLConnection sql = new SQLConnection();
-//        Connection conn = sql.getConnection();
-//        try {
-//
-//            String sqlQuery = "SELECT ShopsId FROM Cards WHERE UsersId = ?";
-//            PreparedStatement statement = conn.prepareStatement(sqlQuery);
-//            statement.setString(1, String.valueOf(userId));
-//            ResultSet resultSet = statement.executeQuery("SELECT ShopsId FROM Cards WHERE UsersId = ?");
-//            while (resultSet.next()){
-//                labels.add(resultSet.getString("Name"));
-//            }
-//
-//        } catch (Exception ex) {
-//        } finally {
-//            try { conn.close(); } catch (Exception e) { }
-//            return labels;
-//        }
+        List<String> labels = new ArrayList<String>();
 
-        return null;
+        SQLConnection sql = new SQLConnection();
+        Connection conn = sql.getConnection();
+        try {
+
+            String sqlQuery = "SELECT s.Name, c.Id FROM Cards AS c JOIN Shops AS s ON c.ShopsId=s.Id WHERE UsersId = ?";
+            PreparedStatement statement = conn.prepareStatement(sqlQuery);
+            statement.setString(1, String.valueOf(userId));
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                labels.add(resultSet.getString("Name"));
+                ids.add(resultSet.getInt("Id"));
+
+            }
+
+        } catch (Exception ex) {
+        } finally {
+            try { conn.close(); } catch (Exception e) { }
+            return labels;
+        }
 
     }
     private void loadCardSpinnerData() {
@@ -78,8 +130,15 @@ public class EditCategoryActivity extends AppCompatActivity {
         cardListSpinner.setAdapter(dataAdapter);
     }
 
+
+    private void getBackToMain()
+    {
+        Intent intent = new Intent(this, MainScreen.class);
+        startActivity(intent);
+    }
     @Override
     public void onBackPressed() {
-        finish();
+        getBackToMain();
+        //finish();
     }
 }
