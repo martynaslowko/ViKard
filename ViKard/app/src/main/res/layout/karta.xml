@@ -45,8 +45,8 @@
 
     <TextView
         android:id="@+id/barcode"
-        android:layout_width="363dp"
-        android:layout_height="826dp"
+        android:layout_width="235dp"
+        android:layout_height="781dp"
         android:fontFamily="@font/barcode"
         android:padding="0dp"
         android:rotation="90"
@@ -54,7 +54,7 @@
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="85sp"
-        tools:layout_editor_absoluteX="-249dp"
-        tools:layout_editor_absoluteY="-5dp" />
+        app:layout_constraintEnd_toStartOf="@+id/shopName"
+        app:layout_constraintTop_toTopOf="@+id/shopName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

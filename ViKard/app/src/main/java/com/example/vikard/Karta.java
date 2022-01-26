@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -31,21 +33,24 @@ import com.google.zxing.oned.Code128Writer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import java.util.Hashtable;
-public class Karta extends FragmentActivity {
+public class Karta extends AppCompatActivity {
     String shopName;
     String expireDate;
     String barcode;
-    View rootView;
     TextView shopName_;
     TextView expireDate_;
     TextView barcode_;
 
-    protected void onCreate(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        rootView = inflater.inflate(R.layout.karta, container, false);
-        shopName_ = (TextView) rootView.findViewById(R.id.shopName);
-        expireDate_ = (TextView) rootView.findViewById(R.id.cardExpires);
-        barcode_ = (TextView) rootView.findViewById(R.id.barcode);
+        setContentView(R.layout.karta);
+
+        Log.e("Karta", "It worked");
+        shopName_ = (TextView) findViewById(R.id.shopName);
+        expireDate_ = (TextView) findViewById(R.id.cardExpires);
+        barcode_ = (TextView) findViewById(R.id.barcode);
 
         Bundle b = getIntent().getExtras();
         if(b != null){
@@ -57,7 +62,6 @@ public class Karta extends FragmentActivity {
             expireDate_.setText(expireDate);
             barcode_.setText(barcode);
         }
-        setContentView(rootView);
-        //return rootView;
+
     }
 }

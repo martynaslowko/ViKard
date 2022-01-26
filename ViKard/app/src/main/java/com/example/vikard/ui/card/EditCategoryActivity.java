@@ -138,7 +138,7 @@ public class EditCategoryActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        getBackToMain();
-        //finish();
+        //getBackToMain();
+        finish();
     }
 }
