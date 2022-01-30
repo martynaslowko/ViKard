@@ -1,6 +1,9 @@
 package com.example.vikard;
 
+import android.os.Build;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
@@ -12,6 +15,8 @@ public class FragmentAdapter extends FragmentStateAdapter {
         super(fragmentManager, lifecycle);
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @NonNull
     @Override
     public Fragment createFragment(int position) {

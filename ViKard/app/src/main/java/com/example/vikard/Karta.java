@@ -47,7 +47,6 @@ public class Karta extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.karta);
 
-        Log.e("Karta", "It worked");
         shopName_ = (TextView) findViewById(R.id.shopName);
         expireDate_ = (TextView) findViewById(R.id.cardExpires);
         barcode_ = (TextView) findViewById(R.id.barcode);
