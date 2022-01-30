@@ -3,22 +3,18 @@ package com.example.vikard;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.vikard.data.model.CardModel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 public class CardListElement extends Fragment {
     View rootView;
@@ -49,27 +45,18 @@ public class CardListElement extends Fragment {
         shopName_.setText(shopName);
         shopCategory_.setText(shopCategory);
 
-        //listener, że jak naciśnie się na kartę, to otwiera się okienko z podglądem karty... nie działa
         cardMiniature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String pattern = "MM/dd/yy";
-                DateFormat df = new SimpleDateFormat(pattern);
                 CardModel cardmodel = new CardModel(cardId_,true);
-                Date ed = cardmodel.getExpiryDate();
-                String expire_date;
-                if(ed != null){
-                    expire_date = df.format(ed);
-                }
-                else{
-                    expire_date = "";
-                }
-
                 Intent intent = new Intent(getActivity(), Karta.class);
                 Bundle attrs = new Bundle();
+                DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                String strDate = format.format(cardmodel.getExpiryDate());
                 attrs.putString("shopName", shopName); //Nazwa sklepu
-                attrs.putString("expireDate", expire_date); //Data
-                attrs.putString("barcode", new CardModel(cardId_,true).getBarcode()); //Your id
+                attrs.putString("expireDate", strDate); //Data
+                attrs.putString("barcode", cardmodel.getBarcode()); //Your id
+                attrs.putString("hexColor", hexColor); //hex Color
                 intent.putExtras(attrs);
                 startActivity(intent);
             }

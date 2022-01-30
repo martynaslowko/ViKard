@@ -1,22 +1,17 @@
 package com.example.vikard;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-
 import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.SQLConnection;
 import com.example.vikard.data.model.CardModel;
-import com.example.vikard.data.model.LoggedInUser;
 import com.example.vikard.data.model.ShopModel;
 
 import java.sql.Connection;
@@ -28,7 +23,6 @@ import java.util.ArrayList;
 public class CardList extends Fragment {
 
     ArrayList<CardModel> cardCollection = new ArrayList<CardModel>();
-    ArrayList<ShopModel> shopsCollection = new ArrayList<ShopModel>();
     View rootView;
     int user_id;
 
@@ -47,7 +41,7 @@ public class CardList extends Fragment {
             ShopModel shopModel = new ShopModel(cardCollection.get(i).getShopsId(), false);
             FragmentManager fm = getParentFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            CardListElement fm2 = new CardListElement(shopModel.getName(), cardCollection.get(i).getUsersCategory(),shopModel.getHexColor(), i);
+            CardListElement fm2 = new CardListElement(shopModel.getName(), cardCollection.get(i).getUsersCategory(),shopModel.getHexColor(), cardCollection.get(i).getId());
             fm.beginTransaction().add(R.id.card_list, fm2).commit();
             fragmentTransaction.commit();
         }

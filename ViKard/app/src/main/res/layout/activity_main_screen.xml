@@ -30,7 +30,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/addCardButton"
         app:layout_constraintEnd_toEndOf="@+id/addCardButton"
-        app:srcCompat="@drawable/ic_delete" />
+        app:srcCompat="@drawable/ic_baseline_delete_outline_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addCardButton"
