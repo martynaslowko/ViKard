@@ -19,6 +19,7 @@ public class Karta extends AppCompatActivity {
     TextView expireDate_;
     TextView barcode_;
     TextView barcode2_;
+    TextView barcodeText;
 
 
     @Override
@@ -39,10 +40,13 @@ public class Karta extends AppCompatActivity {
 
         shopName_ = (TextView) findViewById(R.id.shopName);
         expireDate_ = (TextView) findViewById(R.id.cardExpires);
+        barcodeText = (TextView)findViewById(R.id.barcode_text);
         barcode_ = (TextView) findViewById(R.id.barcode);
-        barcode2_ = (TextView) findViewById(R.id.barcode);
+        barcode2_ = (TextView) findViewById(R.id.barcode2);
         shopName_.setText(shopName);
         expireDate_.setText(expireDate);
         barcode_.setText(barcode);
+        barcode2_.setText(barcode);
+        barcodeText.setText(barcode);
     }
 }
