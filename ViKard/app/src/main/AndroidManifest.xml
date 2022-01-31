@@ -61,6 +61,7 @@
             android:name=".Karta"
             android:exported="false"
             android:label="@string/karta"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.ViKard.NoActionBar"
             tools:ignore="Instantiatable" />
     </application>
