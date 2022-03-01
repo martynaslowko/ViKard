@@ -1,5 +1,6 @@
 package com.example.vikard;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -14,6 +15,9 @@ import android.widget.TextView;
 
 import com.example.vikard.data.model.CardModel;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class CardListElement extends Fragment {
@@ -49,8 +53,25 @@ public class CardListElement extends Fragment {
         cardMiniature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Karta karta;
-                karta = new Karta(shopName, new CardModel(cardId_,true).getExpiryDate(), new CardModel(cardId_,true).getBarcode());
+                String pattern = "MM/dd/yy";
+                DateFormat df = new SimpleDateFormat(pattern);
+                CardModel cardmodel = new CardModel(cardId_,true);
+                Date ed = cardmodel.getExpiryDate();
+                String expire_date;
+                if(ed != null){
+                    expire_date = df.format(ed);
+                }
+                else{
+                    expire_date = "";
+                }
+
+                Intent intent = new Intent(getActivity(), Karta.class);
+                Bundle attrs = new Bundle();
+                attrs.putString("shopName", shopName); //Nazwa sklepu
+                attrs.putString("expireDate", expire_date); //Data
+                attrs.putString("barcode", new CardModel(cardId_,true).getBarcode()); //Your id
+                intent.putExtras(attrs);
+                startActivity(intent);
             }
         });
         return rootView;
