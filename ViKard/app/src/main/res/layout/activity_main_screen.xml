@@ -9,6 +9,18 @@
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/editCardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="Delete Card"
+        android:focusable="true"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/deleteCardButton"
+        app:layout_constraintEnd_toEndOf="@+id/addCardButton"
+        app:srcCompat="@drawable/ic_edit" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/deleteCardButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +30,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/addCardButton"
         app:layout_constraintEnd_toEndOf="@+id/addCardButton"
-        app:srcCompat="@drawable/ic_delete" />
+        app:srcCompat="@drawable/ic_baseline_delete_outline_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addCardButton"
