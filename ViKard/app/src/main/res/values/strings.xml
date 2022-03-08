@@ -36,5 +36,6 @@
     <string name="karta">karta</string>
 
     <string name="google_maps_API_key">AIzaSyCYI0AFAj3bWe4cSVGYyJt1DtA3i17P_pw</string>
+    <string name="przejd_do_sklepu">Przejdź do sklepu</string>
 
 </resources>
