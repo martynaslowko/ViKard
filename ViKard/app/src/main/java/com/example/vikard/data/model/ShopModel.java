@@ -21,7 +21,7 @@ public class ShopModel extends SQLDataModel{
 
     //Used for full initialization or supplementing existing ShopModels
     @Override
-    void setAll() {
+    public void setAll() {
         Connection conn = sql.getConnection();
         try {
             if (Name == null) {
@@ -40,7 +40,7 @@ public class ShopModel extends SQLDataModel{
 
     //Used for primary initialization in ShopModel List
     @Override
-    void setPreview() {
+    public void setPreview() {
         Connection conn = sql.getConnection();
         try {
             Name = getModelDataSQL("Name", "Id", "Shops", Id, conn);

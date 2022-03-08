@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.vikard.data.model.CardModel;
+import com.example.vikard.data.model.ShopModel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,15 +22,13 @@ public class CardListElement extends Fragment {
     ImageView cardMiniature;
     TextView shopName_;
     TextView shopCategory_;
-    String shopName;
+    ShopModel shop;
     String shopCategory;
-    String hexColor;
     int cardId_;
 
-    public CardListElement(String shopname, String shopcategory, String hexcolor, int id) {
-        shopName = shopname;
+    public CardListElement(ShopModel shopModel, String shopcategory, int id) {
+        shop = shopModel;
         shopCategory = shopcategory;
-        hexColor = hexcolor;
         cardId_ = id;
     }
 
@@ -41,22 +40,24 @@ public class CardListElement extends Fragment {
         shopName_ = (TextView) rootView.findViewById(R.id.shopName);
         shopCategory_ = (TextView) rootView.findViewById(R.id.shopCategory);
 
-        cardMiniature.setColorFilter(Color.parseColor("#"+hexColor));
-        shopName_.setText(shopName);
+        cardMiniature.setColorFilter(Color.parseColor("#"+shop.getHexColor()));
+        shopName_.setText(shop.getName());
         shopCategory_.setText(shopCategory);
 
         cardMiniature.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CardModel cardmodel = new CardModel(cardId_,true);
+                shop.setAll();
                 Intent intent = new Intent(getActivity(), Karta.class);
                 Bundle attrs = new Bundle();
                 DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 String strDate = format.format(cardmodel.getExpiryDate());
-                attrs.putString("shopName", shopName); //Nazwa sklepu
+                attrs.putString("shopName", shop.getName()); //Nazwa sklepu
                 attrs.putString("expireDate", strDate); //Data
                 attrs.putString("barcode", cardmodel.getBarcode()); //Your id
-                attrs.putString("hexColor", hexColor); //hex Color
+                attrs.putString("hexColor", shop.getHexColor()); //hex Color
+                attrs.putString("shopLink", shop.getHomeLink()); //storeLink
                 intent.putExtras(attrs);
                 startActivity(intent);
             }
