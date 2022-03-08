@@ -57,7 +57,7 @@ public class CardListElement extends Fragment {
                 attrs.putString("expireDate", strDate); //Data
                 attrs.putString("barcode", cardmodel.getBarcode()); //Your id
                 attrs.putString("hexColor", shop.getHexColor()); //hex Color
-                attrs.putString("shopLink", shop.getHomeLink()); //storeLink
+                attrs.putString("link", shop.getHomeLink()); //storeLink
                 intent.putExtras(attrs);
                 startActivity(intent);
             }
