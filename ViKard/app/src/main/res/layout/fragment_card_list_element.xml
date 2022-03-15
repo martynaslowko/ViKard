@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/shopName"
+        android:id="@+id/ShopNameText"
         android:layout_width="193dp"
         android:layout_height="26dp"
         android:text="Default Store Name"
