@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat;
 public class Karta extends AppCompatActivity {
     String shopName, expireDate, barcode, hexColor,link;
     TextView shopName_, expireDate_, barcode_, barcodeText;
-    ImageView boxBarcode;
+    ImageView boxBarcode, backbutton;
     Button linkbutton;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,15 @@ public class Karta extends AppCompatActivity {
         barcodeText.setText(barcode);
         boxBarcode = findViewById(R.id.imageView2);
         linkbutton = findViewById(R.id.linkbutton);
+        backbutton = findViewById(R.id.backbutton);
+
+        expireDate_.setVisibility(View.VISIBLE);
+        barcode_.setVisibility(View.VISIBLE);
+        barcodeText.setVisibility(View.VISIBLE);
+        boxBarcode.setVisibility(View.VISIBLE);
+        linkbutton.setVisibility(View.INVISIBLE);
+        backbutton.setVisibility(View.INVISIBLE);
+
         barcode_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +69,7 @@ public class Karta extends AppCompatActivity {
                 barcodeText.setVisibility(View.INVISIBLE);
                 boxBarcode.setVisibility(View.INVISIBLE);
                 linkbutton.setVisibility(View.VISIBLE);
+                backbutton.setVisibility(View.VISIBLE);
             }
         });
 
@@ -67,6 +77,18 @@ public class Karta extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goToUrl(link);
+            }
+        });
+
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                expireDate_.setVisibility(View.VISIBLE);
+                barcode_.setVisibility(View.VISIBLE);
+                barcodeText.setVisibility(View.VISIBLE);
+                boxBarcode.setVisibility(View.VISIBLE);
+                linkbutton.setVisibility(View.INVISIBLE);
+                backbutton.setVisibility(View.INVISIBLE);
             }
         });
     }
