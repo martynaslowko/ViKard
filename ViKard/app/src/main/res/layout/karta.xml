@@ -12,10 +12,10 @@
     android:background="@drawable/card">
 
     <TextView
-        android:id="@+id/shopName"
+        android:id="@+id/ShopNameText"
         android:layout_width="549dp"
         android:layout_height="106dp"
-        android:layout_below="@id/barcode"
+
         android:gravity="center"
         android:text="Sklep"
         android:textAlignment="center"
@@ -23,7 +23,7 @@
         android:textSize="60sp"
         android:textStyle="bold"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintBottom_toTopOf="@+id/WhiteBarImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,20 @@
         app:layout_constraintVertical_bias="0.326" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/WhiteBarImageView"
+        android:layout_width="856dp"
+        android:layout_height="122dp"
+        android:translationX="1dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.54"
+        app:srcCompat="@android:drawable/screen_background_light" />
+
+    <ImageView
+        android:id="@+id/BarcodeImageView"
         android:layout_width="856dp"
         android:layout_height="122dp"
         android:translationX="1dp"
@@ -44,7 +57,7 @@
         app:srcCompat="@android:drawable/screen_background_light" />
 
     <TextView
-        android:id="@+id/cardExpires"
+        android:id="@+id/CardExpiryDateText"
         android:layout_width="202dp"
         android:layout_height="30dp"
         android:layout_marginTop="36dp"
@@ -55,10 +68,10 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/WhiteBarImageView" />
 
     <TextView
-        android:id="@+id/barcode_text"
+        android:id="@+id/BarcodeText"
         android:layout_width="264dp"
         android:layout_height="30dp"
         android:gravity="center"
@@ -67,44 +80,15 @@
         android:textSize="24sp"
         android:translationX="-15dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/cardExpires"
+        app:layout_constraintBottom_toTopOf="@+id/CardExpiryDateText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barcode"
+
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/barcode"
-        android:layout_width="685dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="44dp"
-        android:ellipsize="none"
-        android:fontFamily="@font/barcode"
-        android:gravity="center"
-        android:padding="0dp"
-        android:paddingStart="0dp"
-        android:paddingLeft="0dp"
-        android:paddingTop="0dp"
-        android:paddingEnd="0dp"
-        android:paddingRight="0dp"
-        android:paddingBottom="0dp"
-        android:rotationX="0"
-        android:rotationY="0"
-        android:scaleY="1.75"
-        android:singleLine="true"
-        android:text="123456789101123"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="80sp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/linkbutton"
+        android:id="@+id/PageLinkButton"
         android:layout_width="355dp"
         android:layout_height="156dp"
         android:background="@drawable/linkbutton"
@@ -117,16 +101,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shopName" />
+        app:layout_constraintTop_toBottomOf="@+id/ShopNameText" />
 
     <ImageView
-        android:id="@+id/backbutton"
+        android:id="@+id/BackButton"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/linkbutton"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/linkbutton"
+        app:layout_constraintEnd_toStartOf="@+id/PageLinkButton"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

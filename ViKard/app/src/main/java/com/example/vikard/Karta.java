@@ -40,7 +40,7 @@ public class Karta extends AppCompatActivity {
         String p_barcodeText= BarcodeTextView.getText().toString(); // Whatever you need to encode in the QR code
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(p_barcodeText, BarcodeFormat.CODE_128,350,40);
+            BitMatrix bitMatrix = multiFormatWriter.encode(p_barcodeText, BarcodeFormat.CODE_128,200,20);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             BarcodeImageView.setImageBitmap(bitmap);
@@ -70,12 +70,12 @@ public class Karta extends AppCompatActivity {
         ShopNameTextView = (TextView) findViewById(R.id.ShopNameText);
         ExpiryDateTextView = (TextView) findViewById(R.id.CardExpiryDateText);
         BarcodeTextView = (TextView)findViewById(R.id.BarcodeText);
-
         BarcodeImageView = (ImageView) findViewById(R.id.BarcodeImageView);
+
         ShopNameTextView.setText(CardShopNameString);
         ExpiryDateTextView.setText(CardExpireDateString);
-
         BarcodeTextView.setText(CardBarcodeString);
+
         BoxBarcodeImageView = findViewById(R.id.WhiteBarImageView);
         LinkButton = findViewById(R.id.PageLinkButton);
         BackButtonImageView = findViewById(R.id.BackButton);
