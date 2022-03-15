@@ -23,7 +23,6 @@ import java.text.SimpleDateFormat;
 public class Karta extends AppCompatActivity {
     String shopName, expireDate, barcode, hexColor,link;
     TextView shopName_, expireDate_, barcode_, barcodeText;
-    Boolean state;
     ImageView boxBarcode;
     Button linkbutton;
     @Override

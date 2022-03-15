@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="..\:/Android StudioP/ViKard/ViKard/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2828125" />
         <entry key="..\:/Android StudioP/ViKard/ViKard/app/src/main/res/drawable/card.xml" value="0.22962962962962963" />
         <entry key="..\:/Android StudioP/ViKard/ViKard/app/src/main/res/drawable/ic_card.xml" value="0.22962962962962963" />
@@ -48,6 +49,7 @@
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/layout/fragment_card_list_element.xml" value="0.4" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/layout/fragment_map_view.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/layout/karta.xml" value="0.176" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
       </map>
     </option>
   </component>
