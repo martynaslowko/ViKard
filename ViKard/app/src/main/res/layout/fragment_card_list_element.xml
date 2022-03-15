@@ -2,10 +2,26 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
+    android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="120dp"
     tools:context=".CardListElement">
+
+    <ImageView
+        android:id="@+id/cardButton"
+        android:layout_width="411dp"
+        android:layout_height="119dp"
+        android:alpha="0"
+        android:clickable="true"
+        android:onClick="viewCard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:src="@tools:sample/backgrounds/scenic"
+        android:contentDescription="@string/todo"
+        android:focusable="true" />
 
     <ImageView
         android:id="@+id/cardImage"
@@ -14,16 +30,17 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:clickable="true"
-        android:contentDescription="store logo"
+        android:contentDescription="@string/store_logo"
         android:src="@drawable/ic_card"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true" />
 
     <TextView
         android:id="@+id/ShopNameText"
         android:layout_width="193dp"
         android:layout_height="26dp"
-        android:text="Default Store Name"
+        android:text="@string/default_store_name"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,9 +55,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="Default Store Category"
+        android:text="@string/default_store_category"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.449"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

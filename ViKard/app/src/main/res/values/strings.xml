@@ -36,5 +36,10 @@
     <string name="karta">karta</string>
 
     <string name="google_maps_API_key">AIzaSyCYI0AFAj3bWe4cSVGYyJt1DtA3i17P_pw</string>
+    <string name="przejd_do_sklepu">Przejdź do sklepu</string>
+    <string name="store_logo">store logo</string>
+    <string name="default_store_name">Default Store Name</string>
+    <string name="default_store_category">Default Store Category</string>
+    <string name="todo">TODO</string>
 
 </resources>
