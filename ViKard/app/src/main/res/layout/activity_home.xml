@@ -18,6 +18,7 @@
         android:layout_marginBottom="28dp"
 
         android:text="Existing User"
+        android:textColor="#212121"
         app:layout_constraintBottom_toTopOf="@+id/homeRegButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -36,15 +37,16 @@
 
     <ImageView
         android:id="@+id/logoHome"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="347dp"
+        android:layout_height="331dp"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toTopOf="@+id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@mipmap/logo_foreground" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

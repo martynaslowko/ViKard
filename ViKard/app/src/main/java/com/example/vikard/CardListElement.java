@@ -3,15 +3,18 @@ package com.example.vikard;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 
 import com.example.vikard.data.model.CardModel;
+import com.example.vikard.data.model.ShopModel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,15 +24,14 @@ public class CardListElement extends Fragment {
     ImageView cardMiniature;
     TextView shopName_;
     TextView shopCategory_;
-    String shopName;
+    ShopModel shop;
     String shopCategory;
-    String hexColor;
+    ImageView button;
     int cardId_;
 
-    public CardListElement(String shopname, String shopcategory, String hexcolor, int id) {
-        shopName = shopname;
+    public CardListElement(ShopModel shopModel, String shopcategory, int id) {
+        shop = shopModel;
         shopCategory = shopcategory;
-        hexColor = hexcolor;
         cardId_ = id;
     }
 
@@ -38,29 +40,35 @@ public class CardListElement extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_card_list_element, container, false);
         cardMiniature = (ImageView) rootView.findViewById(R.id.cardImage);
-        shopName_ = (TextView) rootView.findViewById(R.id.shopName);
+        shopName_ = (TextView) rootView.findViewById(R.id.ShopNameText);
         shopCategory_ = (TextView) rootView.findViewById(R.id.shopCategory);
+        button = (ImageView) rootView.findViewById(R.id.cardButton);
 
-        cardMiniature.setColorFilter(Color.parseColor("#"+hexColor));
-        shopName_.setText(shopName);
+        cardMiniature.setColorFilter(Color.parseColor("#"+shop.getHexColor()));
+        shopName_.setText(shop.getName());
         shopCategory_.setText(shopCategory);
 
-        cardMiniature.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CardModel cardmodel = new CardModel(cardId_,true);
-                Intent intent = new Intent(getActivity(), Karta.class);
-                Bundle attrs = new Bundle();
-                DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                String strDate = format.format(cardmodel.getExpiryDate());
-                attrs.putString("shopName", shopName); //Nazwa sklepu
-                attrs.putString("expireDate", strDate); //Data
-                attrs.putString("barcode", cardmodel.getBarcode()); //Your id
-                attrs.putString("hexColor", hexColor); //hex Color
-                intent.putExtras(attrs);
-                startActivity(intent);
+                viewCard();
             }
         });
         return rootView;
+    }
+    void viewCard(){
+        CardModel cardmodel = new CardModel(cardId_,true);
+        shop.setAll();
+        Intent intent = new Intent(getActivity(), Karta.class);
+        Bundle attrs = new Bundle();
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String strDate = format.format(cardmodel.getExpiryDate());
+        attrs.putString("shopName", shop.getName()); //Nazwa sklepu
+        attrs.putString("expireDate", strDate); //Data
+        attrs.putString("barcode", cardmodel.getBarcode()); //Your id
+        attrs.putString("hexColor", shop.getHexColor()); //hex Color
+        attrs.putString("link", shop.getHomeLink()); //storeLink
+        intent.putExtras(attrs);
+        startActivity(intent);
     }
 }

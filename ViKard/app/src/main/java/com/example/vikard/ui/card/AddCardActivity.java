@@ -85,7 +85,7 @@ public class AddCardActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 new CardModel(shplistSpinner.getSelectedItem().toString(), scannedText.getText().toString(), Date.valueOf(formattedDate));
-                finish();
+                goBackToMain();
             }
         });
 
@@ -205,13 +205,16 @@ public class AddCardActivity extends AppCompatActivity {
         shplistSpinner.setAdapter(dataAdapter);
     }
 
+
+    void goBackToMain()
+    {
+        Intent intent = new Intent(this, MainScreen.class);
+        startActivity(intent);
+    }
     @Override
     public void onBackPressed()
     {
-
-        Intent intent = new Intent(this, MainScreen.class);
-        startActivity(intent);
-        //finish();
+        finish();
     }
 
     @Override

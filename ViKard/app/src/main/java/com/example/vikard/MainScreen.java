@@ -42,6 +42,12 @@ public class MainScreen extends AppCompatActivity {
         fragmentadapter = new FragmentAdapter(fm, getLifecycle());
         viewpager2.setAdapter(fragmentadapter);
 
+        //Tutaj wyłączyłem "Swipe" z lewej do prawej i z prawej do lewej w viewpagerze
+        //W przyszłośći będzie można to jakoś skonfigurować i przywrócić swipe
+        //https://www.droidcon.com/2021/10/06/controlling-swipe-direction-with-viewpager2/
+        viewpager2.setUserInputEnabled(false);
+
+
 //        CardList frag = (CardList)fm.findFragmentById(R.id.FirstFragment);
 //        if(frag != null && frag.isAdded())
 //        {
