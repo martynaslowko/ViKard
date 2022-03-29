@@ -40,7 +40,7 @@ public class CardListElement extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_card_list_element, container, false);
         cardMiniature = (ImageView) rootView.findViewById(R.id.cardImage);
-        shopName_ = (TextView) rootView.findViewById(R.id.shopName);
+        shopName_ = (TextView) rootView.findViewById(R.id.ShopNameText);
         shopCategory_ = (TextView) rootView.findViewById(R.id.shopCategory);
         button = (ImageView) rootView.findViewById(R.id.cardButton);
 
