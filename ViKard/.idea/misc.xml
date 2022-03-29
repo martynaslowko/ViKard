@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="..\:/Android StudioP/ViKard/ViKard/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2828125" />
         <entry key="..\:/Android StudioP/ViKard/ViKard/app/src/main/res/drawable/card.xml" value="0.22962962962962963" />
         <entry key="..\:/Android StudioP/ViKard/ViKard/app/src/main/res/drawable/ic_card.xml" value="0.22962962962962963" />
+        <entry key="..\:/Android StudioP/ViKard/ViKard/app/src/main/res/drawable/ic_edit.xml" value="0.2703125" />
         <entry key="..\:/Android StudioP/ViKard/ViKard/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2828125" />
         <entry key="..\:/Android StudioP/ViKard/ViKard/app/src/main/res/drawable/logo_background.xml" value="0.2828125" />
         <entry key="..\:/Android StudioP/ViKard/ViKard/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.1318607764390897" />
@@ -21,7 +23,7 @@
         <entry key="..\:/Android StudioP/ViKard/ViKard/app/src/main/res/layout/fragment_map_view.xml" value="0.28125" />
         <entry key="..\:/Android StudioP/ViKard/ViKard/app/src/main/res/layout/fragment_mapa.xml" value="0.20520833333333333" />
         <entry key="..\:/Android StudioP/ViKard/ViKard/app/src/main/res/layout/fragment_register.xml" value="0.1" />
-        <entry key="..\:/Android StudioP/ViKard/ViKard/app/src/main/res/layout/karta.xml" value="0.28125" />
+        <entry key="..\:/Android StudioP/ViKard/ViKard/app/src/main/res/layout/karta.xml" value="0.25" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3828125" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/drawable/ic_card.xml" value="0.3203125" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3828125" />
@@ -38,33 +40,20 @@
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/fragment_map_view.xml" value="0.26927083333333335" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/fragment_mapa.xml" value="0.25" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/karta.xml" value="0.25" />
-        <entry key="..\:/Users/Martyna/Documents/GitHub/ViKard/ViKard/app/src/main/res/drawable/card.xml" value="0.203125" />
-        <entry key="..\:/Users/Martyna/Documents/GitHub/ViKard/ViKard/app/src/main/res/drawable/ic_add.xml" value="0.334375" />
-        <entry key="..\:/Users/Martyna/Documents/GitHub/ViKard/ViKard/app/src/main/res/layout/activity_main_screen.xml" value="0.3182291666666667" />
-        <entry key="..\:/Users/Martyna/Documents/GitHub/ViKard/ViKard/app/src/main/res/layout/karta.xml" value="0.33" />
         <entry key="..\:/Users/PC/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.1" />
-        <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/activity_register.xml" value="0.264" />
-        <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/karta.xml" value="0.1" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/drawable/card.xml" value="0.19635416666666666" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/drawable/ic_card.xml" value="0.18229166666666666" />
-        <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1635" />
-        <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/drawable/ic_logo_foreground.xml" value="0.1635" />
-        <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/drawable/linkbutton.xml" value="0.164" />
-        <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/drawable/logo.xml" value="0.1635" />
-        <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/drawable/logo_background.xml" value="0.1635" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/font/barcode.xml" value="0.284375" />
-        <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/layout/activity_add_card.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/layout/activity_edit_category.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/layout/activity_main_screen.xml" value="0.18020833333333333" />
-        <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/layout/fragment_card_list.xml" value="0.176" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/layout/fragment_card_list_element.xml" value="0.4" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/layout/fragment_map_view.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/layout/karta.xml" value="0.264" />
-        <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1635" />
-        <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1635" />
+        <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/layout/karta.xml" value="0.176" />
+        <entry key="app/src/main/res/layout-w1240dp/activity_login.xml" value="0.11345381526104417" />
+        <entry key="app/src/main/res/layout-w936dp/activity_login.xml" value="0.10689890710382513" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.14175724637681159" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.14175724637681159" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
       </map>
     </option>
   </component>

@@ -40,7 +40,7 @@ public class Karta extends AppCompatActivity {
         String p_barcodeText= BarcodeTextView.getText().toString(); // Whatever you need to encode in the QR code
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(p_barcodeText, BarcodeFormat.CODE_128,200,20);
+            BitMatrix bitMatrix = multiFormatWriter.encode(p_barcodeText, BarcodeFormat.CODE_128,400,40);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             BarcodeImageView.setImageBitmap(bitmap);
