@@ -17,7 +17,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
 
 import com.example.vikard.HomeActivity;
@@ -75,17 +74,17 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                if (RegisterViewModel.register(emailEditText.getText().toString(),
-                    r_passwordEditText.getText().toString(),
-                    firstNameEditText.getText().toString(),
-                    lastNameEditText.getText().toString(),
-                    formattedDate)){
-                    Toast.makeText(getApplicationContext(),"The account has been created.",Toast.LENGTH_SHORT).show();
-                    updateUiWithUser();
-                } else {
-                    Toast.makeText(getApplicationContext(),"The e-mail is taken.",Toast.LENGTH_SHORT).show();
-                }
+                RegisterViewModel.register(firstNameEditText.getText().toString(),
+                        lastNameEditText.getText().toString(),
+                        emailEditText.getText().toString(),
+                        formattedDate,
+                        r_repasswordEditText.getText().toString());
+
+                updateUiWithUser();
+
             }
+
+
         });
 
         //Obserwator sprawdza czy isDataValid zwrócił true;
@@ -118,11 +117,11 @@ public class RegisterActivity extends AppCompatActivity {
                     lastNameEditText.setError(getString(registerFormState.getLastNameError()));
 
                 }
-                //if(registerFormState.getBirthdateError() != null)
-                //{
+                if(registerFormState.getBirthdateError() != null)
+                {
                     //birthdayEditText.setError(getString(registerFormState.getBirthdateError()));
 
-                //}
+                }
                 if(registerFormState.getRepasswordError() != null)
                 {
                     r_repasswordEditText.setError(getString(registerFormState.getRepasswordError()));

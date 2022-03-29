@@ -21,13 +21,11 @@ public class RegisterViewModel extends ViewModel {
 
 
     //Metoda rejestracji wykonująca się po wciśnięciu przycisku registerButton
-    public boolean register(String username, String password, String firstName,
+    public void register(String username, String password, String firstName,
                          String lastName, String birthDate )
     {
-        if (rds.checkRegisteredEmail(username)){
-            rds.executeRegisterQuery(username,password,firstName,lastName,birthDate);
-            return true;
-        } else return false;
+         rds.executeRegisterQuery(username,password,firstName,lastName,birthDate);
+
     }
 
 
