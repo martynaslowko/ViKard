@@ -36,7 +36,7 @@
         android:focusable="true" />
 
     <TextView
-        android:id="@+id/shopName"
+        android:id="@+id/ShopNameText"
         android:layout_width="193dp"
         android:layout_height="26dp"
         android:text="@string/default_store_name"
