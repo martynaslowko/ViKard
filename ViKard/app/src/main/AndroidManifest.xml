@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.vikard" >
+    package="com.example.vikard">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature android:name="android.hardware.camera.autoFocus" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.any" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +18,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ViKard" >
+        android:theme="@style/Theme.ViKard">
+        <activity
+            android:name=".shop_panel"
+            android:exported="false"
+            android:label="@string/title_activity_shop_panel"
+            android:theme="@style/Theme.ViKard.NoActionBar" />
+
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
@@ -23,21 +34,19 @@
 
         <activity
             android:name=".ui.card.AddCardActivity"
-            android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize"
-            android:exported="false" />
-
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.card.EditCategoryActivity"
-            android:screenOrientation="portrait"
             android:configChanges="orientation|screenSize"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".HomeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -53,9 +62,9 @@
             android:exported="false" />
         <activity
             android:name=".MainScreen"
-            android:screenOrientation="portrait"
             android:exported="false"
             android:label="@string/title_activity_main_screen"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.ViKard.NoActionBar" />
         <activity
             android:name=".Karta"
@@ -65,7 +74,5 @@
             android:theme="@style/Theme.ViKard.NoActionBar"
             tools:ignore="Instantiatable" />
     </application>
-    <uses-feature android:name="android.hardware.camera.autoFocus" />
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.any" />
+
 </manifest>
