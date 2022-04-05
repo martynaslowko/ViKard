@@ -8,10 +8,14 @@ import android.util.Patterns;
 
 import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.Result;
+import com.example.vikard.data.Session.SessionManager;
 import com.example.vikard.data.model.LoggedInUser;
 import com.example.vikard.R;
 
 public class LoginViewModel extends ViewModel {
+
+
+
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();

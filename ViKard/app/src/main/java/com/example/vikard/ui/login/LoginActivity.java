@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.example.vikard.HomeActivity;
 import com.example.vikard.MainScreen;
 import com.example.vikard.R;
+import com.example.vikard.data.Session.SessionManager;
 import com.example.vikard.ui.login.LoginViewModel;
 import com.example.vikard.ui.login.LoginViewModelFactory;
 import com.example.vikard.databinding.ActivityLoginBinding;
@@ -49,6 +50,9 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
+        SessionManager sessionManager;
+
+        sessionManager = new SessionManager(getApplicationContext());
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -79,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 if (loginResult.getSuccess() != null) {
+                    sessionManager.createLoginSession(usernameEditText.getText().toString(),passwordEditText.getText().toString());
                     updateUiWithUser(loginResult.getSuccess());
                 }
                 setResult(Activity.RESULT_OK);

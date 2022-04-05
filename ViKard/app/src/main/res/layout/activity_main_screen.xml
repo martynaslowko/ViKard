@@ -8,6 +8,18 @@
     tools:context=".MainScreen">
 
 
+    <Button
+        android:id="@+id/LogoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:backgroundTint="#D51818"
+        android:text="Logout"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/editCardButton"
         android:layout_width="wrap_content"
