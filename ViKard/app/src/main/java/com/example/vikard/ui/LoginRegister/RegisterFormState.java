@@ -1,4 +1,4 @@
-package com.example.vikard.ui.register;
+package com.example.vikard.ui.LoginRegister;
 
 import androidx.annotation.Nullable;
 

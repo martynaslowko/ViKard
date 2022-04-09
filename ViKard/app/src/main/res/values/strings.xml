@@ -41,5 +41,13 @@
     <string name="default_store_name">Default Store Name</string>
     <string name="default_store_category">Default Store Category</string>
     <string name="todo">TODO</string>
+    <string name="logo">Vikard Logo</string>
+    <string name="existing_user">Existing user</string>
+    <string name="register_buttontext">Register</string>
+    <string name="birthdayText">Birthday</string>
+    <string name="retype_password">Retype password</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="password">Password</string>
 
 </resources>

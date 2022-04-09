@@ -1,4 +1,4 @@
-package com.example.vikard.ui.login;
+package com.example.vikard.ui.LoginRegister;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -8,7 +8,6 @@ import android.util.Patterns;
 
 import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.Result;
-import com.example.vikard.data.Session.SessionManager;
 import com.example.vikard.data.model.LoggedInUser;
 import com.example.vikard.R;
 

@@ -4,9 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.example.vikard.HomeActivity;
-import com.example.vikard.MainScreen;
-import com.example.vikard.ui.login.LoginActivity;
+import com.example.vikard.ui.LoginRegister.HomeActivity;
+
 
 import java.util.HashMap;
 
@@ -49,16 +48,16 @@ public class SessionManager {
         return pref.getBoolean(IS_LOGIN, false);
     }
 
-    public void checkLogin(){
-        if(!this.isLoggedIn()){
-            Intent i = new Intent(_context, LoginActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            _context.startActivity(i);
-
-        }
-
-    }
+//    public void checkLogin(){
+//        if(!this.isLoggedIn()){
+//            Intent i = new Intent(_context, LoginActivity.class);
+//            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            _context.startActivity(i);
+//
+//        }
+//
+//    }
 
     public HashMap<String , String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();

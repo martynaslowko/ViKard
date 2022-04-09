@@ -33,7 +33,7 @@
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.LoginRegister.HomeActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation|screenSize">
@@ -44,13 +44,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login" />
-        <activity
-            android:name=".ui.register.RegisterActivity"
-            android:exported="false" />
         <activity
             android:name=".MainScreen"
             android:screenOrientation="portrait"
