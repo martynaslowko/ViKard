@@ -44,5 +44,8 @@
     <string name="choose_card">Choose card</string>
     <string name="new_category">New category</string>
     <string name="edit_category">Edit Category</string>
+    <string name="let_s_register"><b>Let\'s Register!</b></string>
+    <string name="first"><center>First let\'s create your account. Once your account has been created you can use our wonderful features.</center></string>
+    <string name="register">Register</string>
 
 </resources>

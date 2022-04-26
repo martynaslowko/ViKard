@@ -11,21 +11,18 @@
         android:id="@+id/loginButton"
         android:layout_width="186dp"
         android:layout_height="52dp"
-
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
-
-        android:layout_marginBottom="28dp"
-
+        android:layout_marginBottom="24dp"
         android:text="Existing User"
-        android:textColor="#212121"
         app:layout_constraintBottom_toTopOf="@+id/homeRegButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/homeRegButton"
-        android:layout_width="182dp"
+        android:layout_width="186dp"
         android:layout_height="52dp"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
@@ -37,8 +34,8 @@
 
     <ImageView
         android:id="@+id/logoHome"
-        android:layout_width="347dp"
-        android:layout_height="331dp"
+        android:layout_width="322dp"
+        android:layout_height="308dp"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
