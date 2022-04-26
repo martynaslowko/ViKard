@@ -141,5 +141,11 @@
     <string name="shop_name">Shop name</string>
     <string name="cards_count">Cards count</string>
     <string name="number_of_cards">Number of cards</string>
+    <string name="others_text">Others</string>
+    <string name="default_description">default description</string>
+    <string name="hexadecimal_color_code">hexadecimal color code</string>
+    <string name="save">Save</string>
+    <string name="shop_login">Shop login</string>
+    <string name="user_login">User login</string>
 
 </resources>

@@ -3,14 +3,12 @@ package com.example.vikard;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 
 import com.example.vikard.data.model.CardModel;
@@ -42,7 +40,7 @@ public class CardListElement extends Fragment {
         cardMiniature = (ImageView) rootView.findViewById(R.id.cardImage);
 
         //shopName_ = (TextView) rootView.findViewById(R.id.ShopNameText);
-        shopName_ = (TextView) rootView.findViewById(R.id.shopName);
+        shopName_ = (TextView) rootView.findViewById(R.id.shop_name_title);
 
         shopCategory_ = (TextView) rootView.findViewById(R.id.shopCategory);
         button = (ImageView) rootView.findViewById(R.id.cardButton);
