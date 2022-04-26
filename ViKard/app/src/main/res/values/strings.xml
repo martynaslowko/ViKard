@@ -137,5 +137,9 @@
     </string>
     <string name="title_activity_shop_panel">shop_panel</string>
     <string name="action_settings">Settings</string>
+    <string name="color_text">Color</string>
+    <string name="shop_name">Shop name</string>
+    <string name="cards_count">Cards count</string>
+    <string name="number_of_cards">Number of cards</string>
 
 </resources>
