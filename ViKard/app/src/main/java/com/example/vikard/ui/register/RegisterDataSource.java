@@ -24,6 +24,12 @@ public class RegisterDataSource {
             statement.setString(3, email);
             statement.setDate(4, java.sql.Date.valueOf(birthDate));
             statement.executeUpdate();
+            sqlQuery = "CALL getSaltPwd(?)";
+            statement = conn.prepareStatement(sqlQuery);
+            statement.setString(1, password);
+            resultSet = statement.executeQuery();
+            resultSet.next();
+            String saltpwd = resultSet.getString("saltpwd");
             sqlQuery = "SELECT Id FROM Users WHERE Email = ?";
             statement = conn.prepareStatement(sqlQuery);
             statement.setString(1, email);
@@ -32,7 +38,7 @@ public class RegisterDataSource {
             sqlQuery = "INSERT INTO Credentials (UsersId, Password) VALUES (?, ?)";
             statement = conn.prepareStatement(sqlQuery);
             statement.setInt(1, resultSet.getInt("Id"));
-            statement.setString(2, password);
+            statement.setString(2, saltpwd);
             statement.executeUpdate();
         } catch (Exception ex) { } finally {
             try { conn.close(); } catch (Exception e) { }

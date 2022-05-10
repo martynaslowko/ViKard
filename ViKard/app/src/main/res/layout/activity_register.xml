@@ -7,16 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.register.RegisterActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="390dp"
@@ -26,7 +16,7 @@
         android:autoSizeTextType="uniform"
         android:text="@string/let_s_register"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -55,20 +45,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox2"
-        app:layout_constraintVertical_bias="0.063" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/firstName"
         android:layout_width="241dp"
         android:layout_height="51dp"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="164dp"
+        android:layout_marginTop="148dp"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:background="@drawable/custom_input"
-        android:ems="10"
-        android:hint="First Name"
         android:drawableStart="@drawable/custom_name_icon"
         android:drawablePadding="4dp"
+        android:ems="10"
+        android:hint="First Name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:paddingStart="12dp"
@@ -102,7 +92,7 @@
         android:id="@+id/birthDate"
         android:layout_width="241dp"
         android:layout_height="51dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/ic_calendar"
         android:drawablePadding="4dp"
@@ -113,6 +103,7 @@
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
@@ -120,18 +111,19 @@
         android:id="@+id/r_password"
         android:layout_width="241dp"
         android:layout_height="51dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/custom_lock_icon"
+        android:drawablePadding="4dp"
         android:ems="10"
         android:hint="Password"
-        android:drawablePadding="4dp"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:drawableStart="@drawable/custom_lock_icon"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/birthDate" />
 
@@ -142,8 +134,8 @@
         android:layout_marginTop="12dp"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/custom_email_icon"
-        android:ems="10"
         android:drawablePadding="4dp"
+        android:ems="10"
 
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
@@ -182,7 +174,6 @@
         android:layout_marginTop="16dp"
         android:text="@string/accept"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.636"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/r_repassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,7 +31,13 @@ public class LoginDataSource {
                 resultSet = statement.executeQuery();
                 resultSet.next();
                 String pwd = resultSet.getString("Password");
-                if (pwd.equals(password)){
+                sqlQuery = "CALL getSaltPwd(?)";
+                statement = conn.prepareStatement(sqlQuery);
+                statement.setString(1, password);
+                resultSet = statement.executeQuery();
+                resultSet.next();
+                String saltpwd = resultSet.getString("saltpwd");
+                if (pwd.equals(saltpwd)){
                     LoggedInUser logUser = new LoggedInUser(String.valueOf(id), username);
                     return new Result.Success<>(logUser);
                 } else {
