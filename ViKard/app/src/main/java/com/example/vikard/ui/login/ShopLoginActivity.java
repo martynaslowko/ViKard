@@ -23,8 +23,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.vikard.MainScreen;
 import com.example.vikard.R;
 import com.example.vikard.databinding.ActivityLoginBinding;
+import com.example.vikard.shop_panel;
 
-public class LoginActivity extends AppCompatActivity {
+public class ShopLoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
@@ -125,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUiWithUser(LoggedInUserView model) {
         setContentView(binding.getRoot());
-        setContentView(R.layout.activity_main_screen);
+        setContentView(R.layout.activity_shop_panel);
         switchActivities();
     }
 
@@ -136,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //Po udanym logowaniu przechodzi do MainScreen.class
     private void switchActivities() {
-        Intent switchActivityIntent = new Intent(this, MainScreen.class);
+        Intent switchActivityIntent = new Intent(this, shop_panel.class);
         startActivity(switchActivityIntent);
     }
 

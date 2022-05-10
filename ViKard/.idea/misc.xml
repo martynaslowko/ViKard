@@ -70,7 +70,10 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2989583333333333" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.35572916666666665" />
-        <entry key="app/src/main/res/layout/activity_shop_panel.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_shop_panel.xml" value="0.1889763779527559" />
+        <entry key="app/src/main/res/layout/fragment_card_list_element.xml" value="0.18888888888888888" />
+        <entry key="app/src/main/res/layout/fragment_map_view.xml" value="0.18888888888888888" />
+        <entry key="app/src/main/res/layout/karta.xml" value="0.18888888888888888" />
       </map>
     </option>
   </component>

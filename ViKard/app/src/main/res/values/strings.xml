@@ -149,5 +149,6 @@
     <string name="user_login">User login</string>
     <string name="api">API</string>
     <string name="apikey">API key</string>
+    <string name="api_key">API key</string>
 
 </resources>

@@ -1,45 +1,72 @@
 package com.example.vikard;
 
+// Import the required libraries
+import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
-public class shop_panel extends AppCompatActivity {
-    TextView shop_name_title, shop_name_piechart;
-    PieChart pieChart;
-    String shop_name;
-    String HexColor;
+public class shop_panel
+        extends AppCompatActivity {
 
-//    private ActivityShopPanelBinding binding;
+    // Create the object of TextView
+    // and PieChart class
+    TextView tvR, tvPython, tvCPP, tvJava;
+    PieChart pieChart;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        shop_name_title = findViewById(R.id.shop_name_title);
-        shop_name_piechart = findViewById(R.id.shop_name_piechart);
+        setContentView(R.layout.activity_shop_panel);
+
+        // Link those objects with their
+        // respective id's that
+        // we have given in .XML file
+        tvR = findViewById(R.id.tvR);
+        tvPython = findViewById(R.id.tvPython);
+        tvCPP = findViewById(R.id.tvCPP);
+        tvJava = findViewById(R.id.tvJava);
         pieChart = findViewById(R.id.piechart);
+
+        // Creating a method setData()
+        // to set the text in text view and pie chart
         setData();
     }
 
     private void setData()
     {
-        float percent = 0;
+
+        // Set the percentage of language used
+        tvR.setText(Integer.toString(40));
+        tvPython.setText(Integer.toString(30));
+        tvCPP.setText(Integer.toString(5));
+        tvJava.setText(Integer.toString(25));
+
         // Set the data and color to the pie chart
         pieChart.addPieSlice(
                 new PieModel(
-                        shop_name,
-                        percent,
-                        Color.parseColor(HexColor)));
+                        "R",
+                        Integer.parseInt(tvR.getText().toString()),
+                        Color.parseColor("#FFA726")));
         pieChart.addPieSlice(
                 new PieModel(
-                        "Others",
-                        100-percent,
-                        Color.parseColor("@android:color/secondary_text_light")));
+                        "Python",
+                        Integer.parseInt(tvPython.getText().toString()),
+                        Color.parseColor("#66BB6A")));
+        pieChart.addPieSlice(
+                new PieModel(
+                        "C++",
+                        Integer.parseInt(tvCPP.getText().toString()),
+                        Color.parseColor("#EF5350")));
+        pieChart.addPieSlice(
+                new PieModel(
+                        "Java",
+                        Integer.parseInt(tvJava.getText().toString()),
+                        Color.parseColor("#29B6F6")));
+
         // To animate the pie chart
         pieChart.startAnimation();
     }

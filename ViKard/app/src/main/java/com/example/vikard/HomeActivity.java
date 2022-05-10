@@ -9,12 +9,14 @@ import android.widget.Button;
 
 import com.example.vikard.ui.login.LoginActivity;
 
+import com.example.vikard.ui.login.ShopLoginActivity;
 import com.example.vikard.ui.register.RegisterActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
     private Button signinButton;
     private Button signupButton;
+    private Button signinShopButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +24,9 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         signinButton = (Button) findViewById(R.id.LoginButton);
         signupButton = (Button) findViewById(R.id.homeRegButton);
+        signinShopButton = (Button) findViewById(R.id.ShopLoginButton);
 
         signinButton.setOnClickListener(new View.OnClickListener() {
-       
             @Override
             public void onClick(View v) {
                 openLoginScreen();
@@ -39,7 +41,20 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        signinShopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openShopLoginScreen();
+            }
+        });
+
     }
+
+    private void openShopLoginScreen() {
+        Intent intent = new Intent(this, ShopLoginActivity.class);
+        startActivity(intent);
+    }
+
 
     public void openLoginScreen()
     {
