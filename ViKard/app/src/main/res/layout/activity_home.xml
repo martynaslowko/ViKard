@@ -16,7 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="384dp"
             android:layout_marginTop="40dp"
-            android:contentDescription="TODO"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -46,29 +45,13 @@
             app:layout_marginBaseline="0dp">
 
             <androidx.appcompat.widget.AppCompatButton
-
-                android:id="@+id/loginButton"
+                android:id="@+id/LoginButton"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
-
-                android:layout_margin="0dp"
-                android:layout_marginStart="0dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginRight="0dp"
-                android:layout_marginBottom="0dp"
                 android:background="@color/teal_200"
-                android:backgroundTint="@color/teal_200"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:padding="0dp"
-                android:paddingStart="0dp"
-                android:paddingLeft="0dp"
-                android:paddingTop="0dp"
-                android:paddingEnd="0dp"
-                android:paddingRight="0dp"
-                android:paddingBottom="0dp"
                 android:text="@string/user_login"
                 android:textColor="@color/white"
                 android:textColorLink="#7ddfe8"
@@ -76,39 +59,25 @@
                 tools:ignore="TextContrastCheck" />
 
             <androidx.appcompat.widget.AppCompatButton
-
-                android:id="@+id/loginButtonShop"
+                android:id="@+id/ShopLoginButton"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
-
-                android:layout_margin="0dp"
-                android:layout_marginStart="0dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginRight="0dp"
-                android:layout_marginBottom="0dp"
+                android:background="@color/teal_700"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
+                android:padding="0dp"
                 android:text="@string/shop_login"
                 android:textColor="@color/white"
+                android:textColorLink="#7ddfe8"
                 app:cornerRadius="0dp"
                 tools:ignore="TextContrastCheck" />
 
             <androidx.appcompat.widget.AppCompatButton
-
                 android:id="@+id/homeRegButton"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:layout_margin="0dp"
-                android:layout_marginStart="0dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginRight="0dp"
-                android:layout_marginBottom="0dp"
                 android:background="#0f5157"
-                android:backgroundTint="#0f5157"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="@string/register"

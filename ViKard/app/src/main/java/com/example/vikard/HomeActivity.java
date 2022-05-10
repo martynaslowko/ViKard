@@ -20,7 +20,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        signinButton = (Button) findViewById(R.id.loginButton);
+        signinButton = (Button) findViewById(R.id.LoginButton);
         signupButton = (Button) findViewById(R.id.homeRegButton);
 
         signinButton.setOnClickListener(new View.OnClickListener() {
