@@ -6,16 +6,17 @@
     android:layout_height="match_parent"
     android:padding="4dp"
     tools:context=".ui.card.AddCardActivity">
+
     <TextView
+        android:id="@+id/scannedContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/initiateScan"
         android:layout_centerInParent="true"
         android:layout_marginBottom="10dp"
         android:text=" code reader"
         android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scannedContent"/>
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/initiateScan"
@@ -27,13 +28,13 @@
 
     <Button
         android:id="@+id/addCardToDB"
-        android:layout_width="wrap_content"
+        android:layout_width="121dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/scannedContent"
-        android:layout_marginTop="287dp"
+        android:layout_marginTop="323dp"
         android:clickable="false"
         android:focusable="false"
-        android:text="Dodaj kartę"
+        android:text="Add"
         android:translationX="150dp" />
 
     <EditText
