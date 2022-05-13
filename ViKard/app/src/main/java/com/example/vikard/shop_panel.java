@@ -1,6 +1,5 @@
 package com.example.vikard;
 
-// Import the required libraries
 import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,12 +7,7 @@ import android.widget.TextView;
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
-public class shop_panel
-        extends AppCompatActivity {
-
-    // Create the object of TextView
-    // and PieChart class
-    TextView tvR, tvPython, tvCPP, tvJava;
+public class shop_panel extends AppCompatActivity {
     PieChart pieChart;
 
     @Override
@@ -22,52 +16,22 @@ public class shop_panel
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_panel);
 
-        // Link those objects with their
-        // respective id's that
-        // we have given in .XML file
-        tvR = findViewById(R.id.tvR);
-        tvPython = findViewById(R.id.tvPython);
-        tvCPP = findViewById(R.id.tvCPP);
-        tvJava = findViewById(R.id.tvJava);
         pieChart = findViewById(R.id.piechart);
-
-        // Creating a method setData()
-        // to set the text in text view and pie chart
-        setData();
+        setData(99);
     }
 
-    private void setData()
+    private void setData(int percent)
     {
-
-        // Set the percentage of language used
-        tvR.setText(Integer.toString(40));
-        tvPython.setText(Integer.toString(30));
-        tvCPP.setText(Integer.toString(5));
-        tvJava.setText(Integer.toString(25));
-
-        // Set the data and color to the pie chart
         pieChart.addPieSlice(
                 new PieModel(
-                        "R",
-                        Integer.parseInt(tvR.getText().toString()),
+                        "Our shop ("+percent+")",
+                        percent,
                         Color.parseColor("#FFA726")));
         pieChart.addPieSlice(
                 new PieModel(
-                        "Python",
-                        Integer.parseInt(tvPython.getText().toString()),
+                        "Others ("+(100-percent)+")",
+                        100-percent,
                         Color.parseColor("#66BB6A")));
-        pieChart.addPieSlice(
-                new PieModel(
-                        "C++",
-                        Integer.parseInt(tvCPP.getText().toString()),
-                        Color.parseColor("#EF5350")));
-        pieChart.addPieSlice(
-                new PieModel(
-                        "Java",
-                        Integer.parseInt(tvJava.getText().toString()),
-                        Color.parseColor("#29B6F6")));
-
-        // To animate the pie chart
         pieChart.startAnimation();
     }
 }
