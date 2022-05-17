@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.vikard.MainScreen;
 import com.example.vikard.R;
+import com.example.vikard.ViKard;
 import com.example.vikard.databinding.ActivityLoginBinding;
 import com.example.vikard.shop_panel;
 
@@ -107,7 +108,8 @@ public class ShopLoginActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.shop_login(usernameEditText.getText().toString(),
+//                    ((ViKard) this.getApplication()).set_login_flag(true);
+                    loginViewModel.login(usernameEditText.getText().toString(),
                             passwordEditText.getText().toString());
                 }
                 return false;

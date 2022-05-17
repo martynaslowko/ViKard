@@ -23,6 +23,8 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="16dp"
                 android:autoSizeTextType="uniform"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:text="@string/let_s_register"
                 android:textColor="@color/black"
                 android:textSize="30sp"

@@ -1,6 +1,8 @@
 package com.example.vikard;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -14,8 +16,8 @@ public class shop_panel extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_shop_panel);
-
         pieChart = findViewById(R.id.piechart);
         setData(69);
     }
