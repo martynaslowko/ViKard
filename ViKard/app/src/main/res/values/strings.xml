@@ -138,7 +138,7 @@
     <string name="title_activity_shop_panel">shop_panel</string>
     <string name="action_settings">Settings</string>
     <string name="color_text">Color</string>
-    <string name="shop_name">Shop name</string>
+    <string name="shop_name">Douglablablablas</string>
     <string name="cards_count">Cards count</string>
     <string name="number_of_cards">Number of cards</string>
     <string name="others_text">Others</string>
@@ -148,7 +148,6 @@
     <string name="shop_login">Shop login</string>
     <string name="user_login">User login</string>
     <string name="api">API</string>
-    <string name="apikey">API key</string>
     <string name="api_key">API key</string>
 
     <string name="let_s_register"><b>Let\'s Register!</b></string>
