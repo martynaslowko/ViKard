@@ -154,5 +154,9 @@
     <string name="let_s_register"><b>Let\'s Register!</b></string>
     <string name="first"><center>First let\'s create your account. Once your account has been created you can use our wonderful features.</center></string>
     <string name="accept">I agree to the <b>Terms of Service</b> and <b>Privacy Policy</b></string>
-
+    <string name="normal_map">Normal Map</string>
+    <string name="hybrid_map">Hybrid Map</string>
+    <string name="satellite_map">Satellite Map</string>
+    <string name="terrain_map">Terrain Map</string>
+    <string name="poi">poi</string>
 </resources>
