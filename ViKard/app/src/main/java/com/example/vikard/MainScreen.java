@@ -3,6 +3,7 @@ package com.example.vikard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -10,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.vikard.data.Session.SessionManager;
 import com.example.vikard.data.model.CardModel;
 import com.example.vikard.ui.card.AddCardActivity;
 import com.example.vikard.ui.card.EditCategoryActivity;
@@ -24,12 +26,13 @@ public class MainScreen extends AppCompatActivity {
     ViewPager2 viewpager2;
     FragmentAdapter fragmentadapter;
 
-
+    SessionManager sessionManager;
     private boolean isClicked = false;
     FloatingActionButton dropFloatButton;
     FloatingActionButton addFloatButton;
     FloatingActionButton delFloatButton;
     FloatingActionButton editFloatButton;
+    Button logoutButton;
     ArrayList<CardModel> ckd;
 
 
@@ -38,6 +41,10 @@ public class MainScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_main_screen);
+
+        //Session
+        sessionManager = new SessionManager(getApplicationContext());
+
         tablayout = findViewById(R.id.tablayout);
         viewpager2 = findViewById(R.id.view_pager);
         FragmentManager fm = getSupportFragmentManager();
@@ -64,6 +71,7 @@ public class MainScreen extends AppCompatActivity {
         addFloatButton = (FloatingActionButton)findViewById(R.id.addCardButton);
         delFloatButton = (FloatingActionButton)findViewById(R.id.deleteCardButton);
         editFloatButton = (FloatingActionButton)findViewById(R.id.editCardButton);
+        logoutButton = (Button)findViewById(R.id.LogoutButton);
 
 
         dropFloatButton.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +97,15 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openEditCategoryActivity();
+            }
+        });
+
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                sessionManager.logoutUser();
             }
         });
 

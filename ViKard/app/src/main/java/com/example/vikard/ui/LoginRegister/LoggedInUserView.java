@@ -1,4 +1,4 @@
-package com.example.vikard.ui.login;
+package com.example.vikard.ui.LoginRegister;
 
 /**
  * Class exposing authenticated user details to the UI.
