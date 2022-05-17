@@ -1,11 +1,13 @@
 package com.example.vikard.data;
 
+import com.example.vikard.ViKard;
 import com.example.vikard.data.model.LoggedInUser;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
@@ -17,6 +19,7 @@ public class LoginDataSource {
 
     public Result<LoggedInUser> login(String username, String password) {
         ResultSet resultSet = null;
+//        boolean flag = ((ViKard) this.getApplication()).getSomeVariable();
         try {
             String sqlQuery = "SELECT Id FROM Users WHERE Email = ?";
             PreparedStatement statement = conn.prepareStatement(sqlQuery);
