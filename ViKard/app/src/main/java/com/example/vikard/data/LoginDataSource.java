@@ -48,6 +48,38 @@ public class LoginDataSource {
 
     }
 
+    public Result<LoggedInUser> shop_login(String username, String password) {
+        ResultSet resultSet = null;
+        try {
+            String sqlQuery = "SELECT Id FROM Shops WHERE Email = ?";
+            PreparedStatement statement = conn.prepareStatement(sqlQuery);
+            statement.setString(1, username);
+            resultSet = statement.executeQuery();
+            if (resultSet!= null) {
+                resultSet.next();
+                int id = resultSet.getInt("Id");
+                sqlQuery = "SELECT Password FROM ShopsCredentials WHERE ShopsId = ?";
+                statement = conn.prepareStatement(sqlQuery);
+                statement.setInt(1, id);
+                resultSet = statement.executeQuery();
+                resultSet.next();
+                String pwd = resultSet.getString("Password");
+                if (pwd.equals(password)){
+                    LoggedInUser logUser = new LoggedInUser(String.valueOf(id), username);
+                    return new Result.Success<>(logUser);
+                } else {
+                    return new Result.Error(new IOException("The password is incorrect."));
+                }
+            } else {
+                return new Result.Error(new IOException("The user doesn't exist."));
+            }
+        } catch (Exception ex) {
+            return new Result.Error(new IOException("The user doesn't exist."));
+        } finally {
+            try { conn.close(); } catch (Exception e) {}
+        }
+    }
+
     public void logout() {
         // TODO: revoke authentication
     }

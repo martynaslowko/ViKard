@@ -107,7 +107,7 @@ public class ShopLoginActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
+                    loginViewModel.shop_login(usernameEditText.getText().toString(),
                             passwordEditText.getText().toString());
                 }
                 return false;

@@ -157,16 +157,17 @@
                     </LinearLayout>
 
                     <View
-                        android:id="@+id/divider2"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:layout_weight="1" />
-
-                    <View
                         android:id="@+id/divider3"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/cards_count_title"
+                        style="@style/title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cards_count" />
 
                     <TextView
                         android:id="@+id/cards_count"
@@ -177,17 +178,10 @@
                         android:textSize="28sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/cards_count_title"
-                        style="@style/title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/cards_count" />
-
                     <View
                         android:id="@+id/divider4"
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="30dp"
                         android:layout_weight="1" />
 
                     <TextView
@@ -197,15 +191,13 @@
                         android:layout_height="wrap_content"
                         android:text="@string/number_of_cards"
                         android:textAlignment="textStart"
-                        android:textStyle="bold" />
+                        android:textSize="30dp" />
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="40dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
                         android:elevation="10dp"
                         app:cardCornerRadius="10dp">
 
@@ -252,7 +244,7 @@
 
                                     <!--Text view to display R -->
                                     <TextView
-                                        android:layout_width="50dp"
+                                        android:layout_width="fill_parent"
                                         android:layout_height="25dp"
                                         android:paddingStart="10dp"
                                         android:paddingEnd="0dp"
@@ -275,7 +267,7 @@
 
                                     <!--Text view to display python text -->
                                     <TextView
-                                        android:layout_width="50dp"
+                                        android:layout_width="fill_parent"
                                         android:layout_height="25dp"
                                         android:paddingStart="10dp"
                                         android:paddingEnd="0dp"

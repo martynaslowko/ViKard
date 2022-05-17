@@ -17,7 +17,7 @@ public class shop_panel extends AppCompatActivity {
         setContentView(R.layout.activity_shop_panel);
 
         pieChart = findViewById(R.id.piechart);
-        setData(99);
+        setData(69);
     }
 
     private void setData(int percent)
