@@ -24,7 +24,7 @@
             android:layout_marginTop="128dp"
             android:contentDescription="@string/logo"
             android:gravity="center"
-            app:srcCompat="@mipmap/logo_foreground" />
+            app:srcCompat="@drawable/ic_logo_foreground" />
 
         <Button
             android:id="@+id/loginButton"
