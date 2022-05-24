@@ -111,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
 
         //HomeScreenLayout space
 
-        binding.loginButton.setOnClickListener(new View.OnClickListener() {
+        binding.LoginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
