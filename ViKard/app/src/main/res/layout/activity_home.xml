@@ -353,5 +353,4 @@
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </ViewFlipper>

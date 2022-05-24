@@ -65,44 +65,32 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        //
-
-
         //Inflate vars and viewflipper
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         viewFlipper = findViewById(R.id.view_flipper); //ViewFlipper ids -> 0-home,1-login,2-register etc.
-
 
         //LoginLayout vars
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
-        ////
 
         //RegisterLayout vars
         final DatePickerDialog[] picker = new DatePickerDialog[1];
         final EditText firstNameEditText = binding.firstName;
         final EditText lastNameEditText = binding.lastName;
-
         final EditText birthdayEditText = binding.birthDate;
         birthdayEditText.setInputType(InputType.TYPE_NULL);
         birthdayEditText.setFocusable(false);
-
-
         final EditText emailEditText = binding.email;
         final EditText r_passwordEditText = binding.rPassword;
         final EditText r_repasswordEditText = binding.rRepassword;
-
         final Button registerButton = binding.regButton;
         registerButton.setEnabled(false);
 
-        ////////////////////////////////////////////////////
-
-        ////
+        ////////////////
 
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
@@ -110,9 +98,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
         //HomeScreenLayout space
-
         binding.LoginButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 //viewFlipper.showNext();
@@ -123,13 +109,12 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         binding.ShopLoginButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 //viewFlipper.showNext();
                 viewFlipper.setInAnimation(getApplicationContext(),R.anim.slide_in_right);
                 viewFlipper.setOutAnimation(getApplicationContext(),R.anim.slide_out_left);
-                viewFlipper.setDisplayedChild(3);
+                viewFlipper.setDisplayedChild(1);
             }
         });
 
@@ -141,12 +126,6 @@ public class HomeActivity extends AppCompatActivity {
                 viewFlipper.setDisplayedChild(2);
             }
         });
-
-
-
-
-        ////////////////////////////////////////////////////
-
 
         //LoginScreenLayout space
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
@@ -187,8 +166,6 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
 
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
