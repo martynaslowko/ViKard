@@ -122,6 +122,17 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        binding.ShopLoginButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //viewFlipper.showNext();
+                viewFlipper.setInAnimation(getApplicationContext(),R.anim.slide_in_right);
+                viewFlipper.setOutAnimation(getApplicationContext(),R.anim.slide_out_left);
+                viewFlipper.setDisplayedChild(3);
+            }
+        });
+
         binding.homeRegButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
