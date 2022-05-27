@@ -96,10 +96,10 @@ public class AddCardActivity extends AppCompatActivity {
                 IntentIntegrator intentIntegrator = new IntentIntegrator(AddCardActivity.this);
                 intentIntegrator.setDesiredBarcodeFormats(intentIntegrator.ONE_D_CODE_TYPES); //ONE_D_CODE_TYPES WCZYTUJE TYLKO BARCODE
                                                                                                 // || ALL_CODE_TYPES -> WCZYTUJE NAWET QR CODE
-                intentIntegrator.setOrientationLocked(false);
-                intentIntegrator.setBeepEnabled(true);
+                intentIntegrator.setOrientationLocked(true);
                 intentIntegrator.setCameraId(0);
-                intentIntegrator.setPrompt("SCAN");
+                //intentIntegrator.setCaptureActivity()
+                //intentIntegrator.setPrompt("SCAN");
                 intentIntegrator.setBarcodeImageEnabled(true);
                 intentIntegrator.initiateScan();
             }
@@ -225,11 +225,11 @@ public class AddCardActivity extends AppCompatActivity {
         IntentResult Result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (Result != null) {
             if (Result.getContents() == null) {
-                Toast.makeText(this, "cancelled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Aborted scanning", Toast.LENGTH_SHORT).show();
             } else {
-                Log.d("MainActivity", "Scanned");
-                Toast.makeText(this, "Scanned -> " + Result.getContents(), Toast.LENGTH_SHORT).show();
-                scannedText.setText(String.format("%s", Result.getContents().toString()));
+
+                Toast.makeText(this, "Sucesfully Scanned" , Toast.LENGTH_SHORT).show();
+                scannedText.setText(String.format("%s", Result.getContents()));
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
