@@ -2,13 +2,13 @@ package com.example.vikard.ui.card;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Context;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,15 +24,6 @@ import com.example.vikard.data.SQLConnection;
 import com.example.vikard.data.model.CardModel;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
-import androidx.appcompat.app.AppCompatActivity;
-import com.example.vikard.MainScreen;
-import com.example.vikard.R;
-import com.example.vikard.data.SQLConnection;
-import com.example.vikard.data.model.CardModel;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -40,7 +31,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import com.example.vikard.CardList;
+
 
 public class AddCardActivity extends AppCompatActivity {
 
@@ -97,7 +88,9 @@ public class AddCardActivity extends AppCompatActivity {
                 intentIntegrator.setDesiredBarcodeFormats(intentIntegrator.ONE_D_CODE_TYPES); //ONE_D_CODE_TYPES WCZYTUJE TYLKO BARCODE
                                                                                                 // || ALL_CODE_TYPES -> WCZYTUJE NAWET QR CODE
                 intentIntegrator.setOrientationLocked(true);
+                intentIntegrator.setCaptureActivity(Capture.class);
                 intentIntegrator.setCameraId(0);
+                intentIntegrator.setBeepEnabled(false);
                 //intentIntegrator.setCaptureActivity()
                 //intentIntegrator.setPrompt("SCAN");
                 intentIntegrator.setBarcodeImageEnabled(true);
