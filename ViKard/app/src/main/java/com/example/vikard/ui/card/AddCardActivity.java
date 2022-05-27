@@ -1,5 +1,6 @@
 package com.example.vikard.ui.card;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -144,7 +145,7 @@ public class AddCardActivity extends AppCompatActivity {
                 //picker dialog
                 if(picker[0] == null)
                 {
-                    picker[0] = new DatePickerDialog(AddCardActivity.this,
+                    picker[0] = new DatePickerDialog(AddCardActivity.this, AlertDialog.THEME_HOLO_LIGHT,
                             new DatePickerDialog.OnDateSetListener() {
                                 @Override
                                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -152,10 +153,12 @@ public class AddCardActivity extends AppCompatActivity {
                                     formattedDate = "" + year + "-" + (monthOfYear+1) + "-" + dayOfMonth;
                                 }
                             }, year, month, day);
+                    picker[0].getDatePicker().setMaxDate(cldr.getTimeInMillis());
                     picker[0].show();
                 }
                 else
                 {
+                    picker[0].getDatePicker().setMaxDate(cldr.getTimeInMillis());
                     picker[0].show();
                 }
 

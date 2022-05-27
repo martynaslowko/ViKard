@@ -73,9 +73,12 @@
         <entry key="..\:/Users/PC/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.1" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.1636546184738956" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout-w936dp/activity_login.xml" value="0.191015625" />
+        <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/activity_add_card.xml" value="0.16869300911854104" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/activity_main_screen.xml" value="0.33" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/activity_register.xml" value="0.264" />
+        <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/content_scrolling.xml" value="0.18568840579710144" />
+        <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/fragment_map_view.xml" value="0.1" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/karta.xml" value="0.1" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/drawable/card.xml" value="0.19635416666666666" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/drawable/ic_card.xml" value="0.18229166666666666" />

@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +29,6 @@ import com.example.vikard.MainScreen;
 import com.example.vikard.R;
 import com.example.vikard.data.Session.SessionManager;
 import com.example.vikard.databinding.ActivityHomeBinding;
-
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -57,12 +57,19 @@ public class HomeActivity extends AppCompatActivity {
             HashMap<String, String> a = sessionManager.getUserDetails();
             username = a.get("email");
             passwsord = a.get("password");
+            if(username != "" || passwsord != "")
+            {
+                loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
+                        .get(LoginViewModel.class);
+                loginViewModel.login(username, passwsord);
+                sessionManager.createLoginSession(username,passwsord);
 
-            loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
-                    .get(LoginViewModel.class);
-            loginViewModel.login(username, passwsord);
-            Intent intent = new Intent(this, MainScreen.class);
-            startActivity(intent);
+
+                setContentView(R.layout.activity_main_screen);
+                Intent intent = new Intent(this, MainScreen.class);
+                startActivity(intent);
+            }
+
         }
 
         //Inflate vars and viewflipper
@@ -157,7 +164,7 @@ public class HomeActivity extends AppCompatActivity {
                     return;
                 }
                 if (loginResult.getSuccess() != null) {
-                    sessionManager.createLoginSession(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+
                     updateUiWithUser(loginResult.getSuccess());
                 }
                 setResult(Activity.RESULT_OK);
@@ -205,6 +212,13 @@ public class HomeActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
+
+                //Session manager saving SharedPrefrences
+                if(usernameEditText.getText().toString() != "" && passwordEditText.getText().toString() != "")
+                {
+                    sessionManager.createLoginSession(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+
+                }
             }
         });
 
@@ -308,18 +322,22 @@ public class HomeActivity extends AppCompatActivity {
                 //picker dialog
                 if(picker[0] == null)
                 {
-                    picker[0] = new DatePickerDialog(HomeActivity.this,
+                    picker[0] = new DatePickerDialog(HomeActivity.this, AlertDialog.THEME_HOLO_LIGHT,
                             new DatePickerDialog.OnDateSetListener() {
+
                                 @Override
                                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                     birthdayEditText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                                     formattedDate = "" + year + "-" + (monthOfYear+1) + "-" + dayOfMonth;
                                 }
                             }, year, month, day);
+
+                    picker[0].getDatePicker().setMaxDate(cldr.getTimeInMillis());
                     picker[0].show();
                 }
                 else
                 {
+                    picker[0].getDatePicker().setMaxDate(cldr.getTimeInMillis());
                     picker[0].show();
                 }
 
@@ -354,6 +372,7 @@ public class HomeActivity extends AppCompatActivity {
     //Functions
 
     private void updateUiWithUser(LoggedInUserView model) {
+
         setContentView(binding.getRoot());
         setContentView(R.layout.activity_main_screen);
         switchActivities();

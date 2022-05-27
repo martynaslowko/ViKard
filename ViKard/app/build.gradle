@@ -58,4 +58,8 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
     implementation 'com.github.blackfizz:eazegraph:1.2.5l@aar'
     implementation 'com.nineoldandroids:library:2.4.0'
+
+
+    implementation 'com.google.maps:google-maps-services:2.0.0'
+    implementation 'org.slf4j:slf4j-simple:1.7.25'
 }
