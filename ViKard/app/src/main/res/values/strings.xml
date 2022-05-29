@@ -154,5 +154,6 @@
     <string name="let_s_register"><b>Let\'s Register!</b></string>
     <string name="first"><center>First let\'s create your account. Once your account has been created you can use our wonderful features.</center></string>
     <string name="accept">I agree to the <b>Terms of Service</b> and <b>Privacy Policy</b></string>
-
+    <string name="add"><b>Add a loyalty card to your virtual wallet!</b></string>
+    <string name="qr">Use phone camera to scan barcode placed on your loyalty card. Press camera icon to proceed.</string>
 </resources>
