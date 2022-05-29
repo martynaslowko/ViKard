@@ -1,4 +1,4 @@
-package com.example.vikard.ui.login;
+package com.example.vikard.ui.LoginRegister;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -12,6 +12,9 @@ import com.example.vikard.data.model.LoggedInUser;
 import com.example.vikard.R;
 
 public class LoginViewModel extends ViewModel {
+
+
+
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
@@ -40,6 +43,7 @@ public class LoginViewModel extends ViewModel {
             loginResult.setValue(new LoginResult(R.string.login_failed));
         }
     }
+
 
     public void loginDataChanged(String username, String password) {
         if (!isUserNameValid(username)) {

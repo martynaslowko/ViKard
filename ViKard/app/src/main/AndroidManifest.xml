@@ -13,6 +13,7 @@
     <uses-feature android:name="android.hardware.camera.any" />
 
     <application
+        android:name=".ViKard"
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
@@ -34,17 +35,17 @@
 
         <activity
             android:name=".ui.card.AddCardActivity"
-            android:configChanges="orientation|screenSize"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+            />
+        <activity android:name=".ui.card.Capture"
+            android:screenOrientation="portrait"
+            tools:replace="screenOrientation" />
         <activity
             android:name=".ui.card.EditCategoryActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HomeActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:name=".ui.LoginRegister.HomeActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -53,18 +54,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login" />
-
-        <activity
-            android:name=".ui.login.ShopLoginActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login" />
-        <activity
-            android:name=".ui.register.RegisterActivity"
-            android:exported="false" />
         <activity
             android:name=".MainScreen"
             android:exported="false"

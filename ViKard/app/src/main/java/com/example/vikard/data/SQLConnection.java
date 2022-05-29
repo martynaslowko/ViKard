@@ -8,6 +8,7 @@ import java.sql.*;
 public class SQLConnection {
     @SuppressLint("NewApi")
     public static Connection getConnection() {
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 

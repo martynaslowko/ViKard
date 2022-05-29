@@ -1,4 +1,4 @@
-package com.example.vikard.ui.login;
+package com.example.vikard.ui.LoginRegister;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
