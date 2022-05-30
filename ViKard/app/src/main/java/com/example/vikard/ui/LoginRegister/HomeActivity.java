@@ -28,6 +28,7 @@ import com.example.vikard.MainScreen;
 import com.example.vikard.R;
 import com.example.vikard.data.Session.SessionManager;
 import com.example.vikard.databinding.ActivityHomeBinding;
+import com.example.vikard.shop_panel;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -41,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
     private ViewFlipper viewFlipper;
     private ActivityHomeBinding binding;
     private SessionManager sessionManager;
+    private boolean flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,6 @@ public class HomeActivity extends AppCompatActivity {
             HashMap<String, String> a = sessionManager.getUserDetails();
             username = a.get("email");
             passwsord = a.get("password");
-
             loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
             loginViewModelShop = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
             loginViewModel.login(username, passwsord,false);
@@ -61,7 +62,7 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainScreen.class);
             startActivity(intent);
         }
-
+        flag = false;
         //Inflate vars and viewflipper
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
@@ -202,6 +203,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 if (loginResult.getSuccess() != null) {
                     sessionManager.createLoginSession(usernameEditText2.getText().toString(), passwordEditText2.getText().toString());
+                    flag = true;
                     updateUiWithUser(loginResult.getSuccess());
                 }
                 setResult(Activity.RESULT_OK);
@@ -426,7 +428,12 @@ public class HomeActivity extends AppCompatActivity {
 
     private void updateUiWithUser(LoggedInUserView model) {
         setContentView(binding.getRoot());
-        setContentView(R.layout.activity_main_screen);
+        if(!flag){
+            setContentView(R.layout.activity_main_screen);
+        }
+        else{
+            setContentView(R.layout.activity_shop_panel);
+        }
         switchActivities();
     }
 
@@ -437,7 +444,13 @@ public class HomeActivity extends AppCompatActivity {
 
     //Po udanym logowaniu przechodzi do MainScreen.class
     private void switchActivities() {
-        Intent switchActivityIntent = new Intent(this, MainScreen.class);
+        Intent switchActivityIntent;
+        if(!flag) {
+            switchActivityIntent = new Intent(this, shop_panel.class);
+        }
+        else{
+            switchActivityIntent = new Intent(this, shop_panel.class);
+        }
         startActivity(switchActivityIntent);
     }
 

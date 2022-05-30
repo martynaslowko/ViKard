@@ -44,7 +44,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/color_box" />
+                         />
 
                     <TextView
                         android:id="@+id/shop_name_title"
@@ -251,6 +251,7 @@
 
                                     <!--Text view to display R -->
                                     <TextView
+                                        android:id="@+id/little_name"
                                         android:layout_width="fill_parent"
                                         android:layout_height="25dp"
                                         android:paddingStart="10dp"
@@ -270,7 +271,7 @@
                                     <View
                                         android:layout_width="25dp"
                                         android:layout_height="match_parent"
-                                        android:background="@color/Python" />
+                                        android:background="#7a7c80" />
 
                                     <!--Text view to display python text -->
                                     <TextView
