@@ -3,31 +3,29 @@ package com.example.vikard.ui.card;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import com.example.vikard.MainScreen;
 import com.example.vikard.R;
 import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.SQLConnection;
-import com.example.vikard.data.model.CardModel;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class EditCategoryActivity extends AppCompatActivity {
+public class DeleteCardActivity extends AppCompatActivity {
 
     ArrayAdapter<String> dataAdapter;
     Spinner cardListSpinner;
-    Button changeCategoryButton;
-    EditText categoryEditTextBox;
+    Button deleteCardButton;
+
     List<Integer> ids = new ArrayList<Integer>();
     int userId;
 
@@ -36,56 +34,40 @@ public class EditCategoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_category);
+        setContentView(R.layout.activity_del_card);
 
 
-        categoryEditTextBox = findViewById(R.id.editTextCategory);
 
         //CardListSpinner
         userId = Integer.valueOf(LoginRepository.user.getUserId());
+        deleteCardButton = findViewById(R.id.DeleteCardButton);
+        cardListSpinner = findViewById(R.id.delCardListSpinner);
 
-        cardListSpinner = findViewById(R.id.cardListSpinner);
-        loadCardSpinnerData();
+
+        if(!loadCardSpinnerData())
+        {
+            deleteCardButton.setEnabled(false);
+        }
+        else
+        {
+            deleteCardButton.setEnabled(true);
+        }
 
 
-        changeCategoryButton = findViewById(R.id.EditCategoryCardButton);
-        changeCategoryButton.setEnabled(false);
-        changeCategoryButton.setOnClickListener(new View.OnClickListener() {
+
+        deleteCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
                 int id = ids.get((int)cardListSpinner.getSelectedItemId());
-                String userCategory = categoryEditTextBox.getText().toString();
-                new CardModel(id,false).changeUsersCategory(userCategory);
+                //Delete card function
+                deleteCard(id);
                 getBackToMain();
             }
         });
 
-        TextWatcher scannedTextChange = new TextWatcher()
-        {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //ignore
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //ignore
-                if(s.toString().trim().length()==0){
-                    changeCategoryButton.setEnabled(false);
-                } else {
-                    changeCategoryButton.setEnabled(true);
-                }
-            }
 
 
-            @Override
-            public void afterTextChanged(Editable s) {
-
-
-            }
-        };
-        categoryEditTextBox.addTextChangedListener(scannedTextChange);
 
     }
 
@@ -114,20 +96,47 @@ public class EditCategoryActivity extends AppCompatActivity {
         }
 
     }
-    private void loadCardSpinnerData() {
+
+
+    private void deleteCard(int id){
+
+        SQLConnection sql = new SQLConnection();
+        Connection conn = sql.getConnection();
+        try
+        {
+            String sqlQuery = "DELETE FROM Cards WHERE Id = ?";
+            PreparedStatement statement = conn.prepareStatement(sqlQuery);
+            statement.setInt(1, id);
+            statement.executeQuery();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try { conn.close(); } catch (Exception e) { }
+        }
+    }
+
+    private boolean loadCardSpinnerData() {
 
         // Spinner Drop down elements
         List<String> labels = getAllLabels();
+        if(labels.size() < 1)
+        {
+            return false;
+        }
+        else
+        {
+            // Creating adapter for spinner
+            dataAdapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_item, labels);
 
-        // Creating adapter for spinner
-        dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, labels);
+            // Drop down layout style - list view with radio button
+            dataAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
 
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+            // attaching data adapter to spinner
+            cardListSpinner.setAdapter(dataAdapter);
+            return true;
+        }
 
-        // attaching data adapter to spinner
-        cardListSpinner.setAdapter(dataAdapter);
     }
 
 
@@ -141,4 +150,7 @@ public class EditCategoryActivity extends AppCompatActivity {
         //getBackToMain();
         finish();
     }
+
+
+
 }

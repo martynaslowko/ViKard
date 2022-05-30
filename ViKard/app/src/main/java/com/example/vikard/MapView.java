@@ -149,7 +149,10 @@ public class MapView extends Fragment {
 
                 mMap = googleMap;
 
-//
+                    LatLng zut = new LatLng(53.44730722491076, 14.49199357001716);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(zut));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(zut, 15));
+                    mMap.addMarker(new MarkerOptions().position(zut).title("You are here!"));
 
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
@@ -160,10 +163,7 @@ public class MapView extends Fragment {
                     // to handle the case where the user grants the permission. See the documentation
                     // for ActivityCompat#requestPermissions for more details.
 
-                    LatLng zut = new LatLng(53.44730722491076, 14.49199357001716);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(zut));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(zut, 15));
-                    mMap.addMarker(new MarkerOptions().position(zut).title("You are here!"));
+
                 }
                 else
                 {

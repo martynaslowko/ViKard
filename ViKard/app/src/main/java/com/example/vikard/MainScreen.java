@@ -3,6 +3,8 @@ package com.example.vikard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,8 +14,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.vikard.data.Session.SessionManager;
-import com.example.vikard.data.model.CardModel;
 import com.example.vikard.ui.card.AddCardActivity;
+import com.example.vikard.ui.card.DeleteCardActivity;
 import com.example.vikard.ui.card.EditCategoryActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,8 +34,9 @@ public class MainScreen extends AppCompatActivity {
     FloatingActionButton addFloatButton;
     FloatingActionButton delFloatButton;
     FloatingActionButton editFloatButton;
+    Animation fabOpen, fabClose, rotateForward, rotateBackward;
+
     Button logoutButton;
-    ArrayList<CardModel> ckd;
 
 
     @Override
@@ -57,12 +60,6 @@ public class MainScreen extends AppCompatActivity {
         viewpager2.setUserInputEnabled(false);
 
 
-//        CardList frag = (CardList)fm.findFragmentById(R.id.FirstFragment);
-//        if(frag != null && frag.isAdded())
-//        {
-//            ckd = frag.cardCollection;
-//        }
-
         tablayout.addTab(tablayout.newTab().setText("Karty"));
         tablayout.addTab(tablayout.newTab().setText("Mapa"));
 
@@ -71,17 +68,36 @@ public class MainScreen extends AppCompatActivity {
         addFloatButton = (FloatingActionButton)findViewById(R.id.addCardButton);
         delFloatButton = (FloatingActionButton)findViewById(R.id.deleteCardButton);
         editFloatButton = (FloatingActionButton)findViewById(R.id.editCardButton);
-        logoutButton = (Button)findViewById(R.id.LogoutButton);
 
+        fabOpen = AnimationUtils.loadAnimation
+                (this,R.anim.fab_open);
+        fabClose = AnimationUtils.loadAnimation
+                (this,R.anim.fab_close);
+        rotateForward = AnimationUtils.loadAnimation
+                (this,R.anim.rotate_forward);
+        rotateBackward = AnimationUtils.loadAnimation
+                (this,R.anim.rotate_backward);
+
+
+        logoutButton = (Button)findViewById(R.id.LogoutButton);
+        logoutButton.setVisibility(View.VISIBLE);
 
         dropFloatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setVisibility(isClicked);
                 if(!isClicked)
+                {
                     isClicked=true;
+                    animateFab();
+                }
+
                 else
+                {
                     isClicked=false;
+                    animateFab();
+                }
+
 
             }
         });
@@ -99,6 +115,13 @@ public class MainScreen extends AppCompatActivity {
                 openEditCategoryActivity();
             }
         });
+        delFloatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDeleteCategoryActivity();
+            }
+        });
+
 
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -153,7 +176,6 @@ public class MainScreen extends AppCompatActivity {
     public void openAddCardActivity()
     {
         Intent intent = new Intent(this, AddCardActivity.class);
-
         startActivity(intent);
     }
 
@@ -164,8 +186,34 @@ public class MainScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openDeleteCategoryActivity()
+    {
+        Intent intent = new Intent(this, DeleteCardActivity.class);
+        startActivity(intent);
+    }
 
 
+    private void animateFab(){
+        if (!isClicked){
+            dropFloatButton.startAnimation(rotateForward);
+            addFloatButton.startAnimation(fabClose);
+            editFloatButton.startAnimation(fabClose);
+            delFloatButton.startAnimation(fabClose);
+            addFloatButton.setClickable(false);
+            editFloatButton.setClickable(false);
+            delFloatButton.setClickable(false);
+            isClicked=false;
+        }else {
+            dropFloatButton.startAnimation(rotateBackward);
+            addFloatButton.startAnimation(fabOpen);
+            editFloatButton.startAnimation(fabOpen);
+            delFloatButton.startAnimation(fabOpen);
+            addFloatButton.setClickable(true);
+            editFloatButton.setClickable(true);
+            delFloatButton.setClickable(true);
+            isClicked=true;
+        }
+    }
 
 
 

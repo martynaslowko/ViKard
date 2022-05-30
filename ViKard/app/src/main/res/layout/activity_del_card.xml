@@ -13,7 +13,7 @@
         android:layout_width="275dp"
         android:layout_height="42dp"
         android:layout_marginTop="52dp"
-        android:text="@string/EditCatText"
+        android:text="@string/delete_card_text"
         android:textAlignment="textStart"
         android:textDirection="locale"
 
@@ -28,37 +28,19 @@
         android:textSize="23sp" />
 
     <Spinner
-        android:id="@+id/cardListSpinner"
+        android:id="@+id/delCardListSpinner"
         android:layout_width="275dp"
         android:layout_height="57dp"
         android:layout_marginTop="5dp"
         android:contentDescription="@string/SpinnerCatText" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="275dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/new_category"
-        android:textSize="23sp" />
-
-    <EditText
-        android:id="@+id/editTextCategory"
-        android:layout_width="275dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="5dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        tools:ignore="SpeakableTextPresentCheck" />
-
     <Button
-        android:id="@+id/EditCategoryCardButton"
+        android:id="@+id/DeleteCardButton"
         android:layout_width="174dp"
         android:layout_height="52dp"
         android:layout_marginTop="25dp"
-        android:text="@string/edit_category"
-        android:textColor="@color/white" />
+        android:text="@string/delete_card_text"
+        android:textColor="@color/white"
+        tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
 </LinearLayout>

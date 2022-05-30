@@ -146,12 +146,12 @@ public class AddCardActivity extends AppCompatActivity {
                                     formattedDate = "" + year + "-" + (monthOfYear+1) + "-" + dayOfMonth;
                                 }
                             }, year, month, day);
-                    picker[0].getDatePicker().setMaxDate(cldr.getTimeInMillis());
+                    picker[0].getDatePicker().setMinDate(cldr.getTimeInMillis());
                     picker[0].show();
                 }
                 else
                 {
-                    picker[0].getDatePicker().setMaxDate(cldr.getTimeInMillis());
+                    picker[0].getDatePicker().setMinDate(cldr.getTimeInMillis());
                     picker[0].show();
                 }
 

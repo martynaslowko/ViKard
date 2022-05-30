@@ -166,5 +166,7 @@
     <string name="qr">Use phone camera to scan barcode placed on your loyalty card. Press camera icon to proceed.</string>
     <string name="date">Provide card expiration date</string>
     <string name="category">Provide card category</string>
+    <string name="delete_card_text">Delete Card</string>
+
 
 </resources>

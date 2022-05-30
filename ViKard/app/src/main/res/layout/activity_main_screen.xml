@@ -15,10 +15,8 @@
         android:layout_marginStart="300dp"
         android:backgroundTint="#D51818"
         android:text="Logout"
-        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/editCardButton"
