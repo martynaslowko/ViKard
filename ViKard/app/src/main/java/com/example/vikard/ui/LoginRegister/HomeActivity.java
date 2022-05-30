@@ -34,17 +34,12 @@ import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity {
 
-
     private LoginViewModel loginViewModel;
-
-
     private RegisterViewModel RegisterViewModel;
     private String formattedDate = "";
     private ViewFlipper viewFlipper;
-
     private ActivityHomeBinding binding;
     private SessionManager sessionManager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
 
             loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                     .get(LoginViewModel.class);
-            loginViewModel.login(username, passwsord);
+            loginViewModel.login(username, passwsord,false);
             Intent intent = new Intent(this, MainScreen.class);
             startActivity(intent);
         }
@@ -76,6 +71,12 @@ public class HomeActivity extends AppCompatActivity {
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
+
+        //ShopLoginLayout vars
+        final EditText usernameEditText2 = binding.username2;
+        final EditText passwordEditText2 = binding.password2;
+        final Button loginButton2 = binding.login2;
+        final ProgressBar loadingProgressBar2 = binding.loading2;
 
         //RegisterLayout vars
         final DatePickerDialog[] picker = new DatePickerDialog[1];
@@ -114,7 +115,7 @@ public class HomeActivity extends AppCompatActivity {
                 //viewFlipper.showNext();
                 viewFlipper.setInAnimation(getApplicationContext(),R.anim.slide_in_right);
                 viewFlipper.setOutAnimation(getApplicationContext(),R.anim.slide_out_left);
-                viewFlipper.setDisplayedChild(1);
+                viewFlipper.setDisplayedChild(3);
             }
         });
 
@@ -135,6 +136,7 @@ public class HomeActivity extends AppCompatActivity {
                     return;
                 }
                 loginButton.setEnabled(loginFormState.isDataValid());
+                loginButton2.setEnabled(loginFormState.isDataValid());
                 if (loginFormState.getUsernameError() != null) {
                     usernameEditText.setError(getString(loginFormState.getUsernameError()));
                 }
@@ -193,7 +195,7 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
+                            passwordEditText.getText().toString(), false);
                 }
                 return false;
             }
@@ -204,15 +206,20 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                        passwordEditText.getText().toString(), false);
             }
         });
 
-        ////////////////////////////////////////////////////
-
+        loginButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadingProgressBar.setVisibility(View.VISIBLE);
+                loginViewModel.login(usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString(), true);
+            }
+        });
 
         //RegisterScreenLayout space
-
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -226,51 +233,37 @@ public class HomeActivity extends AppCompatActivity {
                 viewFlipper.showPrevious();
                 viewFlipper.setInAnimation(getApplicationContext(),android.R.anim.slide_in_left);
                 viewFlipper.setOutAnimation(getApplicationContext(),android.R.anim.slide_out_right);
-
             }
-
-
         });
 
         RegisterViewModel.getRegisterFormState().observe(this, new Observer<RegisterFormState>() {
             @Override
             public void onChanged(@Nullable RegisterFormState registerFormState) {
-                if(registerFormState == null)
-                {
+                if(registerFormState == null){
                     return;
                 }
-
                 registerButton.setEnabled(registerFormState.isDataValid());
                 if (registerFormState.getEmailError() != null) {
                     emailEditText.setError(getString(registerFormState.getEmailError()));
-
                 }
                 if (registerFormState.getPasswordError() != null) {
                     r_passwordEditText.setError(getString(registerFormState.getPasswordError()));
-
                 }
                 if(registerFormState.getFirstNameError() != null)
                 {
                     firstNameEditText.setError(getString(registerFormState.getFirstNameError()));
-
                 }
                 if(registerFormState.getLastNameError() != null)
                 {
                     lastNameEditText.setError(getString(registerFormState.getLastNameError()));
-
                 }
                 if(registerFormState.getBirthdateError() != null)
                 {
                     //birthdayEditText.setError(getString(registerFormState.getBirthdateError()));
-
                 }
-                if(registerFormState.getRepasswordError() != null)
-                {
+                if(registerFormState.getRepasswordError() != null) {
                     r_repasswordEditText.setError(getString(registerFormState.getRepasswordError()));
-
                 }
-
-
             }
         });
 

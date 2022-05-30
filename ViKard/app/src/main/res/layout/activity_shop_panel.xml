@@ -238,6 +238,7 @@
 
                                     <!--View to display the yellow color icon-->
                                     <View
+                                        android:id="@+id/color_box"
                                         android:layout_width="25dp"
                                         android:layout_height="25dp"
                                         android:background="@color/R" />
