@@ -36,6 +36,9 @@
         <activity
             android:name=".ui.card.AddCardActivity"
             />
+        <activity
+            android:name=".ui.card.DeleteCardActivity"
+            />
         <activity android:name=".ui.card.Capture"
             android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
