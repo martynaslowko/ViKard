@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.fragment.app.FragmentManager;
 
 import androidx.viewpager2.widget.ViewPager2;
@@ -18,6 +19,7 @@ import com.example.vikard.ui.card.AddCardActivity;
 import com.example.vikard.ui.card.DeleteCardActivity;
 import com.example.vikard.ui.card.EditCategoryActivity;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -35,8 +37,8 @@ public class MainScreen extends AppCompatActivity {
     FloatingActionButton delFloatButton;
     FloatingActionButton editFloatButton;
     Animation fabOpen, fabClose, rotateForward, rotateBackward;
-
-    Button logoutButton;
+    MaterialToolbar materialToolbar;
+    ActionMenuItemView logoutButton;
 
 
     @Override
@@ -49,6 +51,9 @@ public class MainScreen extends AppCompatActivity {
         sessionManager = new SessionManager(getApplicationContext());
 
         tablayout = findViewById(R.id.tablayout);
+        materialToolbar = findViewById(R.id.topAppBar);
+
+
         viewpager2 = findViewById(R.id.view_pager);
         FragmentManager fm = getSupportFragmentManager();
         fragmentadapter = new FragmentAdapter(fm, getLifecycle());
@@ -79,8 +84,8 @@ public class MainScreen extends AppCompatActivity {
                 (this,R.anim.rotate_backward);
 
 
-        logoutButton = (Button)findViewById(R.id.LogoutButton);
-        logoutButton.setVisibility(View.VISIBLE);
+        logoutButton = (ActionMenuItemView) findViewById(R.id.logoutBar);
+
 
         dropFloatButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -40,15 +40,11 @@
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/karta.xml" value="0.25" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/drawable/costum_input.xml" value="0.258" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/drawable/custom_email_icon.xml" value="0.258" />
-        <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/drawable/custom_input.xml" value="0.2715" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/drawable/custom_lock_icon.xml" value="0.258" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/drawable/custom_name_icon.xml" value="0.349" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/drawable/custom_sname_icon.xml" value="0.349" />
-        <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/drawable/ic_arrow.xml" value="0.27" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.349" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.349" />
-        <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/drawable/ic_baseline_qr_code_scanner_24.xml" value="0.1895" />
-        <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/drawable/ic_camera.xml" value="0.27" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/drawable/ic_edit.xml" value="0.258" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/drawable/ic_email.xml" value="0.349" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/drawable/ic_email_focused.xml" value="0.258" />
@@ -62,16 +58,13 @@
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/drawable/logo.xml" value="0.349" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.23560910307898258" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/layout-w936dp/activity_login.xml" value="0.2503415300546448" />
-        <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/layout/activity_add_card.xml" value="0.33" />
-        <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/layout/activity_edit_category.xml" value="0.26666666666666666" />
+        <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/layout/activity_add_card.xml" value="0.3319746376811594" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/layout/activity_home.xml" value="0.2586050724637681" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/layout/activity_login.xml" value="0.358695652173913" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/layout/activity_main_screen.xml" value="0.2586050724637681" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/layout/activity_register.xml" value="0.33" />
-        <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/layout/activity_shop_panel.xml" value="0.26666666666666666" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/layout/fragment_card_list.xml" value="0.3319746376811594" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/layout/fragment_card_list_element.xml" value="0.3319746376811594" />
-        <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/layout/fragment_map_view.xml" value="0.26666666666666666" />
         <entry key="..\:/Repos/Vikard/ViKard/app/src/main/res/layout/karta.xml" value="0.3319746376811594" />
         <entry key="..\:/Users/Martyna/Documents/GitHub/ViKard/ViKard/app/src/main/res/drawable/card.xml" value="0.203125" />
         <entry key="..\:/Users/Martyna/Documents/GitHub/ViKard/ViKard/app/src/main/res/drawable/ic_add.xml" value="0.334375" />
@@ -86,11 +79,12 @@
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/activity_del_card.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/activity_edit_category.xml" value="0.19270833333333334" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/activity_home.xml" value="0.25" />
-        <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/activity_main_screen.xml" value="0.33" />
+        <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/activity_main_screen.xml" value="0.25" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/activity_register.xml" value="0.264" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/content_scrolling.xml" value="0.18568840579710144" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/fragment_map_view.xml" value="0.1" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/karta.xml" value="0.1" />
+        <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/menu/top_app_bar.xml" value="0.26510416666666664" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/drawable/card.xml" value="0.19635416666666666" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/drawable/ic_card.xml" value="0.18229166666666666" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1635" />

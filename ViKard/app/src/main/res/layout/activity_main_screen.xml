@@ -8,16 +8,6 @@
     tools:context=".MainScreen">
 
 
-    <Button
-        android:id="@+id/LogoutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="300dp"
-        android:backgroundTint="#D51818"
-        android:text="Logout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/editCardButton"
         android:layout_width="wrap_content"
@@ -82,20 +72,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            app:title="Vikard"
+            app:menu="@menu/top_app_bar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:minHeight="?actionBarSize"
-            android:padding="@dimen/appbar_padding"
-            android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.google.android.material.tabs.TabLayout>
+            android:layout_height="match_parent" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -112,4 +102,5 @@
 
 
     </androidx.viewpager2.widget.ViewPager2>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

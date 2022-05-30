@@ -167,6 +167,7 @@
     <string name="date">Provide card expiration date</string>
     <string name="category">Provide card\'s vendor</string>
     <string name="delete_card_text">Delete Card</string>
+    <string name="logoutText">Logout</string>
 
 
 </resources>
