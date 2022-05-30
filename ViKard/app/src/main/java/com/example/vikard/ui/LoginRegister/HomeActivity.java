@@ -35,6 +35,7 @@ import java.util.HashMap;
 public class HomeActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    private LoginViewModel loginViewModelShop;
     private RegisterViewModel RegisterViewModel;
     private String formattedDate = "";
     private ViewFlipper viewFlipper;
@@ -53,9 +54,10 @@ public class HomeActivity extends AppCompatActivity {
             username = a.get("email");
             passwsord = a.get("password");
 
-            loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
-                    .get(LoginViewModel.class);
+            loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
+            loginViewModelShop = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
             loginViewModel.login(username, passwsord,false);
+            loginViewModelShop.login(username, passwsord,true);
             Intent intent = new Intent(this, MainScreen.class);
             startActivity(intent);
         }
@@ -94,6 +96,8 @@ public class HomeActivity extends AppCompatActivity {
         ////////////////
 
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
+                .get(LoginViewModel.class);
+        loginViewModelShop = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
         RegisterViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
 
@@ -136,12 +140,27 @@ public class HomeActivity extends AppCompatActivity {
                     return;
                 }
                 loginButton.setEnabled(loginFormState.isDataValid());
-                loginButton2.setEnabled(loginFormState.isDataValid());
                 if (loginFormState.getUsernameError() != null) {
                     usernameEditText.setError(getString(loginFormState.getUsernameError()));
                 }
                 if (loginFormState.getPasswordError() != null) {
                     passwordEditText.setError(getString(loginFormState.getPasswordError()));
+                }
+            }
+        });
+
+        loginViewModelShop.getLoginFormState().observe(this, new Observer<LoginFormState>() {
+            @Override
+            public void onChanged(@Nullable LoginFormState loginFormState) {
+                if (loginFormState == null) {
+                    return;
+                }
+                loginButton2.setEnabled(loginFormState.isDataValid());
+                if (loginFormState.getUsernameError() != null) {
+                    usernameEditText2.setError(getString(loginFormState.getUsernameError()));
+                }
+                if (loginFormState.getPasswordError() != null) {
+                    passwordEditText2.setError(getString(loginFormState.getPasswordError()));
                 }
             }
         });
@@ -169,6 +188,29 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        loginViewModelShop.getLoginResult().observe(this, new Observer<LoginResult>() {
+            @Override
+            public void onChanged(@Nullable LoginResult loginResult) {
+                if (loginResult == null) {
+                    return;
+                }
+                loadingProgressBar2.setVisibility(View.GONE);
+                if (loginResult.getError() != null) {
+                    showLoginFailed(loginResult.getError());
+                    //Return ze względu na to że nie chce zeby po błędnym zalogowaniu wracał do homescreenu.
+                    return;
+                }
+                if (loginResult.getSuccess() != null) {
+                    sessionManager.createLoginSession(usernameEditText2.getText().toString(), passwordEditText2.getText().toString());
+                    updateUiWithUser(loginResult.getSuccess());
+                }
+                setResult(Activity.RESULT_OK);
+
+                //Complete and destroy login activity once successful
+                finish();
+            }
+        });
+
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -187,8 +229,30 @@ public class HomeActivity extends AppCompatActivity {
             }
         };
 
+        TextWatcher afterTextChangedListenerShop = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // ignore
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // ignore
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                loginViewModelShop.loginDataChanged(usernameEditText2.getText().toString(),
+                        passwordEditText2.getText().toString());
+            }
+        };
+
         usernameEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.addTextChangedListener(afterTextChangedListener);
+
+        usernameEditText2.addTextChangedListener(afterTextChangedListenerShop);
+        passwordEditText2.addTextChangedListener(afterTextChangedListenerShop);
+
         passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @Override
@@ -196,6 +260,20 @@ public class HomeActivity extends AppCompatActivity {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     loginViewModel.login(usernameEditText.getText().toString(),
                             passwordEditText.getText().toString(), false);
+                }
+                return false;
+            }
+        });
+
+
+
+        passwordEditText2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    loginViewModel.login(usernameEditText2.getText().toString(),
+                            passwordEditText2.getText().toString(), false);
                 }
                 return false;
             }
@@ -214,8 +292,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString(), true);
+                loginViewModel.login(usernameEditText2.getText().toString(),
+                        passwordEditText2.getText().toString(), true);
             }
         });
 
