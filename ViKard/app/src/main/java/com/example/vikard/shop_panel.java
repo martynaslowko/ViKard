@@ -13,17 +13,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vikard.data.LoginRepository;
+import com.example.vikard.data.SQLConnection;
 import com.example.vikard.data.model.ShopModel;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class shop_panel extends AppCompatActivity {
     private PieChart pieChart;
     private String shop_name = "";
     private int shopid;
-    private int shop_card_count = -1;
-    private int card_count = -1;
+    private int shop_card_count = 0;
+    private int card_count = 0;
     private String HexColor;
 
     TextView name;
@@ -38,6 +44,8 @@ public class shop_panel extends AppCompatActivity {
 
         //Get data
         setAll();
+        shop_card_count = getShopsStats(shopid,true);
+        card_count = getShopsStats(shopid,false);
 
         //Set shop name
         name = (TextView) findViewById(R.id.shop_name_title);
@@ -75,10 +83,28 @@ public class shop_panel extends AppCompatActivity {
         ShopModel temp = new ShopModel(shopid,false);
         shop_name = temp.getName();
         HexColor = temp.getHexColor();
-
-        /* TO DO - liczba kart w całej aplikacji, liczba kart danego sklepu */
-
     }
 
-    /* Setter koloru z editboxa, seter api */
+    private int getShopsStats(int id, boolean isSpecific){
+        try
+        {
+            SQLConnection sql = new SQLConnection();
+            Connection conn = sql.getConnection();
+            String sqlQuery = "SELECT count(*) FROM Cards";
+            if (isSpecific){
+                sqlQuery += " WHERE ShopsId = ?";
+            }
+            PreparedStatement statement = conn.prepareStatement(sqlQuery);
+            if (isSpecific){
+                statement.setInt(1, id);
+            }
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            int count = resultSet.getInt("count(*)");
+            return count;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return -1;
+    }
 }
