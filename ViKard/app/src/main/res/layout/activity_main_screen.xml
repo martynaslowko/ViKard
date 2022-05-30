@@ -80,6 +80,7 @@
         android:theme="@style/Theme.ViKard.AppBarOverlay"
         app:layout_constraintBottom_toTopOf="@+id/view_pager"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -96,8 +97,7 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </com.google.android.material.tabs.TabLayout>
+            android:layout_height="wrap_content"></com.google.android.material.tabs.TabLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
