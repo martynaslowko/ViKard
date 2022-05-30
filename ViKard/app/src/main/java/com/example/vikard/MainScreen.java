@@ -1,5 +1,6 @@
 package com.example.vikard;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.vikard.data.Session.SessionManager;
+import com.example.vikard.data.model.CardModel;
 import com.example.vikard.ui.card.AddCardActivity;
 import com.example.vikard.ui.card.DeleteCardActivity;
 import com.example.vikard.ui.card.EditCategoryActivity;
@@ -23,6 +25,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class MainScreen extends AppCompatActivity {
@@ -133,7 +136,33 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                sessionManager.logoutUser();
+
+                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(MainScreen.this);
+                builder.setMessage("Are you sure you want to logout?");
+                builder.setCancelable(true);
+
+                builder.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                sessionManager.logoutUser();
+                            }
+                        });
+
+                builder.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                androidx.appcompat.app.AlertDialog alert = builder.create();
+                alert.show();
+
+
+
+
             }
         });
 

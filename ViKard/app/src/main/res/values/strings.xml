@@ -11,7 +11,7 @@
     <string name="invalidLastName">Invalid LastName"</string>
     <string name="invalidBirthday">"Pick a date"</string>
     <string name="invalid_email">Not a valid email</string>
-    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="invalid_password">Password must be >8 characters</string>
     <string name="invalid_repassword">Passwords must be the same</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_main_screen">MainScreen</string>

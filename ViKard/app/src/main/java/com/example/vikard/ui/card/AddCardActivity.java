@@ -3,6 +3,7 @@ package com.example.vikard.ui.card;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -76,8 +77,33 @@ public class AddCardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                new CardModel(shplistSpinner.getSelectedItem().toString(), scannedText.getText().toString(), Date.valueOf(formattedDate));
-                goBackToMain();
+                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(AddCardActivity.this);
+                builder.setMessage("Are you sure barcode number is correct?");
+                builder.setCancelable(true);
+
+                builder.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                new CardModel(shplistSpinner.getSelectedItem().toString(), scannedText.getText().toString(), Date.valueOf(formattedDate));
+                                goBackToMain();
+                            }
+                        });
+
+                builder.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                androidx.appcompat.app.AlertDialog alert = builder.create();
+                alert.show();
+
+
+
+
             }
         });
 
