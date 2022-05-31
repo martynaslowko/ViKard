@@ -69,6 +69,7 @@ public class CardListElement extends Fragment {
         attrs.putString("barcode", cardmodel.getBarcode()); //Your id
         attrs.putString("hexColor", shop.getHexColor()); //hex Color
         attrs.putString("link", shop.getHomeLink()); //storeLink
+        attrs.putString("points", cardmodel.getPoints().toString());
         intent.putExtras(attrs);
         startActivity(intent);
     }

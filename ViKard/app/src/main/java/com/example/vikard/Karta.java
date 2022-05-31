@@ -27,9 +27,9 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 public class Karta extends AppCompatActivity {
 
 
-    String CardShopNameString, CardExpireDateString, CardBarcodeString, hexColor, CardLinkString;
+    String CardShopNameString, CardExpireDateString, CardBarcodeString, hexColor, CardLinkString, PointsString;
 
-    TextView ShopNameTextView, ExpiryDateTextView, BarcodeTextView;
+    TextView ShopNameTextView, ExpiryDateTextView, BarcodeTextView, PointsTextView, PointsLabelView;
 
     ImageView BoxBarcodeImageView, BackButtonImageView, BarcodeImageView;
 
@@ -59,6 +59,7 @@ public class Karta extends AppCompatActivity {
             CardExpireDateString = b.getString("expireDate");
             CardBarcodeString = b.getString("barcode");
             CardLinkString = b.getString("link");
+            PointsString = b.getString("points");
         }
         Drawable unwrappedDrawable = AppCompatResources.getDrawable(getBaseContext(), R.drawable.card);
         Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
@@ -73,10 +74,13 @@ public class Karta extends AppCompatActivity {
         ExpiryDateTextView = (TextView) findViewById(R.id.CardExpiryDateText);
         BarcodeTextView = (TextView)findViewById(R.id.BarcodeText);
         BarcodeImageView = (ImageView) findViewById(R.id.BarcodeImageView);
+        PointsLabelView = (TextView) findViewById(R.id.PointsLabel);
+        PointsTextView = (TextView) findViewById(R.id.PointsText);
 
         ShopNameTextView.setText(CardShopNameString);
         ExpiryDateTextView.setText(CardExpireDateString);
         BarcodeTextView.setText(CardBarcodeString);
+        PointsTextView.setText(PointsString);
 
         BoxBarcodeImageView = findViewById(R.id.WhiteBarImageView);
         LinkButton = findViewById(R.id.PageLinkButton);
@@ -88,6 +92,8 @@ public class Karta extends AppCompatActivity {
         BoxBarcodeImageView.setVisibility(View.VISIBLE);
         LinkButton.setVisibility(View.INVISIBLE);
         BackButtonImageView.setVisibility(View.INVISIBLE);
+        PointsTextView.setVisibility(View.INVISIBLE);
+        PointsLabelView.setVisibility(View.INVISIBLE);
 
 
         //Po zaludnieniu kontrolek, wygeneruj barcode
@@ -103,6 +109,8 @@ public class Karta extends AppCompatActivity {
                 BoxBarcodeImageView.setVisibility(View.INVISIBLE);
                 LinkButton.setVisibility(View.VISIBLE);
                 BackButtonImageView.setVisibility(View.VISIBLE);
+                PointsTextView.setVisibility(View.VISIBLE);
+                PointsLabelView.setVisibility(View.VISIBLE);
             }
         });
 
@@ -122,6 +130,8 @@ public class Karta extends AppCompatActivity {
                 BoxBarcodeImageView.setVisibility(View.VISIBLE);
                 LinkButton.setVisibility(View.INVISIBLE);
                 BackButtonImageView.setVisibility(View.INVISIBLE);
+                PointsTextView.setVisibility(View.INVISIBLE);
+                PointsLabelView.setVisibility(View.INVISIBLE);
             }
         });
     }
