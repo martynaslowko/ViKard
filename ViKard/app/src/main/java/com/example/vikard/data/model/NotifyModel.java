@@ -54,6 +54,10 @@ public class NotifyModel extends SQLDataModel{
         return Content;
     }
 
+    public ShopModel getShop() {
+        return Shop;
+    }
+
     //endregion
 
     //region Setters
@@ -72,6 +76,10 @@ public class NotifyModel extends SQLDataModel{
 
     public void setContent(String content) {
         Content = content;
+    }
+
+    public void setShop(ShopModel shop) {
+        Shop = shop;
     }
 
     //endregion
