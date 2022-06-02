@@ -33,6 +33,10 @@ public class CardListElement extends Fragment {
         cardId_ = id;
     }
 
+    public CardListElement()
+    {
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

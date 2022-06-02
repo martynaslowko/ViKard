@@ -14,6 +14,10 @@ import com.example.vikard.MainScreen;
 import com.example.vikard.R;
 import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.SQLConnection;
+import com.example.vikard.data.Session.CardSession;
+import com.example.vikard.data.Session.ShopSession;
+import com.example.vikard.data.model.CardModel;
+import com.example.vikard.data.model.ShopModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,6 +32,9 @@ public class DeleteCardActivity extends AppCompatActivity {
     ArrayAdapter<String> dataAdapter;
     Spinner cardListSpinner;
     Button deleteCardButton;
+
+    private ArrayList<CardModel> tempc= new ArrayList<>();
+    private ArrayList<ShopModel> temp= new ArrayList<>();
 
     List<Integer> ids = new ArrayList<Integer>();
     int userId;
@@ -45,7 +52,8 @@ public class DeleteCardActivity extends AppCompatActivity {
         userId = Integer.valueOf(LoginRepository.user.getUserId());
         deleteCardButton = findViewById(R.id.DeleteCardButton);
         cardListSpinner = findViewById(R.id.delCardListSpinner);
-
+        CardSession cs = new CardSession(getApplicationContext());
+        ShopSession ss = new ShopSession(getApplicationContext());
 
         if(!loadCardSpinnerData())
         {
@@ -87,7 +95,23 @@ public class DeleteCardActivity extends AppCompatActivity {
                                 //Delete card function
                                 int cardId = ids.get((int)cardListSpinner.getSelectedItemId());
                                 deleteCard(cardId);
-                                getBackToMain();
+
+                                tempc= cs.loadData();
+                                temp = ss.loadData();
+                                temp.remove((int)cardListSpinner.getSelectedItemId());
+                                tempc.remove((int)cardListSpinner.getSelectedItemId());
+                                ss.clearData();
+                                cs.clearData();
+                                ss.createShopSession();
+                                cs.createCardSession();
+                                ss.saveData(temp);
+                                cs.saveData(tempc);
+
+
+
+
+                                //getBackToMain();
+                                finish();
                             }
                         });
 

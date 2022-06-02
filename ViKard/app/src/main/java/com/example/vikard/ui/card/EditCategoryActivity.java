@@ -14,7 +14,11 @@ import com.example.vikard.MainScreen;
 import com.example.vikard.R;
 import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.SQLConnection;
+import com.example.vikard.data.Session.CardSession;
+import com.example.vikard.data.Session.ShopSession;
 import com.example.vikard.data.model.CardModel;
+import com.example.vikard.data.model.ShopModel;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +34,8 @@ public class EditCategoryActivity extends AppCompatActivity {
     EditText categoryEditTextBox;
     List<Integer> ids = new ArrayList<Integer>();
     int userId;
-
+    private ArrayList<CardModel> tempc= new ArrayList<>();
+    private ArrayList<ShopModel> temp= new ArrayList<>();
 
 
     @Override
@@ -47,7 +52,8 @@ public class EditCategoryActivity extends AppCompatActivity {
         cardListSpinner = findViewById(R.id.cardListSpinner);
         loadCardSpinnerData();
 
-
+        CardSession cs = new CardSession(getApplicationContext());
+        ShopSession ss = new ShopSession(getApplicationContext());
         changeCategoryButton = findViewById(R.id.EditCategoryCardButton);
         changeCategoryButton.setEnabled(false);
         changeCategoryButton.setOnClickListener(new View.OnClickListener() {
@@ -56,8 +62,23 @@ public class EditCategoryActivity extends AppCompatActivity {
             {
                 int id = ids.get((int)cardListSpinner.getSelectedItemId());
                 String userCategory = categoryEditTextBox.getText().toString();
-                new CardModel(id,false).changeUsersCategory(userCategory);
-                getBackToMain();
+                CardModel a = new CardModel(id,false);
+                a.changeUsersCategory(userCategory);
+                //getBackToMain();
+                tempc= cs.loadData();
+                temp = ss.loadData();
+                temp.set((int)cardListSpinner.getSelectedItemId(),a.getShop());
+                tempc.set((int)cardListSpinner.getSelectedItemId(),a);
+                ss.clearData();
+                cs.clearData();
+                ss.createShopSession();
+                cs.createCardSession();
+                ss.saveData(temp);
+                cs.saveData(tempc);
+
+
+
+                finish();
             }
         });
 

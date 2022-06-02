@@ -6,42 +6,41 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.fragment.app.FragmentManager;
-
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.vikard.data.Session.CardSession;
 import com.example.vikard.data.Session.SessionManager;
-import com.example.vikard.data.model.CardModel;
+import com.example.vikard.data.Session.ShopSession;
 import com.example.vikard.ui.card.AddCardActivity;
 import com.example.vikard.ui.card.DeleteCardActivity;
 import com.example.vikard.ui.card.EditCategoryActivity;
-
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
-import java.sql.Date;
-import java.util.ArrayList;
-
 public class MainScreen extends AppCompatActivity {
-    TabLayout tablayout;
-    ViewPager2 viewpager2;
-    FragmentAdapter fragmentadapter;
+    private TabLayout tablayout;
+    private ViewPager2 viewpager2;
+    private FragmentAdapter fragmentadapter;
 
-    SessionManager sessionManager;
+    private SessionManager sessionManager;
+    private CardSession cs;
+    private ShopSession ss;
     private boolean isClicked = false;
-    FloatingActionButton dropFloatButton;
-    FloatingActionButton addFloatButton;
-    FloatingActionButton delFloatButton;
-    FloatingActionButton editFloatButton;
-    Animation fabOpen, fabClose, rotateForward, rotateBackward;
-    MaterialToolbar materialToolbar;
-    ActionMenuItemView logoutButton;
+    private FloatingActionButton dropFloatButton;
+    private FloatingActionButton addFloatButton;
+    private FloatingActionButton delFloatButton;
+    private FloatingActionButton editFloatButton;
+    private Animation fabOpen, fabClose, rotateForward, rotateBackward;
+    private MaterialToolbar materialToolbar;
+    private ActionMenuItemView logoutButton;
+    private ActionMenuItemView discountButton;
+
+
 
 
     @Override
@@ -52,15 +51,23 @@ public class MainScreen extends AppCompatActivity {
 
         //Session
         sessionManager = new SessionManager(getApplicationContext());
+        cs = new CardSession(getApplicationContext());
+        ss = new ShopSession(getApplicationContext());
 
         tablayout = findViewById(R.id.tablayout);
         materialToolbar = findViewById(R.id.topAppBar);
-
+        tablayout.addTab(tablayout.newTab().setText("Karty"));
+        tablayout.addTab(tablayout.newTab().setText("Mapa"));
 
         viewpager2 = findViewById(R.id.view_pager);
         FragmentManager fm = getSupportFragmentManager();
         fragmentadapter = new FragmentAdapter(fm, getLifecycle());
+
+
         viewpager2.setAdapter(fragmentadapter);
+
+
+
 
         //Tutaj wyłączyłem "Swipe" z lewej do prawej i z prawej do lewej w viewpagerze
         //W przyszłośći będzie można to jakoś skonfigurować i przywrócić swipe
@@ -68,8 +75,7 @@ public class MainScreen extends AppCompatActivity {
         viewpager2.setUserInputEnabled(false);
 
 
-        tablayout.addTab(tablayout.newTab().setText("Karty"));
-        tablayout.addTab(tablayout.newTab().setText("Mapa"));
+
 
 
         dropFloatButton = (FloatingActionButton)findViewById(R.id.dropDown);
@@ -87,7 +93,8 @@ public class MainScreen extends AppCompatActivity {
                 (this,R.anim.rotate_backward);
 
 
-        logoutButton = (ActionMenuItemView) findViewById(R.id.logoutBar);
+        logoutButton = (ActionMenuItemView) findViewById(R.id.logoutBarIcon);
+        discountButton = (ActionMenuItemView) findViewById(R.id.discountBarIcon);
 
 
         dropFloatButton.setOnClickListener(new View.OnClickListener() {
@@ -110,23 +117,35 @@ public class MainScreen extends AppCompatActivity {
             }
         });
 
+
+
         addFloatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                setVisibility(true);
                 openAddCardActivity();
+
             }
         });
 
         editFloatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                setVisibility(true);
                 openEditCategoryActivity();
+
+
             }
         });
         delFloatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                setVisibility(true);
                 openDeleteCategoryActivity();
+
             }
         });
 
@@ -146,6 +165,9 @@ public class MainScreen extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 sessionManager.logoutUser();
+                                cs.clearData();
+                                ss.clearData();
+
                             }
                         });
 
@@ -165,7 +187,12 @@ public class MainScreen extends AppCompatActivity {
 
             }
         });
+        discountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
         tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -190,7 +217,21 @@ public class MainScreen extends AppCompatActivity {
                 tablayout.selectTab(tablayout.getTabAt(position));
             }
         });
+
+        //AlertDialog for discounts section
+
+
+
     }
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        FragmentManager fm = getSupportFragmentManager();
+        fragmentadapter = new FragmentAdapter(fm, getLifecycle());
+        viewpager2.setAdapter(fragmentadapter);
+    }
+
 
     private void setVisibility(boolean clicked)
     {
@@ -211,6 +252,7 @@ public class MainScreen extends AppCompatActivity {
     {
         Intent intent = new Intent(this, AddCardActivity.class);
         startActivity(intent);
+
     }
 
     public void openEditCategoryActivity()

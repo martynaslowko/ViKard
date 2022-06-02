@@ -22,7 +22,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.vikard.MainScreen;
 import com.example.vikard.R;
 import com.example.vikard.data.SQLConnection;
+import com.example.vikard.data.Session.CardSession;
+import com.example.vikard.data.Session.ShopSession;
 import com.example.vikard.data.model.CardModel;
+import com.example.vikard.data.model.ShopModel;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import java.sql.Connection;
@@ -41,7 +44,8 @@ public class AddCardActivity extends AppCompatActivity {
     Button btnBarcode;
     Button btnaddCardToDB;
     TextView scannedText;
-
+    ArrayList<CardModel> tempc= new ArrayList<>();
+    ArrayList<ShopModel> temp= new ArrayList<>();
     Spinner shplistSpinner;
     final DatePickerDialog[] picker = new DatePickerDialog[1];
     private String formattedDate = "";
@@ -51,6 +55,11 @@ public class AddCardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_card);
+
+
+        CardSession cs = new CardSession(getApplicationContext());
+        ShopSession ss = new ShopSession(getApplicationContext());
+
 
 
         //ShoplistSpinner
@@ -85,8 +94,25 @@ public class AddCardActivity extends AppCompatActivity {
                         "Yes",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                new CardModel(shplistSpinner.getSelectedItem().toString(), scannedText.getText().toString(), Date.valueOf(formattedDate));
-                                goBackToMain();
+                                CardModel a = new CardModel(shplistSpinner.getSelectedItem().toString(), scannedText.getText().toString(), Date.valueOf(formattedDate));
+
+                                CardModel b = new CardModel(a.getId(),false);
+                                tempc= cs.loadData();
+                                temp = ss.loadData();
+                                temp.add(a.getShop());
+                                tempc.add(b);
+                                ss.clearData();
+                                cs.clearData();
+                                ss.createShopSession();
+                                cs.createCardSession();
+                                ss.saveData(temp);
+                                cs.saveData(tempc);
+
+
+
+                                //goBackToMain();
+
+                                finish();
                             }
                         });
 

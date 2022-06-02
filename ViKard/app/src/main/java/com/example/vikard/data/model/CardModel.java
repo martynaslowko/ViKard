@@ -1,10 +1,7 @@
 package com.example.vikard.data.model;
 
-import android.graphics.Point;
-
 import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.SQLConnection;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +17,10 @@ public class CardModel extends SQLDataModel{
     private Date ExpiryDate;
     private String UsersCategory;
     private Integer Points;
+
+    public ShopModel getShop() {
+        return Shop;
+    }
 
     //Used to get ShopModel.Name and ShopModel.HexColor
     private ShopModel Shop;
