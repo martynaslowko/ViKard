@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
             loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
             loginViewModelShop = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
             loginViewModel.login(username, passwsord,false);
-            loginViewModelShop.login(username, passwsord,true);
+            //loginViewModelShop.login(username, passwsord,true);
             Intent intent = new Intent(this, MainScreen.class);
             startActivity(intent);
         }
@@ -180,7 +180,8 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 if (loginResult.getSuccess() != null) {
                     sessionManager.createLoginSession(usernameEditText.getText().toString(), passwordEditText.getText().toString());
-                    updateUiWithUser(loginResult.getSuccess());
+                    flag = false;
+                    updateUiWithUser();
                 }
                 setResult(Activity.RESULT_OK);
 
@@ -204,7 +205,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (loginResult.getSuccess() != null) {
                     sessionManager.createLoginSession(usernameEditText2.getText().toString(), passwordEditText2.getText().toString());
                     flag = true;
-                    updateUiWithUser(loginResult.getSuccess());
+                    updateUiWithUser();
                 }
                 setResult(Activity.RESULT_OK);
 
@@ -266,9 +267,6 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-
-
         passwordEditText2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @Override
@@ -289,7 +287,6 @@ public class HomeActivity extends AppCompatActivity {
                         passwordEditText.getText().toString(), false);
             }
         });
-
         loginButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -426,12 +423,12 @@ public class HomeActivity extends AppCompatActivity {
 
     //Functions
 
-    private void updateUiWithUser(LoggedInUserView model) {
+    private void updateUiWithUser() {
         setContentView(binding.getRoot());
-        if(!flag){
+        if(flag == false){
             setContentView(R.layout.activity_main_screen);
         }
-        else{
+        if(flag == true){
             setContentView(R.layout.activity_shop_panel);
         }
         switchActivities();
@@ -444,14 +441,16 @@ public class HomeActivity extends AppCompatActivity {
 
     //Po udanym logowaniu przechodzi do MainScreen.class
     private void switchActivities() {
-        Intent switchActivityIntent;
-        if(!flag) {
+        Intent switchActivityIntent = null;
+        if(flag == false) {
+            switchActivityIntent = new Intent(this, MainScreen.class);
+        }
+        if(flag == true){
             switchActivityIntent = new Intent(this, shop_panel.class);
         }
-        else{
-            switchActivityIntent = new Intent(this, shop_panel.class);
+        if(switchActivityIntent != null) {
+            startActivity(switchActivityIntent);
         }
-        startActivity(switchActivityIntent);
     }
 
 
