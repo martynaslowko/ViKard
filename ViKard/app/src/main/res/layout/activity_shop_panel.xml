@@ -76,7 +76,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/color_text"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                         android:orientation="horizontal"
                         android:paddingStart="0dp"
                         android:paddingEnd="0dp"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <EditText
                             android:id="@+id/color_edit"
@@ -94,15 +94,16 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
                             android:ems="10"
+                            android:hint="@string/hexadecimal_color_code"
                             android:importantForAutofill="no"
                             android:inputType="textPersonName"
                             android:paddingStart="0dp"
                             android:paddingEnd="20dp"
-                            android:text="@string/hexadecimal_color_code"
-                            android:visibility="gone"
+                            android:visibility="visible"
                             tools:ignore="LabelFor,TouchTargetSizeCheck" />
 
                         <Button
+                            android:id="@+id/save_color"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
@@ -117,7 +118,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_weight="1"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
 
                     <TextView
                         android:id="@+id/color_title2"
@@ -125,7 +126,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/api"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -135,7 +136,7 @@
                         android:orientation="horizontal"
                         android:paddingStart="0dp"
                         android:paddingEnd="0dp"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <EditText
                             android:id="@+id/api_edit"
@@ -144,15 +145,15 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
                             android:ems="10"
+                            android:hint="@string/api_key"
                             android:importantForAutofill="no"
                             android:inputType="textPersonName"
                             android:paddingStart="0dp"
                             android:paddingEnd="20dp"
-                            android:text="@string/api_key"
                             tools:ignore="LabelFor,TouchTargetSizeCheck" />
 
                         <Button
-                            android:id="@+id/save_api_button"
+                            android:id="@+id/save_api"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
@@ -223,7 +224,7 @@
                                 android:layout_marginTop="15dp"
                                 android:layout_marginBottom="15dp"
                                 android:layout_weight="1"
-                                android:padding="6dp"/>
+                                android:padding="6dp" />
 
                             <!--Creating another linear layout -->
                             <!-- to display pie chart details -->
@@ -273,6 +274,7 @@
 
                                     <!--Text view to display python text -->
                                     <TextView
+                                        android:id="@+id/little_others"
                                         android:layout_width="fill_parent"
                                         android:layout_height="25dp"
                                         android:paddingStart="10dp"

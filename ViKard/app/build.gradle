@@ -51,6 +51,7 @@ dependencies {
     implementation 'androidx.fragment:fragment:1.3.0-alpha08'
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
     implementation 'com.github.blackfizz:eazegraph:1.2.5l@aar'
+    implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.google.code.gson:gson:2.8.5'
 
 

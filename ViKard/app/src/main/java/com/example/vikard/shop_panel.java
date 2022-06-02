@@ -8,14 +8,19 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.SQLConnection;
 import com.example.vikard.data.model.ShopModel;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
@@ -33,9 +38,12 @@ public class shop_panel extends AppCompatActivity {
     private int card_count = 0;
     private String HexColor;
 
-    TextView name, cards_count, little_name;
-    ImageView background;
-    View colorbox;
+
+    private TextView name, cards_count, little_name, little_others;
+    private EditText hex, api;
+    private ImageView background;
+    private View colorbox;
+    private Button save_color, save_api;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -52,6 +60,7 @@ public class shop_panel extends AppCompatActivity {
         //Set shop name
         name = (TextView) findViewById(R.id.shop_name_title);
         name.setText(shop_name);
+        little_others = (TextView) findViewById(R.id.little_others);
         little_name = (TextView) findViewById(R.id.little_name);
         little_name.setText(shop_name);
 
@@ -68,7 +77,63 @@ public class shop_panel extends AppCompatActivity {
         pieChart = findViewById(R.id.piechart);
         float percent = ((float)shop_card_count/(float)card_count)*100;
         setData(percent);
-        Log.i(Float.toString(percent),Integer.toString(card_count));
+        Log.i("h "+Float.toString(percent),Integer.toString(card_count));
+        little_name.setText(shop_name + " ("+(int)percent + "%)");
+        little_others.setText("Others ("+(int)(100-percent) + "%)");
+        //Save buttons
+        save_color = findViewById(R.id.save_color);
+        save_api = findViewById(R.id.save_api);
+        save_color.setEnabled(false);
+        save_api.setEnabled(false);
+
+        save_color.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                update_color();
+            }
+        });
+        save_api.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               update_api();
+            }
+        });
+
+
+        //Edittexts
+        hex = findViewById(R.id.color_edit);
+        api = findViewById(R.id.api_edit);
+
+        hex.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {
+                if ((hex.getText().toString()).length() == 6){
+                    save_color.setEnabled(true);
+                }
+                else{
+                    save_color.setEnabled(false);
+                }
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
+
+        api.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+                if ((api.getText().toString()).length() != 0){
+                    save_api.setEnabled(true);
+                }
+                else{
+                    save_api.setEnabled(false);
+                }
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
     }
 
     private void setData(float percent)
@@ -114,5 +179,49 @@ public class shop_panel extends AppCompatActivity {
             throwables.printStackTrace();
         }
         return -1;
+    }
+
+    private void update_color(){
+        String color = hex.getText().toString();
+        Log.i("h Api", color);
+
+       try{
+            //Test czy to kolor
+            Color.parseColor("#"+color);
+
+            //Połączenie z bazą
+            SQLConnection sql = new SQLConnection();
+            Connection conn = sql.getConnection();
+
+            //Zapytanie
+            String sqlQuery = "UPDATE Shops SET HexColor = ? WHERE Id = ?";
+            PreparedStatement statement = conn.prepareStatement(sqlQuery);
+            statement.setString(1, color);
+            statement.setInt(2, shopid);
+            statement.executeQuery();
+            finish();
+            startActivity(getIntent());
+       } catch (SQLException throwables) {
+            throwables.printStackTrace();
+       }
+    }
+
+    private void update_api(){
+        String api_text = api.getText().toString();
+        Log.i("h Api", api_text);
+        try{
+            //Połączenie z bazą
+            SQLConnection sql = new SQLConnection();
+            Connection conn = sql.getConnection();
+
+            //Zapytanie
+            String sqlQuery = "UPDATE Shops SET API = ? WHERE Id = ?";
+            PreparedStatement statement = conn.prepareStatement(sqlQuery);
+            statement.setString(1, api_text);
+            statement.setInt(2, shopid);
+            statement.executeQuery();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
