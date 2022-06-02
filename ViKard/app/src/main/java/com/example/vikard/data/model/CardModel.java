@@ -2,7 +2,6 @@ package com.example.vikard.data.model;
 
 import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.SQLConnection;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +16,11 @@ public class CardModel extends SQLDataModel{
     private String Barcode;
     private Date ExpiryDate;
     private String UsersCategory;
+    private Integer Points;
+
+    public ShopModel getShop() {
+        return Shop;
+    }
 
     //Used to get ShopModel.Name and ShopModel.HexColor
     private ShopModel Shop;
@@ -59,6 +63,7 @@ public class CardModel extends SQLDataModel{
             if (UsersCategory == null) {
                 UsersCategory = getModelDataSQL("UsersCategory", "Id", "Cards", Id, conn);
             }
+            Points = Integer.valueOf(getModelDataSQL("Points", "Id", "Cards", Id, conn));
         } catch (Exception ex) {
         } finally {
             try { conn.close(); } catch (Exception e) { }
@@ -155,6 +160,8 @@ public class CardModel extends SQLDataModel{
         return UsersCategory;
     }
 
+    public Integer getPoints() {return Points;}
+
     //endregion
 
     //region Setters
@@ -182,6 +189,8 @@ public class CardModel extends SQLDataModel{
     public void setUsersCategory(String usersCategory) {
         UsersCategory = usersCategory;
     }
+
+    public void setPoints(Integer points) {Points = points; }
 
     //endregion
 }

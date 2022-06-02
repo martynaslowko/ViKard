@@ -19,4 +19,5 @@
     <color name="Python">#66BB6A</color>
     <color name="CPP">#EF5350</color>
     <color name="Java">#29B6F6</color>
+    <color name="transparent">#00000000</color>
 </resources>

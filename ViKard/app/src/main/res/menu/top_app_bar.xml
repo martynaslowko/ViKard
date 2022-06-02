@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/discountBarIcon"
+        android:icon="@drawable/ic_discount_icon"
+        app:showAsAction="ifRoom"
+        android:title="LogoutButtonItem" />
+    <item
+        android:id="@+id/logoutBarIcon"
+        android:icon="@drawable/ic_logout_button"
+        android:title="@string/app_name"
+        app:showAsAction="ifRoom" />
+</menu>

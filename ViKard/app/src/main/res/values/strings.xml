@@ -11,7 +11,7 @@
     <string name="invalidLastName">Invalid LastName"</string>
     <string name="invalidBirthday">"Pick a date"</string>
     <string name="invalid_email">Not a valid email</string>
-    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="invalid_password">Password must be >8 characters</string>
     <string name="invalid_repassword">Passwords must be the same</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_main_screen">MainScreen</string>
@@ -162,6 +162,12 @@
     <string name="let_s_register"><b>Let\'s Register!</b></string>
     <string name="first"><center>First let\'s create your account. Once your account has been created you can use our wonderful features.</center></string>
     <string name="accept">I agree to the <b>Terms of Service</b> and <b>Privacy Policy</b></string>
+    <string name="add"><b>Add a loyalty card to your virtual wallet!</b></string>
+    <string name="qr">Use phone camera to scan barcode placed on your loyalty card. Press camera icon to proceed.</string>
+    <string name="date">Provide card expiration date</string>
+    <string name="category">Provide card\'s vendor</string>
+    <string name="delete_card_text">Delete Card</string>
+    <string name="logoutText">Logout</string>
 
 
 </resources>

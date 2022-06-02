@@ -1,13 +1,15 @@
 package com.example.vikard.ui.card;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Context;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,18 +22,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.vikard.MainScreen;
 import com.example.vikard.R;
 import com.example.vikard.data.SQLConnection;
+import com.example.vikard.data.Session.CardSession;
+import com.example.vikard.data.Session.ShopSession;
 import com.example.vikard.data.model.CardModel;
+import com.example.vikard.data.model.ShopModel;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
-import androidx.appcompat.app.AppCompatActivity;
-import com.example.vikard.MainScreen;
-import com.example.vikard.R;
-import com.example.vikard.data.SQLConnection;
-import com.example.vikard.data.model.CardModel;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -39,7 +35,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import com.example.vikard.CardList;
+
 
 public class AddCardActivity extends AppCompatActivity {
 
@@ -48,7 +44,8 @@ public class AddCardActivity extends AppCompatActivity {
     Button btnBarcode;
     Button btnaddCardToDB;
     TextView scannedText;
-
+    ArrayList<CardModel> tempc= new ArrayList<>();
+    ArrayList<ShopModel> temp= new ArrayList<>();
     Spinner shplistSpinner;
     final DatePickerDialog[] picker = new DatePickerDialog[1];
     private String formattedDate = "";
@@ -58,6 +55,11 @@ public class AddCardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_card);
+
+
+        CardSession cs = new CardSession(getApplicationContext());
+        ShopSession ss = new ShopSession(getApplicationContext());
+
 
 
         //ShoplistSpinner
@@ -84,8 +86,50 @@ public class AddCardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                new CardModel(shplistSpinner.getSelectedItem().toString(), scannedText.getText().toString(), Date.valueOf(formattedDate));
-                goBackToMain();
+                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(AddCardActivity.this);
+                builder.setMessage("Are you sure barcode number is correct?");
+                builder.setCancelable(true);
+
+                builder.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                CardModel a = new CardModel(shplistSpinner.getSelectedItem().toString(), scannedText.getText().toString(), Date.valueOf(formattedDate));
+
+                                CardModel b = new CardModel(a.getId(),false);
+                                tempc= cs.loadData();
+                                temp = ss.loadData();
+                                temp.add(a.getShop());
+                                tempc.add(b);
+                                ss.clearData();
+                                cs.clearData();
+                                ss.createShopSession();
+                                cs.createCardSession();
+                                ss.saveData(temp);
+                                cs.saveData(tempc);
+
+
+
+                                //goBackToMain();
+
+                                finish();
+                            }
+                        });
+
+                builder.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                androidx.appcompat.app.AlertDialog alert = builder.create();
+                alert.show();
+
+
+
+
             }
         });
 
@@ -95,10 +139,12 @@ public class AddCardActivity extends AppCompatActivity {
                 IntentIntegrator intentIntegrator = new IntentIntegrator(AddCardActivity.this);
                 intentIntegrator.setDesiredBarcodeFormats(intentIntegrator.ONE_D_CODE_TYPES); //ONE_D_CODE_TYPES WCZYTUJE TYLKO BARCODE
                                                                                                 // || ALL_CODE_TYPES -> WCZYTUJE NAWET QR CODE
-                intentIntegrator.setOrientationLocked(false);
-                intentIntegrator.setBeepEnabled(true);
+                intentIntegrator.setOrientationLocked(true);
+                intentIntegrator.setCaptureActivity(Capture.class);
                 intentIntegrator.setCameraId(0);
-                intentIntegrator.setPrompt("SCAN");
+                intentIntegrator.setBeepEnabled(false);
+                //intentIntegrator.setCaptureActivity()
+                //intentIntegrator.setPrompt("SCAN");
                 intentIntegrator.setBarcodeImageEnabled(true);
                 intentIntegrator.initiateScan();
             }
@@ -144,7 +190,7 @@ public class AddCardActivity extends AppCompatActivity {
                 //picker dialog
                 if(picker[0] == null)
                 {
-                    picker[0] = new DatePickerDialog(AddCardActivity.this,
+                    picker[0] = new DatePickerDialog(AddCardActivity.this, AlertDialog.THEME_HOLO_LIGHT,
                             new DatePickerDialog.OnDateSetListener() {
                                 @Override
                                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -152,10 +198,12 @@ public class AddCardActivity extends AppCompatActivity {
                                     formattedDate = "" + year + "-" + (monthOfYear+1) + "-" + dayOfMonth;
                                 }
                             }, year, month, day);
+                    picker[0].getDatePicker().setMinDate(cldr.getTimeInMillis());
                     picker[0].show();
                 }
                 else
                 {
+                    picker[0].getDatePicker().setMinDate(cldr.getTimeInMillis());
                     picker[0].show();
                 }
 
@@ -222,11 +270,11 @@ public class AddCardActivity extends AppCompatActivity {
         IntentResult Result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (Result != null) {
             if (Result.getContents() == null) {
-                Toast.makeText(this, "cancelled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Aborted scanning", Toast.LENGTH_SHORT).show();
             } else {
-                Log.d("MainActivity", "Scanned");
-                Toast.makeText(this, "Scanned -> " + Result.getContents(), Toast.LENGTH_SHORT).show();
-                scannedText.setText(String.format("%s", Result.getContents().toString()));
+
+                Toast.makeText(this, "Sucesfully Scanned" , Toast.LENGTH_SHORT).show();
+                scannedText.setText(String.format("%s", Result.getContents()));
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);

@@ -118,4 +118,36 @@
         app:srcCompat="?attr/actionModeCloseDrawable"
         android:contentDescription="TODO" />
 
+    <TextView
+        android:id="@+id/PointsText"
+        android:layout_width="118dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="68dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.968"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/WhiteBarImageView" />
+
+    <TextView
+        android:id="@+id/PointsLabel"
+        android:layout_width="118dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="45dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="Points:"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.968"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/WhiteBarImageView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,57 +5,138 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="4dp"
+
     tools:context=".ui.card.AddCardActivity">
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="372dp"
+        android:layout_height="67dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="107dp"
+        android:autoSizeTextType="uniform"
+        android:text="@string/add"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:layout_width="342dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="40dp"
+        android:autoSizeTextType="uniform"
+        android:text="@string/qr"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:ignore="MissingConstraints" />
+
 
     <TextView
         android:id="@+id/scannedContent"
-        android:layout_width="wrap_content"
+        android:layout_width="202dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/initiateScan"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="10dp"
-        android:text=" code reader"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="315dp"
+        android:layout_marginEnd="103dp"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="209dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="355dp"
+        android:layout_marginEnd="81dp"
+        android:text="@string/date"
         android:textSize="16sp"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/initiateScan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="Process" />
+        android:layout_width="166dp"
+        android:layout_height="154dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="115dp"
+        android:background="@drawable/ic_camera" />
 
     <Button
         android:id="@+id/addCardToDB"
-        android:layout_width="121dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/scannedContent"
-        android:layout_marginTop="323dp"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="530dp"
+        android:layout_marginEnd="97dp"
         android:clickable="false"
         android:focusable="false"
-        android:text="Add"
-        android:translationX="150dp" />
+        android:text="Add" />
 
     <EditText
         android:id="@+id/expiryDateText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/scannedContent"
-        android:layout_alignStart="@+id/initiateScan"
-        android:layout_marginStart="-55dp"
-        android:layout_marginTop="37dp"
+
+        android:layout_height="42dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="387dp"
+        android:layout_marginEnd="120dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_calendar"
+
         android:ems="10"
-        android:inputType="date" />
+        android:inputType="date"
+        android:paddingStart="10dp" />
+
+    <TextView
+        android:layout_width="184dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="437dp"
+        android:layout_marginEnd="91dp"
+        android:text="@string/category"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <Spinner
         android:id="@+id/shopListSpinner"
-        android:layout_width="206dp"
-        android:layout_height="53dp"
-        android:layout_below="@+id/expiryDateText"
-        android:layout_alignStart="@+id/expiryDateText"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="66dp"
+        android:layout_width="177dp"
+        android:layout_height="42dp"
+        android:layout_below="@+id/initiateScan"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="152dp"
+        android:layout_marginEnd="120dp"
+        android:background="@drawable/custom_input"
+        android:drawableEnd="@drawable/ic_arrow"
         android:spinnerMode="dropdown" />
 
 </RelativeLayout>

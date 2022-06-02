@@ -33,6 +33,10 @@ public class CardListElement extends Fragment {
         cardId_ = id;
     }
 
+    public CardListElement()
+    {
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,6 +73,7 @@ public class CardListElement extends Fragment {
         attrs.putString("barcode", cardmodel.getBarcode()); //Your id
         attrs.putString("hexColor", shop.getHexColor()); //hex Color
         attrs.putString("link", shop.getHomeLink()); //storeLink
+        attrs.putString("points", cardmodel.getPoints().toString());
         intent.putExtras(attrs);
         startActivity(intent);
     }

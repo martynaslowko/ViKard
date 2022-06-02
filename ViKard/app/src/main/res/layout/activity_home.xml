@@ -10,9 +10,9 @@
     android:outAnimation="@android:anim/slide_out_right">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/HomeScreenLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible">
+        android:layout_height="match_parent">
         android:id="@+id/homeScreenLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -299,23 +299,6 @@
                     android:selectAllOnFocus="true" />
 
                 <EditText
-                    android:id="@+id/email"
-                    android:layout_width="241dp"
-                    android:layout_height="51dp"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/custom_input"
-                    android:drawableStart="@drawable/custom_email_icon"
-                    android:drawablePadding="4dp"
-                    android:ems="10"
-
-                    android:hint="@string/prompt_email"
-                    android:inputType="textEmailAddress"
-                    android:minHeight="48dp"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:selectAllOnFocus="true" />
-
-                <EditText
                     android:id="@+id/r_repassword"
                     android:layout_width="241dp"
                     android:layout_height="51dp"
@@ -332,6 +315,23 @@
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp" />
 
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="241dp"
+                    android:layout_height="51dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/custom_input"
+                    android:drawableStart="@drawable/custom_email_icon"
+                    android:drawablePadding="4dp"
+                    android:ems="10"
+
+                    android:hint="@string/prompt_email"
+                    android:inputType="textEmailAddress"
+                    android:minHeight="48dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:selectAllOnFocus="true" />
+
                 <CheckBox
                     android:id="@+id/checkBox2"
                     android:layout_width="301dp"
@@ -345,8 +345,7 @@
                     android:layout_height="48dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="25dp"
-                    android:text="@string/register"
-                    />
+                    android:text="@string/register" />
             </LinearLayout>
         </ScrollView>
 
