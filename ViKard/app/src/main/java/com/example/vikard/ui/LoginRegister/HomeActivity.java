@@ -4,6 +4,7 @@ package com.example.vikard.ui.LoginRegister;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -46,6 +47,7 @@ public class HomeActivity extends AppCompatActivity {
     private boolean shop_flag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         //Sessionmanager check
         sessionManager = new SessionManager(getApplicationContext());

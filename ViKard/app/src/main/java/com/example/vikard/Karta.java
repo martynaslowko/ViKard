@@ -52,6 +52,8 @@ public class Karta extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         Bundle b = getIntent().getExtras();
         if(b != null) {
             hexColor = b.getString("hexColor");

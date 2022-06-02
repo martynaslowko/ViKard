@@ -84,31 +84,7 @@ public class shop_panel extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(shop_panel.this);
-                builder.setMessage("Are you sure you want to logout?");
-                builder.setCancelable(true);
-
-                builder.setPositiveButton(
-                        "Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                startActivity(new Intent(shop_panel.this, HomeActivity.class));
-                            }
-                        });
-
-                builder.setNegativeButton(
-                        "No",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-                androidx.appcompat.app.AlertDialog alert = builder.create();
-                alert.show();
-
-
-
+               onBackPressed();
             }
         });
 
@@ -282,5 +258,31 @@ public class shop_panel extends AppCompatActivity {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(shop_panel.this);
+        builder.setMessage("Are you sure you want to logout?");
+        builder.setCancelable(true);
+
+        builder.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        startActivity(new Intent(shop_panel.this, HomeActivity.class));
+                    }
+                });
+
+        builder.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        androidx.appcompat.app.AlertDialog alert = builder.create();
+        alert.show();
     }
 }
