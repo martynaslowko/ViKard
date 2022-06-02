@@ -33,10 +33,8 @@ import java.sql.SQLException;
 public class shop_panel extends AppCompatActivity {
     private PieChart pieChart;
     private String shop_name = "";
-    private int shopid;
-    private int shop_card_count = 0;
-    private int card_count = 0;
-    private String HexColor;
+    private int shopid, shop_card_count = 0, card_count = 0;
+    private String HexColor, API;
 
 
     private TextView name, cards_count, little_name, little_others;
@@ -50,12 +48,15 @@ public class shop_panel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_shop_panel);
-        shopid = Integer.valueOf(LoginRepository.user.getUserId());
+
 
         //Get data
+        shopid = Integer.valueOf(LoginRepository.user.getUserId());
         setAll();
+        getAPI();
         shop_card_count = getShopsStats(shopid,true);
         card_count = getShopsStats(shopid,false);
+
 
         //Set shop name
         name = (TextView) findViewById(R.id.shop_name_title);
@@ -79,7 +80,7 @@ public class shop_panel extends AppCompatActivity {
         setData(percent);
         Log.i("h "+Float.toString(percent),Integer.toString(card_count));
         little_name.setText(shop_name + " ("+(int)percent + "%)");
-        little_others.setText("Others ("+(int)(100-percent) + "%)");
+        little_others.setText("Others ("+(int)(100-(int)percent) + "%)");
         //Save buttons
         save_color = findViewById(R.id.save_color);
         save_api = findViewById(R.id.save_api);
@@ -99,10 +100,12 @@ public class shop_panel extends AppCompatActivity {
             }
         });
 
-
         //Edittexts
         hex = findViewById(R.id.color_edit);
         api = findViewById(R.id.api_edit);
+
+        hex.setText(HexColor);
+        api.setText(API);
 
         hex.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
@@ -181,6 +184,22 @@ public class shop_panel extends AppCompatActivity {
         return -1;
     }
 
+    private void getAPI(){
+        try
+        {
+            SQLConnection sql = new SQLConnection();
+            Connection conn = sql.getConnection();
+            String sqlQuery = "SELECT API FROM Shops WHERE Id = ?";
+            PreparedStatement statement = conn.prepareStatement(sqlQuery);
+            statement.setInt(1, shopid);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            API = resultSet.getString("API");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     private void update_color(){
         String color = hex.getText().toString();
         Log.i("h Api", color);
@@ -220,6 +239,8 @@ public class shop_panel extends AppCompatActivity {
             statement.setString(1, api_text);
             statement.setInt(2, shopid);
             statement.executeQuery();
+            finish();
+            startActivity(getIntent());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
