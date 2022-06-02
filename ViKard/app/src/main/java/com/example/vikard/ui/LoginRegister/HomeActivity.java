@@ -142,9 +142,11 @@ public class HomeActivity extends AppCompatActivity {
                 loginButton2.setEnabled(loginFormState.isDataValid());
                 if (loginFormState.getUsernameError() != null) {
                     usernameEditText.setError(getString(loginFormState.getUsernameError()));
+                    usernameEditText2.setError(getString(loginFormState.getUsernameError()));
                 }
                 if (loginFormState.getPasswordError() != null) {
                     passwordEditText.setError(getString(loginFormState.getPasswordError()));
+                    passwordEditText2.setError(getString(loginFormState.getPasswordError()));
                 }
             }
         });
