@@ -28,8 +28,12 @@
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/drawable/logo_background.xml" value="0.33489583333333334" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.20481927710843373" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout-w936dp/activity_login.xml" value="0.275" />
+        <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/activity_edit_category.xml" value="0.18802083333333333" />
+        <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/activity_login.xml" value="1.0" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/activity_main_screen.xml" value="0.26197916666666665" />
+        <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/activity_shop_panel.xml" value="0.22146739130434784" />
+        <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/content_scrolling.xml" value="0.22146739130434784" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/fragment_card_list.xml" value="0.26927083333333335" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/fragment_card_list_element.xml" value="0.33" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/fragment_fragment1.xml" value="0.36666666666666664" />

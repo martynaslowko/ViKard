@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -36,14 +37,12 @@ import java.util.HashMap;
 public class HomeActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
-    private LoginViewModel loginViewModelShop;
     private RegisterViewModel RegisterViewModel;
     private String formattedDate = "";
     private ViewFlipper viewFlipper;
     private ActivityHomeBinding binding;
     private SessionManager sessionManager;
-    private boolean flag;
-
+    private boolean shop_flag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -56,13 +55,10 @@ public class HomeActivity extends AppCompatActivity {
             username = a.get("email");
             passwsord = a.get("password");
             loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
-            loginViewModelShop = new ViewModelProvider(this, new LoginViewModelFactory()).get(LoginViewModel.class);
             loginViewModel.login(username, passwsord,false);
-            //loginViewModelShop.login(username, passwsord,true);
             Intent intent = new Intent(this, MainScreen.class);
             startActivity(intent);
         }
-        flag = false;
         //Inflate vars and viewflipper
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
@@ -76,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
         final ProgressBar loadingProgressBar = binding.loading;
 
         //ShopLoginLayout vars
+        shop_flag = false;
         final EditText usernameEditText2 = binding.username2;
         final EditText passwordEditText2 = binding.password2;
         final Button loginButton2 = binding.login2;
@@ -98,8 +95,7 @@ public class HomeActivity extends AppCompatActivity {
 
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
-        loginViewModelShop = new ViewModelProvider(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
+
         RegisterViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
 
 
@@ -110,6 +106,7 @@ public class HomeActivity extends AppCompatActivity {
                 //viewFlipper.showNext();
                 viewFlipper.setInAnimation(getApplicationContext(),R.anim.slide_in_right);
                 viewFlipper.setOutAnimation(getApplicationContext(),R.anim.slide_out_left);
+                shop_flag = false;
                 viewFlipper.setDisplayedChild(1);
             }
         });
@@ -120,6 +117,7 @@ public class HomeActivity extends AppCompatActivity {
                 //viewFlipper.showNext();
                 viewFlipper.setInAnimation(getApplicationContext(),R.anim.slide_in_right);
                 viewFlipper.setOutAnimation(getApplicationContext(),R.anim.slide_out_left);
+                shop_flag = true;
                 viewFlipper.setDisplayedChild(3);
             }
         });
@@ -141,27 +139,12 @@ public class HomeActivity extends AppCompatActivity {
                     return;
                 }
                 loginButton.setEnabled(loginFormState.isDataValid());
+                loginButton2.setEnabled(loginFormState.isDataValid());
                 if (loginFormState.getUsernameError() != null) {
                     usernameEditText.setError(getString(loginFormState.getUsernameError()));
                 }
                 if (loginFormState.getPasswordError() != null) {
                     passwordEditText.setError(getString(loginFormState.getPasswordError()));
-                }
-            }
-        });
-
-        loginViewModelShop.getLoginFormState().observe(this, new Observer<LoginFormState>() {
-            @Override
-            public void onChanged(@Nullable LoginFormState loginFormState) {
-                if (loginFormState == null) {
-                    return;
-                }
-                loginButton2.setEnabled(loginFormState.isDataValid());
-                if (loginFormState.getUsernameError() != null) {
-                    usernameEditText2.setError(getString(loginFormState.getUsernameError()));
-                }
-                if (loginFormState.getPasswordError() != null) {
-                    passwordEditText2.setError(getString(loginFormState.getPasswordError()));
                 }
             }
         });
@@ -175,41 +158,18 @@ public class HomeActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.GONE);
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError());
-                    //Return ze względu na to że nie chce zeby po błędnym zalogowaniu wracał do homescreenu.
                     return;
                 }
                 if (loginResult.getSuccess() != null) {
-                    sessionManager.createLoginSession(usernameEditText.getText().toString(), passwordEditText.getText().toString());
-                    flag = false;
-                    updateUiWithUser();
+                    if(shop_flag == false) {
+                        updateUiWithUser(false);
+                        sessionManager.createLoginSession(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+                    }
+                    else{
+                        updateUiWithUser(true);
+                    }
                 }
                 setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
-                finish();
-            }
-        });
-
-        loginViewModelShop.getLoginResult().observe(this, new Observer<LoginResult>() {
-            @Override
-            public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
-                    return;
-                }
-                loadingProgressBar2.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
-                    //Return ze względu na to że nie chce zeby po błędnym zalogowaniu wracał do homescreenu.
-                    return;
-                }
-                if (loginResult.getSuccess() != null) {
-                    sessionManager.createLoginSession(usernameEditText2.getText().toString(), passwordEditText2.getText().toString());
-                    flag = true;
-                    updateUiWithUser();
-                }
-                setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
                 finish();
             }
         });
@@ -245,7 +205,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                loginViewModelShop.loginDataChanged(usernameEditText2.getText().toString(),
+                loginViewModel.loginDataChanged(usernameEditText2.getText().toString(),
                         passwordEditText2.getText().toString());
             }
         };
@@ -273,7 +233,7 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     loginViewModel.login(usernameEditText2.getText().toString(),
-                            passwordEditText2.getText().toString(), false);
+                            passwordEditText2.getText().toString(), true);
                 }
                 return false;
             }
@@ -282,6 +242,7 @@ public class HomeActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("h User login", String.valueOf(true));
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString(), false);
@@ -290,11 +251,16 @@ public class HomeActivity extends AppCompatActivity {
         loginButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
+                Log.i("h Shop login", String.valueOf(true));
+                loadingProgressBar2.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText2.getText().toString(),
                         passwordEditText2.getText().toString(), true);
             }
         });
+
+
+        ////////////////////////////////////////////////////
+
 
         //RegisterScreenLayout space
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -392,12 +358,9 @@ public class HomeActivity extends AppCompatActivity {
                 {
                     picker[0].show();
                 }
-
-
             }
 
         });
-
 
         emailEditText.addTextChangedListener(afterTextChangedListener1);
         r_passwordEditText.addTextChangedListener(afterTextChangedListener1);
@@ -405,55 +368,40 @@ public class HomeActivity extends AppCompatActivity {
         lastNameEditText.addTextChangedListener(afterTextChangedListener1);
         birthdayEditText.addTextChangedListener(afterTextChangedListener1);
         r_repasswordEditText.addTextChangedListener(afterTextChangedListener1);
-
-
-
-
-        ////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
     }
 
 
     //Functions
 
-    private void updateUiWithUser() {
+    private void updateUiWithUser(boolean f) {
         setContentView(binding.getRoot());
-        if(flag == false){
+        Log.i("h updateUIWithUser", String.valueOf(f));
+        if(f == false){
             setContentView(R.layout.activity_main_screen);
         }
-        if(flag == true){
+        if(f == true){
             setContentView(R.layout.activity_shop_panel);
         }
-        switchActivities();
-    }
-
-    private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
-
+        switchActivities(f);
     }
 
     //Po udanym logowaniu przechodzi do MainScreen.class
-    private void switchActivities() {
+    private void switchActivities(boolean f) {
         Intent switchActivityIntent = null;
-        if(flag == false) {
+        Log.i("h switchActivities", String.valueOf(f));
+        if(f == false) {
             switchActivityIntent = new Intent(this, MainScreen.class);
+            startActivity(switchActivityIntent);
         }
-        if(flag == true){
+        if(f == true){
             switchActivityIntent = new Intent(this, shop_panel.class);
-        }
-        if(switchActivityIntent != null) {
             startActivity(switchActivityIntent);
         }
     }
 
-
+    private void showLoginFailed(@StringRes Integer errorString) {
+        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public void onBackPressed() {
