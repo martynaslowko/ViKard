@@ -2,11 +2,10 @@ package com.example.vikard;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.graphics.drawable.DrawableCompat;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,7 +19,7 @@ import android.widget.TextView;
 import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.SQLConnection;
 import com.example.vikard.data.model.ShopModel;
-import com.google.android.material.textfield.TextInputEditText;
+import com.example.vikard.ui.LoginRegister.HomeActivity;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
@@ -59,7 +58,7 @@ public class shop_panel extends AppCompatActivity {
 
 
         //Set shop name
-        name = (TextView) findViewById(R.id.shop_name_title);
+        name = (TextView) findViewById(R.id.ContentTitle);
         name.setText(shop_name);
         little_others = (TextView) findViewById(R.id.little_others);
         little_name = (TextView) findViewById(R.id.little_name);
@@ -245,4 +244,31 @@ public class shop_panel extends AppCompatActivity {
             throwables.printStackTrace();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(shop_panel.this);
+        builder.setMessage("Are you sure you want to logout?");
+        builder.setCancelable(true);
+
+        builder.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        startActivity(new Intent(shop_panel.this, HomeActivity.class));
+                    }
+                });
+
+        builder.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        androidx.appcompat.app.AlertDialog alert = builder.create();
+        alert.show();
+    }
+
 }

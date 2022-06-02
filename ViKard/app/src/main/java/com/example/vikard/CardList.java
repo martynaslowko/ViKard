@@ -1,32 +1,26 @@
 package com.example.vikard;
 
-
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.SQLConnection;
 import com.example.vikard.data.Session.CardSession;
 import com.example.vikard.data.Session.ShopSession;
 import com.example.vikard.data.model.CardModel;
 import com.example.vikard.data.model.ShopModel;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 
 public class CardList extends Fragment {
 
@@ -58,7 +52,7 @@ public class CardList extends Fragment {
                 arr.add(cardCollection.get(i).getShopsId());
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 CardListElement fm2 = new CardListElement(shopModels.get(i), cardCollection.get(i).getUsersCategory(), cardCollection.get(i).getId());
-                fm.beginTransaction().add(R.id.card_list, fm2).commit();
+                fm.beginTransaction().add(R.id.card_list,fm2).commit();
                 fragmentTransaction.commit();
             }
             result.putIntegerArrayList("123", arr);

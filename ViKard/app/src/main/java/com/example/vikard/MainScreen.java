@@ -23,10 +23,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainScreen extends AppCompatActivity {
+
+
     private TabLayout tablayout;
     private ViewPager2 viewpager2;
     private FragmentAdapter fragmentadapter;
-
     private SessionManager sessionManager;
     private CardSession cs;
     private ShopSession ss;
@@ -65,17 +66,7 @@ public class MainScreen extends AppCompatActivity {
 
 
         viewpager2.setAdapter(fragmentadapter);
-
-
-
-
-        //Tutaj wyłączyłem "Swipe" z lewej do prawej i z prawej do lewej w viewpagerze
-        //W przyszłośći będzie można to jakoś skonfigurować i przywrócić swipe
-        //https://www.droidcon.com/2021/10/06/controlling-swipe-direction-with-viewpager2/
         viewpager2.setUserInputEnabled(false);
-
-
-
 
 
         dropFloatButton = (FloatingActionButton)findViewById(R.id.dropDown);
@@ -150,7 +141,6 @@ public class MainScreen extends AppCompatActivity {
         });
 
 
-
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,7 +180,7 @@ public class MainScreen extends AppCompatActivity {
         discountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                openDiscountActivity();
             }
         });
 
@@ -248,26 +238,31 @@ public class MainScreen extends AppCompatActivity {
             editFloatButton.setVisibility(View.INVISIBLE);
         }
     }
-    public void openAddCardActivity()
+    private void openAddCardActivity()
     {
         Intent intent = new Intent(this, AddCardActivity.class);
         startActivity(intent);
 
     }
 
-    public void openEditCategoryActivity()
+    private void openEditCategoryActivity()
     {
 
         Intent intent = new Intent(this, EditCategoryActivity.class);
         startActivity(intent);
     }
 
-    public void openDeleteCategoryActivity()
+    private void openDeleteCategoryActivity()
     {
         Intent intent = new Intent(this, DeleteCardActivity.class);
         startActivity(intent);
     }
+    private void openDiscountActivity()
+    {
+        Intent intent = new Intent(this, DiscountActivity.class);
+        startActivity(intent);
 
+    }
 
     private void animateFab(){
         if (!isClicked){
