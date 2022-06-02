@@ -28,7 +28,7 @@ import java.sql.SQLException;
 public class shop_panel extends AppCompatActivity {
     private PieChart pieChart;
     private String shop_name = "";
-    private int shopid = Integer.valueOf(LoginRepository.user.getUserId());
+    private int shopid;
     private int shop_card_count = 0;
     private int card_count = 0;
     private String HexColor;
@@ -42,7 +42,7 @@ public class shop_panel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_shop_panel);
-
+        shopid = Integer.valueOf(LoginRepository.user.getUserId());
 
         //Get data
         setAll();
@@ -75,12 +75,12 @@ public class shop_panel extends AppCompatActivity {
     {
         pieChart.addPieSlice(
                 new PieModel(
-                        "Our shop ("+percent+")",
+                        shop_name,
                         percent,
                         Color.parseColor("#"+HexColor)));
         pieChart.addPieSlice(
                 new PieModel(
-                        "Others ("+(100-percent)+")",
+                        "Others",
                         100-percent,
                         Color.parseColor("#7a7c80")));
         pieChart.startAnimation();

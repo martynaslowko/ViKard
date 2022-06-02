@@ -223,9 +223,7 @@
                                 android:layout_marginTop="15dp"
                                 android:layout_marginBottom="15dp"
                                 android:layout_weight="1"
-                                android:padding="6dp"
-
-                                />
+                                android:padding="6dp"/>
 
                             <!--Creating another linear layout -->
                             <!-- to display pie chart details -->

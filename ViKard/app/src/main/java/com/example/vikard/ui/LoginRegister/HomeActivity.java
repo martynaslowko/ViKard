@@ -59,9 +59,8 @@ public class HomeActivity extends AppCompatActivity {
             {
                 loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                         .get(LoginViewModel.class);
-                loginViewModel.login(username, passwsord);
+                loginViewModel.login(username, passwsord, false);
                 sessionManager.createLoginSession(username,passwsord);
-
 
                 setContentView(R.layout.activity_main_screen);
                 Intent intent = new Intent(this, MainScreen.class);
