@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -20,6 +23,7 @@ import android.widget.TextView;
 import com.example.vikard.data.LoginRepository;
 import com.example.vikard.data.SQLConnection;
 import com.example.vikard.data.model.ShopModel;
+import com.example.vikard.ui.LoginRegister.HomeActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.eazegraph.lib.charts.PieChart;
@@ -39,7 +43,7 @@ public class shop_panel extends AppCompatActivity {
 
     private TextView name, cards_count, little_name, little_others;
     private EditText hex, api;
-    private ImageView background;
+    private ImageView logout;
     private View colorbox;
     private Button save_color, save_api;
     @Override
@@ -75,6 +79,40 @@ public class shop_panel extends AppCompatActivity {
         cards_count = (TextView) findViewById(R.id.cards_count);
         cards_count.setText(Integer.toString(shop_card_count));
 
+        //Logout button
+        logout = findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(shop_panel.this);
+                builder.setMessage("Are you sure you want to logout?");
+                builder.setCancelable(true);
+
+                builder.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                startActivity(new Intent(shop_panel.this, HomeActivity.class));
+                            }
+                        });
+
+                builder.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                androidx.appcompat.app.AlertDialog alert = builder.create();
+                alert.show();
+
+
+
+            }
+        });
+
+        //Piechart
         pieChart = findViewById(R.id.piechart);
         float percent = ((float)shop_card_count/(float)card_count)*100;
         setData(percent);
