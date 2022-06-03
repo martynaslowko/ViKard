@@ -44,9 +44,9 @@ public class CardListElement extends Fragment {
         cardMiniature = (ImageView) rootView.findViewById(R.id.cardImage);
 
         //shopName_ = (TextView) rootView.findViewById(R.id.ShopNameText);
-        shopName_ = (TextView) rootView.findViewById(R.id.shop_name_title);
+        shopName_ = (TextView) rootView.findViewById(R.id.ContentTitle);
 
-        shopCategory_ = (TextView) rootView.findViewById(R.id.shopCategory);
+        shopCategory_ = (TextView) rootView.findViewById(R.id.DiscountDescription);
         button = (ImageView) rootView.findViewById(R.id.cardButton);
 
         cardMiniature.setColorFilter(Color.parseColor("#"+shop.getHexColor()));

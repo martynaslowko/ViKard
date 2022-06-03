@@ -49,6 +49,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+
+        //Inflate vars and viewflipper
+        super.onCreate(savedInstanceState);
         //Sessionmanager check
         sessionManager = new SessionManager(getApplicationContext());
         if (sessionManager.isLoggedIn()) {
@@ -67,11 +70,10 @@ public class HomeActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_main_screen);
                 Intent intent = new Intent(this, MainScreen.class);
                 startActivity(intent);
+                finish();
             }
 
         }
-        //Inflate vars and viewflipper
-        super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         viewFlipper = findViewById(R.id.view_flipper); //ViewFlipper ids -> 0-home,1-login,2-register etc.
@@ -175,11 +177,10 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 if (loginResult.getSuccess() != null) {
                     if(shop_flag == false) {
-                        updateUiWithUser(false);
-                        sessionManager.createLoginSession(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+                        updateUiWithUser(false,usernameEditText.getText().toString(), passwordEditText.getText().toString());
                     }
                     else{
-                        updateUiWithUser(true);
+                        updateUiWithUser(true,"","");
                     }
                 }
                 setResult(Activity.RESULT_OK);
@@ -397,10 +398,11 @@ public class HomeActivity extends AppCompatActivity {
 
     //Functions
 
-    private void updateUiWithUser(boolean f) {
+    private void updateUiWithUser(boolean f,String a, String b) {
         setContentView(binding.getRoot());
         Log.i("h updateUIWithUser", String.valueOf(f));
         if(f == false){
+            sessionManager.createLoginSession(a, b);
             setContentView(R.layout.activity_main_screen);
         }
         if(f == true){

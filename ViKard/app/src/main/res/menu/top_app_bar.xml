@@ -4,7 +4,7 @@
         android:id="@+id/discountBarIcon"
         android:icon="@drawable/ic_discount_icon"
         app:showAsAction="ifRoom"
-        android:title="LogoutButtonItem" />
+        android:title="DiscountButtonItem" />
     <item
         android:id="@+id/logoutBarIcon"
         android:icon="@drawable/ic_logout_button"

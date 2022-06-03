@@ -57,7 +57,7 @@
                         app:srcCompat="@drawable/ic_logout_button" />
 
                     <TextView
-                        android:id="@+id/shop_name_title"
+                        android:id="@+id/ContentTitle"
                         style="@style/screen_title"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"

@@ -28,12 +28,8 @@
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/drawable/logo_background.xml" value="0.33489583333333334" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.20481927710843373" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout-w936dp/activity_login.xml" value="0.275" />
-        <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/activity_edit_category.xml" value="0.18802083333333333" />
-        <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/activity_login.xml" value="1.0" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/activity_main_screen.xml" value="0.26197916666666665" />
-        <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/activity_shop_panel.xml" value="0.22146739130434784" />
-        <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/content_scrolling.xml" value="0.22146739130434784" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/fragment_card_list.xml" value="0.26927083333333335" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/fragment_card_list_element.xml" value="0.33" />
         <entry key="..\:/GIT/ViKard/ViKard/app/src/main/res/layout/fragment_fragment1.xml" value="0.36666666666666664" />
@@ -89,12 +85,15 @@
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/activity_register.xml" value="0.264" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/activity_shop_panel.xml" value="0.2586050724637681" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/content_scrolling.xml" value="0.18568840579710144" />
+        <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/discount_activity.xml" value="0.22" />
+        <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/discount_list_element.xml" value="0.25" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/fragment_card_list.xml" value="0.14855072463768115" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/fragment_card_list_element.xml" value="0.14855072463768115" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/fragment_map_view.xml" value="0.1" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/layout/karta.xml" value="0.1" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/menu/menu_shop_panel.xml" value="0.25885416666666666" />
         <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/menu/top_app_bar.xml" value="0.26510416666666664" />
+        <entry key="..\:/Users/Piotrek/Documents/AndroidRepo/ViKard/ViKard/app/src/main/res/menu/top_app_bar_discount.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/drawable/card.xml" value="0.19635416666666666" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/drawable/ic_card.xml" value="0.18229166666666666" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1635" />
@@ -115,13 +114,6 @@
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/layout/karta.xml" value="0.264" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1635" />
         <entry key="..\:/Users/kuba/Documents/ViKard/ViKard/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1635" />
-        <entry key="app/src/main/res/drawable/card.xml" value="0.137" />
-        <entry key="app/src/main/res/drawable/color_box.xml" value="0.137" />
-        <entry key="app/src/main/res/layout/activity_home.xml" value="0.35572916666666665" />
-        <entry key="app/src/main/res/layout/activity_main_screen.xml" value="0.10131712259371833" />
-        <entry key="app/src/main/res/layout/activity_shop_panel.xml" value="0.14842958459979735" />
-        <entry key="app/src/main/res/layout/fragment_card_list_element.xml" value="0.19927536231884058" />
-        <entry key="app/src/main/res/layout/karta.xml" value="0.19927536231884058" />
       </map>
     </option>
   </component>
