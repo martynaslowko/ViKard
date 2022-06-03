@@ -3,47 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/discountFrame"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".DiscountActivity">
 
-    <TextView
-        android:id="@+id/ContentTitle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="125dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="125dp"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:padding="0dp"
-        android:text="@string/default_store_name"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/DiscountDescription"
+        android:layout_margin="10dp"
+        android:background="@drawable/border_bottom"
+        android:gravity="left"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="15dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="15dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/DiscountDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="20dp"
-        android:padding="0dp"
-        android:paddingStart="0dp"
-        android:paddingLeft="0dp"
-        android:paddingTop="2dp"
-        android:paddingEnd="0dp"
-        android:paddingRight="0dp"
-        android:paddingBottom="0dp"
-        android:text="@string/DiscountDescriptionString"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ContentTitle" />
+        <TextView
+            android:id="@+id/ContentTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/default_store_name"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/DiscountDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:text="@string/DiscountDescriptionString"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

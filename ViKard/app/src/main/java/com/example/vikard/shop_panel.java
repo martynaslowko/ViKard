@@ -63,7 +63,7 @@ public class shop_panel extends AppCompatActivity {
 
 
         //Set shop name
-        name = (TextView) findViewById(R.id.shop_name_title);
+        name = (TextView) findViewById(R.id.ContentTitle);
         name.setText(shop_name);
         little_others = (TextView) findViewById(R.id.little_others);
         little_name = (TextView) findViewById(R.id.little_name);
