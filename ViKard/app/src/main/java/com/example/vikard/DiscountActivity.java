@@ -49,16 +49,30 @@ public class DiscountActivity extends AppCompatActivity {
         cs = new CardSession(getApplicationContext());
         ss = new ShopSession(getApplicationContext());
 
+
+
+
         if (ss.isSaved() && cs.isSaved()) {
 
             cardCollection = cs.loadData();
             shopCollection = ss.loadData();
-            cardCollection.get(1).getShopsId();
-
-            bindCardList();
-
-
+            if(cardCollection.size()>0)
+                bindCardList();
+            else
+            {
+                sv = findViewById(R.id.DiscountLinearLayout);
+                linflater=(LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View customView;
+                customView = linflater.inflate(R.layout.discount_list_element, null);
+                TextView ad = customView.findViewById(R.id.DiscountDescription);
+                TextView be = customView.findViewById(R.id.ContentTitle);
+                ad.setText("Check again later");
+                be.setText("No promotions available.");
+                sv.addView(customView);
+            }
         }
+
+
     }
 
     public void bindCardList() {
@@ -124,19 +138,34 @@ public class DiscountActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             {
 
-                sv = findViewById(R.id.DiscountLinearLayout);
-                linflater=(LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                int size = notifiesCollection.size();
-                for (int i = 0; i < size; i++) {
+                if(notifiesCollection.size() > 0)
+                {
+                    sv = findViewById(R.id.DiscountLinearLayout);
+                    linflater=(LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    int size = notifiesCollection.size();
+                    for (int i = 0; i < size; i++) {
 
+                        View customView;
+                        customView = linflater.inflate(R.layout.discount_list_element, null);
+                        TextView ad = customView.findViewById(R.id.DiscountDescription);
+                        TextView be = customView.findViewById(R.id.ContentTitle);
+
+                        ad.setText(notifiesCollection.get(i).getContent());
+                        be.setText(notifiesCollection.get(i).getTitle());
+
+                        sv.addView(customView);
+                    }
+                }
+                else
+                {
+                    sv = findViewById(R.id.DiscountLinearLayout);
+                    linflater=(LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     View customView;
                     customView = linflater.inflate(R.layout.discount_list_element, null);
                     TextView ad = customView.findViewById(R.id.DiscountDescription);
                     TextView be = customView.findViewById(R.id.ContentTitle);
-
-                    ad.setText(notifiesCollection.get(i).getContent());
-                    be.setText(notifiesCollection.get(i).getTitle());
-
+                    ad.setText("Check again later");
+                    be.setText("No promotions available.");
                     sv.addView(customView);
                 }
                 dialog.dismiss();
